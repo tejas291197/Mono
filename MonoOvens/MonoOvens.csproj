@@ -1,0 +1,206 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Controllers\AccessRoleController.cs" />
+    <Compile Include="Controllers\AssetController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ControllerModulesController.cs" />
+    <Compile Include="Controllers\DealerController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Migrations\20190916093918_afterinitialmigration.cs" />
+    <Compile Include="Migrations\20190916093918_afterinitialmigration.Designer.cs" />
+    <Compile Include="Migrations\20190916094427_AssetAddedmigration.cs" />
+    <Compile Include="Migrations\20190916094427_AssetAddedmigration.Designer.cs" />
+    <Compile Include="Migrations\20190916115900_identityaddedwithUsertable.cs" />
+    <Compile Include="Migrations\20190916115900_identityaddedwithUsertable.Designer.cs" />
+    <Compile Include="Migrations\20190916120214_identityaddedwithUsertable1.cs" />
+    <Compile Include="Migrations\20190916120214_identityaddedwithUsertable1.Designer.cs" />
+    <Compile Include="Migrations\20190917060229_dealerAdded.cs" />
+    <Compile Include="Migrations\20190917060229_dealerAdded.Designer.cs" />
+    <Compile Include="Migrations\20190917060415_dealerAdded1.cs" />
+    <Compile Include="Migrations\20190917060415_dealerAdded1.Designer.cs" />
+    <Compile Include="Migrations\20190917060643_dealerAdded2.cs" />
+    <Compile Include="Migrations\20190917060643_dealerAdded2.Designer.cs" />
+    <Compile Include="Migrations\20190917125659_controllerupdated.cs" />
+    <Compile Include="Migrations\20190917125659_controllerupdated.Designer.cs" />
+    <Compile Include="Migrations\20190917133224_clientadded.cs" />
+    <Compile Include="Migrations\20190917133224_clientadded.Designer.cs" />
+    <Compile Include="Migrations\20190917144343_assetModified.cs" />
+    <Compile Include="Migrations\20190917144343_assetModified.Designer.cs" />
+    <Compile Include="Migrations\20190918100647_clientedited2.cs" />
+    <Compile Include="Migrations\20190918100647_clientedited2.Designer.cs" />
+    <Compile Include="Migrations\20190918123107_removedDealer.cs" />
+    <Compile Include="Migrations\20190918123107_removedDealer.Designer.cs" />
+    <Compile Include="Migrations\20190918124132_dealerAdded12.cs" />
+    <Compile Include="Migrations\20190918124132_dealerAdded12.Designer.cs" />
+    <Compile Include="Migrations\20190918131317_dealerUpdated.cs" />
+    <Compile Include="Migrations\20190918131317_dealerUpdated.Designer.cs" />
+    <Compile Include="Migrations\20190918154344_trayWidthAdded.cs" />
+    <Compile Include="Migrations\20190918154344_trayWidthAdded.Designer.cs" />
+    <Compile Include="Migrations\20190919062853_IdAddedinAllTables.cs" />
+    <Compile Include="Migrations\20190919062853_IdAddedinAllTables.Designer.cs" />
+    <Compile Include="Migrations\20190919063603_IdAddedforIndividualTable.cs" />
+    <Compile Include="Migrations\20190919063603_IdAddedforIndividualTable.Designer.cs" />
+    <Compile Include="Migrations\20190919072933_changedTheIdName.cs" />
+    <Compile Include="Migrations\20190919072933_changedTheIdName.Designer.cs" />
+    <Compile Include="Migrations\20190919095906_Authcode.cs" />
+    <Compile Include="Migrations\20190919095906_Authcode.Designer.cs" />
+    <Compile Include="Migrations\20190919132426_IdentityaddedAndChangedreturnType.cs" />
+    <Compile Include="Migrations\20190919132426_IdentityaddedAndChangedreturnType.Designer.cs" />
+    <Compile Include="Migrations\20190919145612_test.cs" />
+    <Compile Include="Migrations\20190919145612_test.Designer.cs" />
+    <Compile Include="Migrations\MonoContextModelSnapshot.cs" />
+    <Compile Include="Models\AssetCategoryMaster.cs" />
+    <Compile Include="Models\AssetMaster.cs" />
+    <Compile Include="Models\AssetTypeMaster.cs" />
+    <Compile Include="Models\ClientMaster.cs" />
+    <Compile Include="Models\ControllerModule.cs" />
+    <Compile Include="Models\ControllerTypeMaster.cs" />
+    <Compile Include="Models\DealerMaster.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Data\MonoContext.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\RoleMaster.cs" />
+    <Compile Include="Models\UserMaster.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json" />
+    <Content Include="appsettings.json" />
+    <Content Include="Properties\launchSettings.json" />
+    <Content Include="ScaffoldingReadme.txt" />
+    <Content Include="wwwroot\css\site.css" />
+    <Content Include="wwwroot\css\site.min.css" />
+    <Content Include="wwwroot\favicon.ico" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\responsive.bootstrap.min.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
+    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="wwwroot\lib\jquery-validation\.bower.json" />
+    <Content Include="wwwroot\lib\jquery\.bower.json" />
+    <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MonoOvens.sln" />
+    <None Include="Views\AccessRole\Create.cshtml" />
+    <None Include="Views\AccessRole\Delete.cshtml" />
+    <None Include="Views\AccessRole\Details.cshtml" />
+    <None Include="Views\AccessRole\Edit.cshtml" />
+    <None Include="Views\AccessRole\Index.cshtml" />
+    <None Include="Views\Asset\Create.cshtml" />
+    <None Include="Views\Asset\Delete.cshtml" />
+    <None Include="Views\Asset\Details.cshtml" />
+    <None Include="Views\Asset\Edit.cshtml" />
+    <None Include="Views\Asset\Index.cshtml" />
+    <None Include="Views\Clients\Create.cshtml" />
+    <None Include="Views\Clients\Details.cshtml" />
+    <None Include="Views\Clients\Edit.cshtml" />
+    <None Include="Views\Clients\Index.cshtml" />
+    <None Include="Views\ControllerModules\Create.cshtml" />
+    <None Include="Views\ControllerModules\Delete.cshtml" />
+    <None Include="Views\ControllerModules\Details.cshtml" />
+    <None Include="Views\ControllerModules\Edit.cshtml" />
+    <None Include="Views\ControllerModules\Index.cshtml" />
+    <None Include="Views\Dealer\Create.cshtml" />
+    <None Include="Views\Dealer\Delete.cshtml" />
+    <None Include="Views\Dealer\Details.cshtml" />
+    <None Include="Views\Dealer\Edit.cshtml" />
+    <None Include="Views\Dealer\Index.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\User\Create.cshtml" />
+    <None Include="Views\User\Delete.cshtml" />
+    <None Include="Views\User\Details.cshtml" />
+    <None Include="Views\User\Edit.cshtml" />
+    <None Include="Views\User\Index.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\images\banner1.svg" />
+    <None Include="wwwroot\images\banner2.svg" />
+    <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap-4.3.1-dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\core.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\lib\jquery\jquery.js" />
+    <None Include="wwwroot\lib\jquery\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\jquery.min.map" />
+    <None Include="wwwroot\lib\jquery\jquery.slim.js" />
+    <None Include="wwwroot\lib\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\lib\jquery\jquery.slim.min.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp2.1\" />
+  </ItemGroup>
+
+</Project>

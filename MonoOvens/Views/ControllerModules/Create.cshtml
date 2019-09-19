@@ -1,0 +1,83 @@
+﻿@model MonoOvens.Models.ControllerModule
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>ControllerModule</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SerialNumber" class="control-label"></label>
+                <input asp-for="SerialNumber" class="form-control" />
+                <span asp-validation-for="SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthenticationCode" class="control-label"></label>
+                <input asp-for="AuthenticationCode" class="form-control" />
+                <span asp-validation-for="AuthenticationCode" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="FirmwareVersion" class="control-label"></label>
+            <input asp-for="FirmwareVersion" class="form-control" />
+            <span asp-validation-for="FirmwareVersion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoftwareVersion" class="control-label"></label>
+            <input asp-for="SoftwareVersion" class="form-control" />
+            <span asp-validation-for="SoftwareVersion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RecipeVersion" class="control-label"></label>
+            <input asp-for="RecipeVersion" class="form-control" />
+            <span asp-validation-for="RecipeVersion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Skins" class="control-label"></label>
+            <input asp-for="Skins" class="form-control" />
+            <span asp-validation-for="Skins" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wallpaper" class="control-label"></label>
+            <input asp-for="Wallpaper" class="form-control" />
+            <span asp-validation-for="Wallpaper" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SevenDayTimer" class="control-label"></label>
+            <input asp-for="SevenDayTimer" class="form-control" />
+            <span asp-validation-for="SevenDayTimer" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SleepDelay" class="control-label"></label>
+            <input asp-for="SleepDelay" class="form-control" />
+            <span asp-validation-for="SleepDelay" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ControllerDate" class="control-label"></label>
+            <input asp-for="ControllerDate" class="form-control" />
+            <span asp-validation-for="ControllerDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,123 @@
+﻿@model MonoOvens.Models.DealerMaster
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>DealerMaster</h4>
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerName" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerName" class="form-control" id="dname" required />
+                <span id="nameError" style="color:red"></span>
+                <span asp-validation-for="DealerName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerPhone" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerPhone" class="form-control" id="phone" required />
+                <span id="phoneError" style="color:red"></span>
+                <span asp-validation-for="DealerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left">
+                <label asp-for="DealerEmail" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerEmail" class="form-control" id="dEmail" type="email" />
+                <span id="emailError"></span>
+                <span asp-validation-for="DealerEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; clear:left ; float:left">
+                <label asp-for="DealerAddressLine1" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerAddressLine1" class="form-control" required />
+                <span id="addressError"></span>
+                <span asp-validation-for="DealerAddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left">
+                <label asp-for="DealerAddressLine2" class="control-label"></label>
+                <input asp-for="DealerAddressLine2" class="form-control" />
+                <span asp-validation-for="DealerAddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left">
+                <label asp-for="DealerArea" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerArea" class="form-control" required id="area" />
+                <span id="areaError"></span>
+                <span asp-validation-for="DealerArea" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left">
+                <label asp-for="DealerCity" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerCity" class="form-control" required id="dcity" />
+                <span id="cityError"></span>
+                <span asp-validation-for="DealerCity" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; clear:left ;float:left">
+                <label asp-for="DealerState" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerState" class="form-control" id="dstate" required />
+                <span id="stateError"></span>
+                <span asp-validation-for="DealerState" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left">
+                <label asp-for="DealerCountry" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerCountry" class="form-control" id="dcountry" required />
+                <span id="contryError"></span>
+                <span asp-validation-for="DealerCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" clear:left ; padding-left:400px">
+                <input type="submit" value="Save" class="btn btn-info" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // to allow only digits to be entered from the user side .
+        function Digits(e) {
+           if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+              //display error message
+              $("#phoneError").html("Only Digits Allowed").show().fadeOut("slow");
+               return false;
+           }
+       }
+       // to allow only charactors to be entered from the user side .
+       function Charactors(e) {
+            var key = e.keyCode;
+            if (!((key == 8) ||  (key == 9) ||  (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+       }
+       $(document).ready(function () {
+           $("#phone").keypress(function(e)
+           {
+               return Digits(e);
+           });
+            $("#dname").keydown(function(e)
+           {
+               Charactors(e);
+            });
+           $("#dcity").keydown(function(e)
+           {
+               Charactors(e);
+           });
+           $("#dstate").keydown(function(e)
+           {
+               Charactors(e);
+           });
+           $("#dcountry").keydown(function(e)
+           {
+               Charactors(e);
+           });
+
+         });
+    </script>
+}

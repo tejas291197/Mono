@@ -1,0 +1,78 @@
+﻿@model MonoOvens.Models.AssetMaster
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AssetMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetCategory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllerType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ControllerType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Controllers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Controllers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Trays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Trays)
+        </dd>
+        <dt>
+           TraySize
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TrayHeight_inch)   &Chi;  @Html.DisplayFor(model => model.TrayWidth_inch)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Handed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Handed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Format)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Format)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Power)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Power)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerConsumption)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerConsumption)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

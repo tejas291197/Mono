@@ -1,0 +1,75 @@
+﻿@model MonoOvens.Models.ControllerModule
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ControllerModule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirmwareVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirmwareVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftwareVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoftwareVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipeVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipeVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Skins)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Skins)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wallpaper)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wallpaper)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SevenDayTimer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SevenDayTimer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SleepDelay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SleepDelay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllerDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ControllerDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SerialNumber" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

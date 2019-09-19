@@ -1,0 +1,97 @@
+﻿@model IEnumerable<MonoOvens.Models.ControllerModule>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthenticationCode)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.FirmwareVersion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoftwareVersion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeVersion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Skins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wallpaper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SevenDayTimer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SleepDelay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ControllerDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthenticationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirmwareVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoftwareVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wallpaper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SevenDayTimer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SleepDelay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControllerDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

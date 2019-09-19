@@ -1,0 +1,14 @@
+D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.deps.json
+D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.json
+D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.dev.json
+D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.dll
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csproj.CoreCompileInputs.cache
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfo.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorTargetAssemblyInfo.cache
+D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.pdb
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.dll
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.pdb
