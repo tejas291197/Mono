@@ -64,7 +64,7 @@
             <div class="form-group" style="float:left ; padding-right:50px ">
                 <label asp-for="City" class="control-label"></label>
                 <input asp-for="City" class="form-control" pattern="[a-zA-Z][a-zA-Z\s]+$" id="city" />
-                <span asp-validation-for="City" class="text-danger"></span>
+                <span asp-validation-for="City" class="text-danger" id="cityError"></span>
             </div>
             <div class="form-group" style=" padding-left:450px  ; clear:left">
                 <input type="submit" value="Create" class="btn btn-success" />
@@ -80,19 +80,25 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-     function Charactors(e) {
+     function Charactors(e,n) {
             var key = e.keyCode;
             if (!((key == 8) ||  (key == 9) ||  (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90)  || e.shiftKey  ) ) {
                 e.preventDefault();
-                $("#nameError").html("Only Charactors Allowed").show().fadeOut("slow");
+                if (n == 1) {
+                    $("#nameError").html("Only Charactors Allowed").show().fadeOut("slow");
+                }
+                else {
+                    $("#cityError").html("Only Charactors Allowed").show().fadeOut("slow");
+                }
+                
             }
        }
     $(document).ready(function () {
         $("#name").keydown(function (e) {
-            Charactors(e);
+            Charactors(e , 1);
         });
         $("#city").keydown(function (e) {
-            Charactors(e);
+            Charactors(e , 2);
         });
     });
 </script> 

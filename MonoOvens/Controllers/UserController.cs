@@ -63,11 +63,15 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Birthdate,Password,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
+        public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userMaster);
+                // _context.Add(userMaster);
+                userMaster.UserName = userMaster.Email;
+                var rolename = _roleManager.Roles.Where(e=>e.Id == userMaster.RollId).Select(e=>e.Name).FirstOrDefault();
+                var result = await _userManager.CreateAsync(userMaster, "Test@123");
+                var roleresult = await _userManager.AddToRoleAsync( userMaster , rolename);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -100,9 +104,12 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Birthdate,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
+        //public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
+        //  public ActionResult Edit(string id,[Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
+        public async Task<IActionResult> Edit(UserMaster userMaster)
         {
-            if (id != userMaster.Id)
+            // if (id != userMaster.Id )
+            if(userMaster.Id == null)
             {
                 return NotFound();
             }
@@ -111,8 +118,46 @@ namespace MonoOvens.Controllers
             {
                 try
                 {
-                    _context.Update(userMaster);
-                    await _context.SaveChangesAsync();
+                    var edituser = _context.Users.FirstOrDefault(x => x.Id == userMaster.Id);
+                    edituser.EmployeeId = userMaster.EmployeeId;
+                    edituser.Name = userMaster.Name;
+                    edituser.Birthdate = userMaster.Birthdate;
+                    edituser.City = userMaster.City;
+                    edituser.AddressLine1 = userMaster.AddressLine1;
+                    edituser.UserName = userMaster.Email;
+                    edituser.Email = userMaster.Email;
+                    edituser.AddressLine2 = userMaster.AddressLine2;
+                    edituser.Gender = userMaster.Gender;                   
+                    var oldUser = _userManager.FindByIdAsync(userMaster.Id);
+                    var oldRoleId = _roleManager.Roles.Where(x => x.Id == edituser.RollId).Select(x=>x.Id).FirstOrDefault();
+                     var oldRoleName = _context.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+                    var newRoleName = _context.Roles.SingleOrDefault(r => r.Id == userMaster.RollId).Name;
+                    if (oldRoleId != userMaster.RollId)
+                    {
+                        var removeroleresult =  await _userManager.RemoveFromRoleAsync(edituser, oldRoleName);
+                        var roleresult = await _userManager.AddToRoleAsync(edituser, newRoleName);
+                    }
+                    edituser.RollId = userMaster.RollId;
+                    //if (edituser.Email != userMaster.Email)
+                    //{
+                    //    edituser.Email = userMaster.Email;
+                    //    edituser.UserName = userMaster.Email;
+                    //    _context.Users.Remove(edituser);
+                    //    userMaster.UserName = userMaster.Email;
+                    //    _userManager.CreateAsync(userMaster, "Test@123");
+
+                    //}
+                    //else
+                    //{
+
+                    // }
+
+
+                    // var removeroleresult = await _userManager.RemoveFromRoleAsync(edituser, edituser.Role);                                       
+                    //   _context.Update(userMaster);
+                    _context.Entry(edituser).State = EntityState.Modified;
+                    //  await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
