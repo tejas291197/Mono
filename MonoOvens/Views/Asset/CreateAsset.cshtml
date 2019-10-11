@@ -1,0 +1,133 @@
+﻿@model MonoOvens.Models.AssetMaster
+
+@{
+    ViewData["Title"] = "Create Asset ";
+}
+
+    <h2>Add Asset</h2>
+
+
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="CreateAsset" align="center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Asset Category : </label>
+                @*<input asp-for="AssetCategory" class="form-control" />*@
+                <select asp-for="AssetCategory" class="form-control" onblur="check(1)"
+                        asp-items="@(new SelectList(@ViewBag.ACateogies, "Id" ,"AssetCategory" ) )" id="acategory" required>
+                </select>
+                <span asp-validation-for="AssetCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="float:left ; padding-right:100px">
+                <label>Asset Type : </label>
+                <select asp-for="AssetType" class="form-control" onblur="check(2)"
+                        asp-items="@(new SelectList(@ViewBag.ATypes,"Id" , "AssetType" ) ) " id="atype" required>
+                </select>
+                <span asp-validation-for="AssetType" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="float:left ; padding-right:100px">
+                <label>ControllerType: </label>
+                <select asp-for="ControllerType" class="form-control" onblur="check(3)"
+                        asp-items="@(new SelectList(@ViewBag.CTypes,"Id","ControllerType"))" id="ctype" required>
+                </select>
+                <span asp-validation-for="ControllerType" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Controllers : </label>
+                <input asp-for="Controllers" class="form-control" />
+                <span asp-validation-for="Controllers" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Trays : </label>
+                <input asp-for="Trays" class="form-control" />
+                <span asp-validation-for="Trays" class="text-danger"></span>
+            </div>
+            @*<div style="height:100px ; clear:right"> </div>*@
+            <div class="form-group" style=" float:left ; padding-right:100px ">
+                <label>TraySize(Inch) : </label>
+                <input asp-for="TrayHeight_inch" class="form-control" required placeholder="height" />
+                <input asp-for="TrayWidth_inch" class="form-control" required placeholder="width" />
+                <span asp-validation-for="TrayWidth_inch" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Handed : </label>
+                <select asp-for="Handed" class="form-control" required>
+                    <option value="">--Select--</option>
+                    <option value="Left-Handed">Left</option>
+                    <option value="Right-Handed">Right</option>
+                </select>
+                <span asp-validation-for="Handed" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:100px ; clear:left">
+                <label>Format : </label>
+                <select asp-for="Format" class="form-control" required>
+                    <option value="">--Select--</option>
+                    <option value="Portrait ">Portrait </option>
+                    <option value="Landscape">Landscape</option>
+                </select>
+                <span asp-validation-for="Format" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Power : </label>
+                <select asp-for="Power" class="form-control" required>
+                    <option value="">--Select--</option>
+                    <option value="Single-phase ">Single-phase </option>
+                    <option value="Three-phase">Three-phase</option>
+                </select>
+                <span asp-validation-for="Power" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Power Consumption : </label>
+                <select asp-for="PowerConsumption" class="form-control" required>
+                    <option value="">--Select--</option>
+                    <option value="Light power ">Light power  </option>
+                    <option value="Heating element">Heating element </option>
+                </select>
+                <span asp-validation-for="PowerConsumption" class="text-danger"></span>
+            </div><br />
+            <div class="form-group" style=" clear:left" align="center">
+                <input type="submit" value="Create" class="btn btn-primary" id="subbtn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AssetsList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+ 
+    <script>
+        var val;
+        var id;
+        function check(n) {
+             if (n == 1) {
+            id = $("acategory");
+            val = $("#acategory option:selected").val();
+             }
+            else if (n == 2) {
+                id = $("#atype");
+                val = $("#atype option:selected").val();
+            }
+            else {
+                 id = $("#ctype");
+                val = $("#ctype option:selected").val();
+            }
+
+
+            if (val == 0) {
+              //  id.focus();
+               
+                $("#subbtn").attr("disabled", true);
+            }
+            else {
+                $("#subbtn").attr("disabled", false);
+            }
+        }
+    </script>
+}

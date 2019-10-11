@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MonoOvens.Models.UserMaster>
+
+@{
+    ViewData["Title"] = "UsersList";
+}
+
+<h2>Users</h2>
+
+<p>
+    <a asp-action="CreateUser">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                AccessRole
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>          
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>           
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessRole)
+            </td>           
+            <td>
+                <a asp-action="EditUser" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="UserDetails" asp-route-id="@item.Id">Details</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

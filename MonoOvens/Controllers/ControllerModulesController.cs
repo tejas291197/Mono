@@ -20,13 +20,13 @@ namespace MonoOvens.Controllers
         }
 
         // GET: ControllerModules
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ControllersList()
         {
             return View(await _context.Controller.ToListAsync());
         }
 
         // GET: ControllerModules/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ControllerDetails(int? id)
         {
             if (id == null)
             {
@@ -44,7 +44,7 @@ namespace MonoOvens.Controllers
         }
 
         // GET: ControllerModules/Create
-        public IActionResult Create()
+        public IActionResult CreateController()
         {
             return View();
         }
@@ -54,19 +54,19 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status")] ControllerModule controllerModule)
+        public async Task<IActionResult> CreateController([Bind("Id,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status")] ControllerModule controllerModule)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(controllerModule);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ControllersList));
             }
             return View(controllerModule);
         }
 
         // GET: ControllerModules/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditController(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status")] ControllerModule controllerModule)
+        public async Task<IActionResult> EditController(int id, [Bind("Id,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status")] ControllerModule controllerModule)
         {
             if (id != controllerModule.Id)
             {
@@ -111,7 +111,7 @@ namespace MonoOvens.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ControllersList));
             }
             return View(controllerModule);
         }
@@ -142,7 +142,7 @@ namespace MonoOvens.Controllers
             var controllerModule = await _context.Controller.FindAsync(id);
             _context.Controller.Remove(controllerModule);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ControllersList));
         }
 
         private bool ControllerModuleExists(int id)

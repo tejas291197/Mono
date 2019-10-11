@@ -20,17 +20,17 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Asset
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> AssetsList()
         {
             return View(await _context.Assets.ToListAsync());
         }
 
         // GET: Asset/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> AssetDetails(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToPage("Home/Notfound");
             }
 
             var assetMaster = await _context.Assets
@@ -44,7 +44,7 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Asset/Create
-        public IActionResult Create()
+        public IActionResult CreateAsset()
         {
             List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();
             List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
@@ -66,20 +66,20 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
+        public async Task<IActionResult> CreateAsset([Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
         {
             if (ModelState.IsValid)
             {
                
                 _context.Add(assetMaster);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AssetsList));
             }
             return View(assetMaster);
         }
 
         // GET: Asset/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditAsset(int? id)
         {
             if (id == null)
             {
@@ -111,7 +111,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
+        public async Task<IActionResult> EditAsset(int id, [Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
         {
             if (id != assetMaster.Id)
             {
@@ -136,7 +136,7 @@ namespace MonoOvens.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AssetsList));
             }
             return View(assetMaster);
         }
@@ -167,7 +167,7 @@ namespace MonoOvens.Controllers
             var assetMaster = await _context.Assets.FindAsync(id);
             _context.Assets.Remove(assetMaster);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AssetsList));
         }
 
         private bool AssetMasterExists(int id)

@@ -259,8 +259,6 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("ClientId");
-
                     b.Property<string>("ClientName");
 
                     b.Property<string>("HOAddress1");
@@ -268,6 +266,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("HOAddress2");
 
                     b.Property<string>("HOAddress3");
+
+                    b.Property<string>("PostTown");
 
                     b.Property<string>("Postcode");
 
@@ -352,26 +352,11 @@ namespace MonoOvens.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DealerAddressLine1");
-
-                    b.Property<string>("DealerAddressLine2");
-
-                    b.Property<string>("DealerArea");
-
-                    b.Property<string>("DealerCity");
-
-                    b.Property<string>("DealerCountry");
-
-                    b.Property<string>("DealerEmail")
-                        .IsRequired();
-
-                    b.Property<string>("DealerId");
-
                     b.Property<string>("DealerName");
 
                     b.Property<string>("DealerPhone");
 
-                    b.Property<string>("DealerState");
+                    b.Property<string>("DealerRegion");
 
                     b.HasKey("Id");
 
@@ -479,23 +464,11 @@ namespace MonoOvens.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("AddressLine1");
+                    b.Property<string>("AccessRole");
 
-                    b.Property<string>("AddressLine2");
+                    b.Property<string>("FirstName");
 
-                    b.Property<DateTime>("Birthdate");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("EmployeeId");
-
-                    b.Property<string>("Gender");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("RollId");
+                    b.Property<string>("LastName");
 
                     b.ToTable("UserMaster");
 

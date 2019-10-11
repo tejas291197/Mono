@@ -1,0 +1,76 @@
+﻿@model MonoOvens.Models.UserMaster
+
+@{
+    ViewData["Title"] = "EditUser";
+}
+
+<h2>Edit User</h2>
+
+
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="EditUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="float:left ; padding-right:50px ">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" id="name1" required />
+                <span asp-validation-for="FirstName" class="text-danger" id="fnameError"></span>
+            </div>
+            <div class="form-group" style="float:left ; padding-right:50px ">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" id="name2" required />
+                <span asp-validation-for="LastName" class="text-danger" id="lnameError"></span>
+            </div>
+            <div class="form-group" style="float:left ; padding-right:50px ">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group" style="float:left ; padding-right:50px ">
+                <label>Access Role</label>
+                <select asp-for="AccessRole" class="form-control"
+                        asp-items="@(new SelectList(@ViewBag.AccessRoles , "Id" , "Name"))" required>
+                </select>
+                <span asp-validation-for="AccessRole" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" padding-left:450px  ; clear:left">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="UsersList">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        function Charactors(e, n) {
+            var key = e.keyCode;
+            if (!((key == 8) || (key == 9) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90) || e.shiftKey)) {
+                e.preventDefault();
+                if (n == 1) {
+                    $("#fnameError").html("Only Charactors Allowed").show().fadeOut("slow");
+                }
+                else {
+                    $("#lnameError").html("Only Charactors Allowed").show().fadeOut("slow");
+                }
+
+            }
+        }
+        $(document).ready(function () {
+            $("#name1").keydown(function (e) {
+                Charactors(e, 1);
+            });
+            $("#name2").keydown(function (e) {
+                Charactors(e, 2);
+            });
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

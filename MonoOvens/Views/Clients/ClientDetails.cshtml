@@ -1,0 +1,127 @@
+﻿@model MonoOvens.Models.ClientMaster
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Client Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryContactName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryContactName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryContactNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryContactNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HOAddress1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HOAddress1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HOAddress2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HOAddress2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HOAddress3)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HOAddress3)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Postcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Postcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreAddress1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreAddress1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreAddress2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreAddress2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PostTown)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostTown)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StorePostcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StorePostcode)
+        </dd>
+       
+    </dl>
+</div>
+<div>
+    <a asp-action="EditClient" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="ClientsList">Back to List</a>
+</div>

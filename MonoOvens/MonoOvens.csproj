@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
+<!--
   <ItemGroup>
     <Compile Include="Areas\Identity\IdentityHostingStartup.cs" />
     <Compile Include="Areas\Identity\Pages\Account\AccessDenied.cshtml.cs" />
@@ -82,6 +82,10 @@
     <Compile Include="Migrations\20190919132426_IdentityaddedAndChangedreturnType.Designer.cs" />
     <Compile Include="Migrations\20190919145612_test.cs" />
     <Compile Include="Migrations\20190919145612_test.Designer.cs" />
+    <Compile Include="Migrations\20190921051706_Namechanged.cs" />
+    <Compile Include="Migrations\20190921051706_Namechanged.Designer.cs" />
+    <Compile Include="Migrations\20190921052500_firstnameTypeChanged.cs" />
+    <Compile Include="Migrations\20190921052500_firstnameTypeChanged.Designer.cs" />
     <Compile Include="Migrations\MonoContextModelSnapshot.cs" />
     <Compile Include="Models\AssetCategoryMaster.cs" />
     <Compile Include="Models\AssetMaster.cs" />
@@ -97,6 +101,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RoleMaster.cs" />
     <Compile Include="Models\UserMaster.cs" />
+    <Compile Include="obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -104,6 +110,9 @@
   <ItemGroup>
     <Content Include="appsettings.Development.json" />
     <Content Include="appsettings.json" />
+    <Content Include="obj\Debug\netcoreapp2.1\MonoOvens.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\MonoOvens.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
     <Content Include="Properties\launchSettings.json" />
     <Content Include="ScaffoldingReadme.txt" />
     <Content Include="wwwroot\css\site.css" />
@@ -129,7 +138,7 @@
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
   </ItemGroup>
-
+-->
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
@@ -166,44 +175,57 @@
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
     <None Include="MonoOvens.sln" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.dll" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.pdb" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorTargetAssemblyInfo.cache" />
+    <None Include="obj\MonoOvens.csproj.nuget.cache" />
+    <None Include="obj\MonoOvens.csproj.nuget.g.props" />
+    <None Include="obj\MonoOvens.csproj.nuget.g.targets" />
     <None Include="Views\AccessRole\Create.cshtml" />
     <None Include="Views\AccessRole\Delete.cshtml" />
     <None Include="Views\AccessRole\Details.cshtml" />
     <None Include="Views\AccessRole\Edit.cshtml" />
     <None Include="Views\AccessRole\Index.cshtml" />
-    <None Include="Views\Asset\Create.cshtml" />
+    <None Include="Views\Asset\CreateAsset.cshtml" />
     <None Include="Views\Asset\Delete.cshtml" />
-    <None Include="Views\Asset\Details.cshtml" />
-    <None Include="Views\Asset\Edit.cshtml" />
-    <None Include="Views\Asset\Index.cshtml" />
-    <None Include="Views\Clients\Create.cshtml" />
-    <None Include="Views\Clients\Details.cshtml" />
-    <None Include="Views\Clients\Edit.cshtml" />
-    <None Include="Views\Clients\Index.cshtml" />
-    <None Include="Views\ControllerModules\Create.cshtml" />
+    <None Include="Views\Asset\AssetDetails.cshtml" />
+    <None Include="Views\Asset\EditAsset.cshtml" />
+    <None Include="Views\Asset\AssetsList.cshtml" />
+    <None Include="Views\Clients\CreateClient.cshtml" />
+    <None Include="Views\Clients\Delete.cshtml" />
+    <None Include="Views\Clients\ClientDetails.cshtml" />
+    <None Include="Views\Clients\EditClient.cshtml" />
+    <None Include="Views\Clients\ClientsList.cshtml" />
+    <None Include="Views\ControllerModules\CreateController.cshtml" />
     <None Include="Views\ControllerModules\Delete.cshtml" />
-    <None Include="Views\ControllerModules\Details.cshtml" />
-    <None Include="Views\ControllerModules\Edit.cshtml" />
-    <None Include="Views\ControllerModules\Index.cshtml" />
-    <None Include="Views\Dealer\Create.cshtml" />
+    <None Include="Views\ControllerModules\ControllerDetails.cshtml" />
+    <None Include="Views\ControllerModules\EditController.cshtml" />
+    <None Include="Views\ControllerModules\ControllersList.cshtml" />
+    <None Include="Views\Dealer\CreateDealer.cshtml" />
     <None Include="Views\Dealer\Delete.cshtml" />
-    <None Include="Views\Dealer\Details.cshtml" />
-    <None Include="Views\Dealer\Edit.cshtml" />
-    <None Include="Views\Dealer\Index.cshtml" />
+    <None Include="Views\Dealer\DealerDetails.cshtml" />
+    <None Include="Views\Dealer\EditDealer.cshtml" />
+    <None Include="Views\Dealer\DealersList.cshtml" />
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Notfound.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\User\Create.cshtml" />
+    <None Include="Views\User\CreateUser.cshtml" />
     <None Include="Views\User\Delete.cshtml" />
-    <None Include="Views\User\Details.cshtml" />
-    <None Include="Views\User\Edit.cshtml" />
-    <None Include="Views\User\Index.cshtml" />
+    <None Include="Views\User\UserDetails.cshtml" />
+    <None Include="Views\User\EditUser.cshtml" />
+    <None Include="Views\User\UsersList.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\images\banner1.svg" />

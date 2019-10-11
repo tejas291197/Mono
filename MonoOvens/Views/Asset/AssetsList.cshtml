@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MonoOvens.Models.AssetMaster>
+
+@{
+    ViewData["Title"] = "AssetList";
+}
+
+    <h2>Assets</h2>
+
+<p>
+    <a asp-action="CreateAsset">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Asset Category
+            </th>
+            <th>
+                Asset Type
+            </th>
+            <th>
+                Controller Type
+            </th>
+            <th>
+                Number of Controllers
+            </th>
+            <th>
+                number of Trays
+            </th>
+            <th>
+               TraySize(inch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Handed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Power)
+            </th>
+            <th>
+                Power Consumption Variable
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControllerType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Controllers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrayHeight_inch)" &Chi;  @Html.DisplayFor(modelItem => item.TrayWidth_inch)"
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Handed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Format)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Power)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PowerConsumption)
+            </td>
+            <td>
+                <a asp-action="EditAsset" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="AssetDetails" asp-route-id="@item.Id">Details</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

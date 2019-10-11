@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.DealerPhone)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.DealerRegion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DealerRegion)
+        </dd>
+        @*<dt>
             @Html.DisplayNameFor(model => model.DealerEmail)
         </dt>
         <dd>
@@ -64,12 +70,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DealerCountry)
-        </dd>
+        </dd>*@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="DealerId" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="DealersList">Back to List</a>
     </form>
 </div>

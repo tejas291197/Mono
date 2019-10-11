@@ -1,0 +1,106 @@
+﻿@model IEnumerable<MonoOvens.Models.ClientMaster>
+
+@{
+    ViewData["Title"] = "ClientsList";
+}
+
+    <h2>Clients</h2>
+
+<p>
+    <a asp-action="CreateClient">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                Client Name
+            </th>
+            <th>
+               Primary Contact Email
+            </th>
+            <th>
+                Primary Contact Name
+            </th>
+            <th>
+               	Primary Contact Number
+            </th>
+            <th>
+                @* Html.DisplayNameFor(model => model.HOAddress1)*@   
+                Head-Office
+            </th>
+           
+            <th>
+                Zone
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreName)
+            </th>
+            <th>
+                @* Html.DisplayNameFor(model => model.StoreAddressLine1)   *@  Store-Address
+            </th>                      
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryContactNumber)
+            </td>
+            <td>
+   @Html.DisplayFor(modelItem => item.HOAddress1),&nbsp;@Html.DisplayFor(modelItem => item.HOAddress2),&nbsp;@Html.DisplayFor(modelItem => item.HOAddress3),&nbsp;@Html.DisplayFor(modelItem => item.City),&nbsp;@Html.DisplayFor(modelItem => item.Postcode).
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.Zone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreAddress1),&nbsp;@Html.DisplayFor(modelItem => item.StoreAddress1),&nbsp;@Html.DisplayFor(modelItem => item.PostTown),&nbsp;@Html.DisplayFor(modelItem => item.StorePostcode).
+            </td>           
+            <td>
+                <a asp-action="EditClient" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="ClientDetails" asp-route-id="@item.Id">Details</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

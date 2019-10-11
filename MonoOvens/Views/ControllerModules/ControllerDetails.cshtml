@@ -1,0 +1,73 @@
+﻿@model MonoOvens.Models.ControllerModule
+
+@{
+    ViewData["Title"] = "ControllerDetails";
+}
+
+<h2>Controller Details</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirmwareVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirmwareVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftwareVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoftwareVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipeVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipeVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Skins)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Skins)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wallpaper)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wallpaper)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SevenDayTimer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SevenDayTimer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SleepDelay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SleepDelay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllerDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ControllerDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditController" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="ControllersList">Back to List</a>
+</div>

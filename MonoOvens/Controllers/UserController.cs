@@ -25,13 +25,13 @@ namespace MonoOvens.Controllers
         }
 
         // GET: User
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> UsersList()
         {
             return View(await _context.Users.ToListAsync());
         }
 
         // GET: User/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> UserDetails(string id)
         {
             if (id == null)
             {
@@ -49,7 +49,7 @@ namespace MonoOvens.Controllers
         }
 
         // GET: User/Create
-        public IActionResult Create()
+        public IActionResult CreateUser()
         {
             //List<IdentityRole> roles = new List<IdentityRole>();
             var rolelist = _roleManager.Roles.ToList();
@@ -63,23 +63,23 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
+        public async Task<IActionResult> CreateUser([Bind("Id,FirstName,LastName,Email,AccessRole")] UserMaster userMaster)
         {
             if (ModelState.IsValid)
             {
                 // _context.Add(userMaster);
                 userMaster.UserName = userMaster.Email;
-                var rolename = _roleManager.Roles.Where(e=>e.Id == userMaster.RollId).Select(e=>e.Name).FirstOrDefault();
+                var rolename = _roleManager.Roles.Where(e=>e.Id == userMaster.AccessRole).Select(e=>e.Name).FirstOrDefault();
                 var result = await _userManager.CreateAsync(userMaster, "Test@123");
                 var roleresult = await _userManager.AddToRoleAsync( userMaster , rolename);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UsersList));
             }
             return View(userMaster);
         }
 
         // GET: User/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> EditUser(string id)
         {
             if (id == null)
             {
@@ -106,12 +106,12 @@ namespace MonoOvens.Controllers
         [ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
         //  public ActionResult Edit(string id,[Bind("Id,EmployeeId,Name,Birthdate,Email,Gender,RollId,AddressLine1,AddressLine2,City")] UserMaster userMaster)
-        public async Task<IActionResult> Edit(UserMaster userMaster)
+        public async Task<IActionResult> EditUser(UserMaster userMaster)
         {
             // if (id != userMaster.Id )
             if(userMaster.Id == null)
             {
-                return NotFound();
+                return RedirectToPage("Home/Notfound");
             }
 
             if (ModelState.IsValid)
@@ -119,25 +119,22 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var edituser = _context.Users.FirstOrDefault(x => x.Id == userMaster.Id);
-                    edituser.EmployeeId = userMaster.EmployeeId;
-                    edituser.Name = userMaster.Name;
-                    edituser.Birthdate = userMaster.Birthdate;
-                    edituser.City = userMaster.City;
-                    edituser.AddressLine1 = userMaster.AddressLine1;
+                   
                     edituser.UserName = userMaster.Email;
                     edituser.Email = userMaster.Email;
-                    edituser.AddressLine2 = userMaster.AddressLine2;
-                    edituser.Gender = userMaster.Gender;                   
+                    edituser.FirstName = userMaster.FirstName;
+                    edituser.LastName = userMaster.LastName;
+
                     var oldUser = _userManager.FindByIdAsync(userMaster.Id);
-                    var oldRoleId = _roleManager.Roles.Where(x => x.Id == edituser.RollId).Select(x=>x.Id).FirstOrDefault();
+                    var oldRoleId = _roleManager.Roles.Where(x => x.Id == edituser.AccessRole).Select(x=>x.Id).FirstOrDefault();
                      var oldRoleName = _context.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
-                    var newRoleName = _context.Roles.SingleOrDefault(r => r.Id == userMaster.RollId).Name;
-                    if (oldRoleId != userMaster.RollId)
+                    var newRoleName = _context.Roles.SingleOrDefault(r => r.Id == userMaster.AccessRole).Name;
+                    if (oldRoleId != userMaster.AccessRole)
                     {
                         var removeroleresult =  await _userManager.RemoveFromRoleAsync(edituser, oldRoleName);
                         var roleresult = await _userManager.AddToRoleAsync(edituser, newRoleName);
                     }
-                    edituser.RollId = userMaster.RollId;
+                    edituser.AccessRole = userMaster.AccessRole;
                     //if (edituser.Email != userMaster.Email)
                     //{
                     //    edituser.Email = userMaster.Email;
@@ -170,7 +167,7 @@ namespace MonoOvens.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UsersList));
             }
             return View(userMaster);
         }
@@ -201,7 +198,7 @@ namespace MonoOvens.Controllers
             var userMaster = await _context.Users.FindAsync(id);
             _context.Users.Remove(userMaster);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UsersList));
         }
 
         private bool UserMasterExists(string id)

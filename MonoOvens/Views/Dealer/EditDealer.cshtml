@@ -1,0 +1,79 @@
+﻿@model MonoOvens.Models.DealerMaster
+
+@{
+    ViewData["Title"] = "EditDealer";
+}
+
+<h2>Edit Dealer</h2>
+
+
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="EditDealer">
+            <p class="form-group text-info">(*)fields are mandatory</p>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerName" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerName" class="form-control" id="dname" required />
+                <span id="nameError" style="color:red"></span>
+                <span asp-validation-for="DealerName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerPhone" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerPhone" class="form-control" id="phone" required />
+                <span id="phoneError" style="color:red"></span>
+                <span asp-validation-for="DealerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerRegion" class="control-label"></label><span style="color:red"> *</span>
+                <input asp-for="DealerRegion" class="form-control" id="dname" required />
+                <span id="nameError" style="color:red"></span>
+                <span asp-validation-for="DealerRegion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style=" clear:left ; padding-left:400px">
+                <input type="submit" value="Save" class="btn btn-info" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="DealersList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // to allow only digits to be entered from the user side .
+        function Digits(e) {
+           if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+              //display error message
+              $("#phoneError").html("Only Digits Allowed").show().fadeOut("slow");
+               return false;
+           }
+       }
+       // to allow only charactors to be entered from the user side .
+       function Charactors(e) {
+            var key = e.keyCode;
+            if (!((key == 8) ||  (key == 9) ||  (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+       }
+       $(document).ready(function () {
+           $("#phone").keypress(function(e)
+           {
+               return Digits(e);
+           });
+            $("#dname").keydown(function(e)
+           {
+               Charactors(e);
+            });
+          
+
+         });
+    </script>
+}

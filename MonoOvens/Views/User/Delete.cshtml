@@ -1,7 +1,7 @@
 ﻿@model MonoOvens.Models.UserMaster
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete User";
 }
 
 <h2>Delete</h2>
@@ -12,17 +12,30 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessRole)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccessRole)
+        </dd>
+        @*<dt>
             @Html.DisplayNameFor(model => model.EmployeeId)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.EmployeeId)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Birthdate)
         </dt>
@@ -64,12 +77,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.City)
-        </dd>
+        </dd>*@
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="UsersList">Back to List</a>
     </form>
 </div>

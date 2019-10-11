@@ -19,13 +19,13 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Dealer
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> DealersList()
         {
             return View(await _context.Dealers.ToListAsync());
         }
 
         // GET: Dealer/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> DealerDetails(int? id)
         {
             if (id == null)
             {
@@ -43,7 +43,7 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Dealer/Create
-        public IActionResult Create()
+        public IActionResult CreateDealer()
         {
             return View();
         }
@@ -53,19 +53,19 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DealerId,DealerName,DealerPhone,DealerEmail,DealerAddressLine1,DealerAddressLine2,DealerArea,DealerCity,DealerState,DealerCountry")] DealerMaster dealerMaster)
+        public async Task<IActionResult> CreateDealer([Bind("Id,DealerName,DealerPhone,DealerRegion")] DealerMaster dealerMaster)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(dealerMaster);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(DealersList));
             }
             return View(dealerMaster);
         }
 
         // GET: Dealer/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditDealer(int? id)
         {
             if (id == null)
             {
@@ -85,7 +85,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DealerId,DealerName,DealerPhone,DealerEmail,DealerAddressLine1,DealerAddressLine2,DealerArea,DealerCity,DealerState,DealerCountry")] DealerMaster dealerMaster)
+        public async Task<IActionResult> EditDealer(int id, [Bind("Id,DealerName,DealerPhone,DealerRegion")] DealerMaster dealerMaster)
         {
             if (id != dealerMaster.Id)
             {
@@ -110,7 +110,7 @@ namespace MonoOvens.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(DealersList));
             }
             return View(dealerMaster);
         }
@@ -141,7 +141,7 @@ namespace MonoOvens.Controllers
             var dealerMaster = await _context.Dealers.FindAsync(id);
             _context.Dealers.Remove(dealerMaster);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(DealersList));
         }
 
         private bool DealerMasterExists(int id)

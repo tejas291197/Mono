@@ -20,13 +20,13 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ClientsList()
         {
             return View(await _context.Client.ToListAsync());
         }
 
         // GET: Clients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ClientDetails(int? id)
         {
             if (id == null)
             {
@@ -44,7 +44,7 @@ namespace MonoOvens.Controllers
         }
 
         // GET: Clients/Create
-        public IActionResult Create()
+        public IActionResult CreateClient()
         {
             return View();
         }
@@ -54,19 +54,19 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClientId,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,StorePostcode")] ClientMaster client)
+        public async Task<IActionResult> CreateClient([Bind("Id,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ClientsList));
             }
             return View(client);
         }
 
         // GET: Clients/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditClient(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,StorePostcode")] ClientMaster client)
+        public async Task<IActionResult> EditClient(int id, [Bind("Id,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
         {
             if (id != client.Id)
             {
@@ -111,7 +111,7 @@ namespace MonoOvens.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ClientsList));
             }
             return View(client);
         }
@@ -142,7 +142,7 @@ namespace MonoOvens.Controllers
             var client = await _context.Client.FindAsync(id);
             _context.Client.Remove(client);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ClientsList));
         }
 
         private bool ClientExists(int id)

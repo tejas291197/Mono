@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MonoOvens.Models.DealerMaster>
+
+@{
+    ViewData["Title"] = "DealersList";
+}
+
+<h2>Dealers</h2>
+
+<p>
+    <a asp-action="CreateDealer">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Dealer Name
+            </th>
+            <th>
+                Region
+            </th>
+            <th>
+               Contact
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DealerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DealerPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DealerRegion)
+            </td>
+            
+            <td>
+                <a asp-action="EditDealer" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="DealerDetails" asp-route-id="@item.Id">Details</a> 
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
