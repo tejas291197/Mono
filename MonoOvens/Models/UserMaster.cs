@@ -10,9 +10,9 @@ namespace MonoOvens.Models
     public class UserMaster : IdentityUser
     {
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-        
+        public string LastName { get; set; }        
         public string AccessRole { get; set; }
+        public bool IsDeleted { get; set; }
         //// public int Id { get; set; }
         // public string EmployeeId { get; set; }
         // public string Name { get; set; }

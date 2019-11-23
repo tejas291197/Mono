@@ -30,6 +30,8 @@ namespace MonoOvens.Models
         public virtual DbSet<Product> Product { get; set; }
          
         public DbSet<MonoOvens.Models.RoleMaster> RoleMaster { get; set; }
+         
+        public DbSet<MonoOvens.Models.CustomerMaster> Customers { get; set; }
       
 
         //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

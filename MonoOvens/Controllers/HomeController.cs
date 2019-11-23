@@ -24,7 +24,7 @@ namespace MonoOvens.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = " Contact MonoOvens.";
 
             return View();
         }

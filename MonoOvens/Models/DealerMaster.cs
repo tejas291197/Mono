@@ -12,6 +12,7 @@ namespace MonoOvens.Models
         public string DealerName { get; set; }
         public string DealerPhone { get; set; }
         public string DealerRegion { get; set; }
+        public bool IsDeleted { get; set; }
         //[Required]
         //[EmailAddress]
         //public string DealerEmail { get; set; }

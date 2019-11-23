@@ -34,7 +34,7 @@ namespace MonoOvens.Models
         public string PostTown { get; set; }
         
         public string StorePostcode { get; set; }
-
+        public bool IsDeleted { get; set; }
 
     }
 }

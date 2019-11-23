@@ -27,7 +27,85 @@ namespace MonoOvens.Controllers
         // GET: User
         public async Task<IActionResult> UsersList()
         {
+            //var query=  from q in _context.Users u join RoleManager<IdentityRole> r on 
+            //            select
+        // var UserInRole = _context.Users.
+        //Join(_roleManager, u => u.Id, uir => uir.UserId,
+        //(u, uir) => new { u, uir }).
+        //Join(_roleManager, r => r.uir.RoleId, ro => ro.RoleId, (r, ro) => new { r, ro })
+       
+        //.Select(m => new 
+        //{
+        //    UserName = m.r.u.FirstName,
+        //    RoleName = m.ro.Name
+        //});
+
+
+            
+           // return View(viewModel);
             return View(await _context.Users.ToListAsync());
+
+        }
+
+
+        //data provider method for the Users list.
+        public JsonResult UserAjaxDataProvider(GridPagination param)
+        {
+            var userId = _userManager.GetUserId(User);
+            var uId = _context.Users.Where(x => x.Id == userId);
+         //   IEnumerable<UserMaster> Users = _context.Users;
+
+            var viewModel = from pd in _context.Users
+                            join p in _roleManager.Roles on pd.AccessRole equals p.Id
+                            where pd.AccessRole == p.Id 
+                            where pd.IsDeleted == false
+                            select new
+                            {
+                                //Id = _context.Users.Select(x => x.Id),
+                                //Name = _context.Users.Select(x => x.FirstName) + " " + _context.Users.Select(x => x.LastName),
+                                //Email = _context.Users.Select(x => x.Email),
+                                //Role = _roleManager.Roles.Where(x => x.Id == pd.AccessRole).Select(x => x.Name)
+                                Id = pd.Id,
+                                Name = pd.FirstName + " " + pd.LastName,
+                                Email = pd.Email,
+                                Role = p.Name
+                            };
+
+            // var totalUsers = _context.Users.Count();
+            var totalUsers = viewModel.ToList().Count();
+             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
+            var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
+            var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
+            if (!string.IsNullOrEmpty(param.sSearch)) viewModel = viewModel.Where(z => z.Role.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Email.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Name.ToLower().Contains(param.sSearch.ToLower())   );
+
+            switch (sortColumnIndex)
+            {
+                case 1:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Name ) : viewModel.OrderByDescending(z => z.Name);
+                    break;
+                case 2:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Email) : viewModel.OrderByDescending(z => z.Email);
+                    break;
+                case 3:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Role) : viewModel.OrderByDescending(z => z.Role);
+                    break;
+
+                default:
+                    viewModel = viewModel.OrderByDescending(z => z.Id);
+                    break;
+            }
+            var filteredUsersCount = viewModel.Count();
+            viewModel = viewModel.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = totalUsers,
+                iTotalDisplayRecords = filteredUsersCount,
+                aaData = viewModel
+            });
         }
 
         // GET: User/Details/5
@@ -70,6 +148,7 @@ namespace MonoOvens.Controllers
                 // _context.Add(userMaster);
                 userMaster.UserName = userMaster.Email;
                 var rolename = _roleManager.Roles.Where(e=>e.Id == userMaster.AccessRole).Select(e=>e.Name).FirstOrDefault();
+               // userMaster.AccessRole = rolename;
                 var result = await _userManager.CreateAsync(userMaster, "Test@123");
                 var roleresult = await _userManager.AddToRoleAsync( userMaster , rolename);
                 await _context.SaveChangesAsync();
@@ -172,34 +251,78 @@ namespace MonoOvens.Controllers
             return View(userMaster);
         }
 
-        // GET: User/Delete/5
-        public async Task<IActionResult> Delete(string id)
+
+        //To soft delete a record.
+        public JsonResult Delete(string id)
         {
             if (id == null)
             {
-                return NotFound();
+                return Json(new
+                {
+                    success = 0
+                });
+                //return RedirectToAction("NotFound", "Home");
             }
-
-            var userMaster = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (userMaster == null)
+            var user = _context.Users.Find(id);
+            //  _context.Customers.Remove(customer);
+            if (user.IsDeleted == false)
             {
-                return NotFound();
+                user.IsDeleted = true;   // flag for a soft delete is set.
             }
-
-            return View(userMaster);
+            var result = _context.SaveChanges();
+            if (result != 0)
+            {
+                return Json(new
+                {
+                    success = 1
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = 0
+                });
+            }
         }
+        //// GET: User/Delete/5
+        //public async Task<IActionResult> Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // POST: User/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var userMaster = await _context.Users.FindAsync(id);
-            _context.Users.Remove(userMaster);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(UsersList));
-        }
+        //    var userMaster = await _context.Users
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (userMaster == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(userMaster);
+        //}
+
+        //// POST: User/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<JsonResult> DeleteConfirmed(string id)
+        //{
+        //    var userMaster = await _context.Users.FindAsync(id);
+        //    _context.Users.Remove(userMaster);
+        //    await _context.SaveChangesAsync();
+        //    return Json(new
+        //    {
+        //        success = 1
+        //    });
+        //}
+        //public async Task<IActionResult> DeleteConfirmed(string id)
+        //{
+        //    var userMaster = await _context.Users.FindAsync(id);
+        //    _context.Users.Remove(userMaster);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(UsersList));
+        //}
 
         private bool UserMasterExists(string id)
         {

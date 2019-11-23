@@ -4,32 +4,34 @@
     ViewData["Title"] = "ClientsList";
 }
 
-    <h2>Clients</h2>
+<h2>Clients</h2>
 
 <p>
     <a asp-action="CreateClient">Create New</a>
 </p>
-<table class="table">
+<table style="width:100%!important" class="table  table-bordered" id="clientsTable">
     <thead>
         <tr>
-           
+            <th>
+                Id
+            </th>
             <th>
                 Client Name
             </th>
             <th>
-               Primary Contact Email
+                Primary Contact Email
             </th>
             <th>
                 Primary Contact Name
             </th>
             <th>
-               	Primary Contact Number
+                Primary Contact Number
             </th>
             <th>
-                @* Html.DisplayNameFor(model => model.HOAddress1)*@   
+                @* Html.DisplayNameFor(model => model.HOAddress1)*@
                 Head-Office
             </th>
-           
+
             <th>
                 Zone
             </th>
@@ -50,57 +52,133 @@
             </th>
             <th>
                 @* Html.DisplayNameFor(model => model.StoreAddressLine1)   *@  Store-Address
-            </th>                      
+            </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimaryEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimaryContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimaryContactNumber)
-            </td>
-            <td>
-   @Html.DisplayFor(modelItem => item.HOAddress1),&nbsp;@Html.DisplayFor(modelItem => item.HOAddress2),&nbsp;@Html.DisplayFor(modelItem => item.HOAddress3),&nbsp;@Html.DisplayFor(modelItem => item.City),&nbsp;@Html.DisplayFor(modelItem => item.Postcode).
-            </td>
-          
-            <td>
-                @Html.DisplayFor(modelItem => item.Zone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreAddress1),&nbsp;@Html.DisplayFor(modelItem => item.StoreAddress1),&nbsp;@Html.DisplayFor(modelItem => item.PostTown),&nbsp;@Html.DisplayFor(modelItem => item.StorePostcode).
-            </td>           
-            <td>
-                <a asp-action="EditClient" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="ClientDetails" asp-route-id="@item.Id">Details</a> 
-                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
+   
 </table>
+
+@section Scripts{
+
+    <script language="javascript" type="text/javascript">
+        var clientsTable;
+
+        function EditClientbyAdmin(id) {
+            
+            window.location.href = "/Clients/EditClient/" + id;
+          }
+
+
+         function confirmDelete(callback) {
+            bootbox.confirm({
+                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) callback();
+                }
+            });
+
+        }
+
+        function deleteSelectedItem(Id) {
+
+            confirmDelete(function () {
+
+                //var data = customersTable.rows({ selected: true }).data();
+                $.ajax({
+                    type: "GET",
+                    url:  "/Clients/Delete",
+                    data: { Id: Id },
+                    success: function (data) {
+
+                        clientsTable.draw(true);
+                        // toggleActionButtons(false);
+                      //  document.location.reload(true);
+                    }
+
+                }).fail(function (error) {
+                    alert(error.statusText);
+                    console.log(error);
+                })
+            });
+
+        }
+
+          $(document).ready(function () {
+            //toggleActionButtons(false);
+
+             clientsTable = $('#clientsTable').DataTable({
+                select: {
+                    style: 'single'
+                },
+                //"order": [[3, "desc"]],
+                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                responsive: true, "bProcessing": true,
+                "bServerSide": true,                                                   // paging
+                "sAjaxSource": '/Clients/ClientAjaxDataProvider',
+                 "columnDefs": [
+                     {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+
+                    {
+                        "render": function (data, type, row) {
+  //return '<a href="/Clients/EditClient/' + data.id +'"  >Edit</a> <a href="/Clients/ClientDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+    return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditClientbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                        },
+                        "targets": 13
+                    }
+                ],
+                 "columns": [
+                    {"data" :"id" },
+                    { "data": "clientName" },
+                    { "data": "primaryEmail" },
+                    { "data": "primaryContactName" },
+                    { "data": "primaryContactNumber" },
+                  
+                    {
+                        "data": "hOAddress1",
+                        "render": function (data, type, row) {
+                    return row.hoAddress1 + '&nbsp;' + row.hoAddress2  + '&nbsp;' + row.hoAddress3  + '&nbsp;' + row.city   +'&nbsp;' + row.postcode
+                        }
+                    },
+                    { "data": "zone" },
+                    { "data": "region" },
+                    { "data": "area" },
+                    { "data": "storeCode" },
+                    { "data": "type" },
+                    { "data": "storeName" },   
+                    {
+                        "data": "storeAddress1",
+                        "render": function (data, type, row) {
+                    return row.storeAddress1 + '&nbsp;' + row.storeAddress2  + '&nbsp;' + row.postTown + '&nbsp;' +row.storePostcode
+                        }
+                    },                        
+                    {
+                        "orderable": false,
+                        "searchable": false,
+                        "data": null
+                    }
+                ]
+            });
+            $('#clientsTable tbody').on('click', 'tr', function () {
+                setTimeout(function () {
+                    var selectedCount = clientsTable.rows({ selected: true }).count();
+                    // toggleActionButtons(selectedCount > 0);
+                }, 100)
+            });
+        });
+    </script>
+}

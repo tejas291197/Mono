@@ -3,6 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190918100549_clientedited.cs" />
+    <Compile Remove="Migrations\20190918100549_clientedited.Designer.cs" />
+    <Compile Remove="Migrations\20191017100628_CustomerAdded.cs" />
+    <Compile Remove="Migrations\20191017100628_CustomerAdded.Designer.cs" />
+  </ItemGroup>
 <!--
   <ItemGroup>
     <Compile Include="Areas\Identity\IdentityHostingStartup.cs" />
@@ -175,17 +189,6 @@
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
     <None Include="MonoOvens.sln" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.assets.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.dll" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.pdb" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorTargetAssemblyInfo.cache" />
-    <None Include="obj\MonoOvens.csproj.nuget.cache" />
-    <None Include="obj\MonoOvens.csproj.nuget.g.props" />
-    <None Include="obj\MonoOvens.csproj.nuget.g.targets" />
     <None Include="Views\AccessRole\Create.cshtml" />
     <None Include="Views\AccessRole\Delete.cshtml" />
     <None Include="Views\AccessRole\Details.cshtml" />
@@ -206,6 +209,11 @@
     <None Include="Views\ControllerModules\ControllerDetails.cshtml" />
     <None Include="Views\ControllerModules\EditController.cshtml" />
     <None Include="Views\ControllerModules\ControllersList.cshtml" />
+    <None Include="Views\Customer\CreateCustomer.cshtml" />
+    <None Include="Views\Customer\CustomerDetails.cshtml" />
+    <None Include="Views\Customer\CustomersList.cshtml" />
+    <None Include="Views\Customer\Delete.cshtml" />
+    <None Include="Views\Customer\EditCustomer.cshtml" />
     <None Include="Views\Dealer\CreateDealer.cshtml" />
     <None Include="Views\Dealer\Delete.cshtml" />
     <None Include="Views\Dealer\DealerDetails.cshtml" />
@@ -228,6 +236,7 @@
     <None Include="Views\User\UsersList.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\CSV\csvnewly.csv" />
     <None Include="wwwroot\images\banner1.svg" />
     <None Include="wwwroot\images\banner2.svg" />
     <None Include="wwwroot\images\banner3.svg" />
@@ -277,10 +286,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Highsoft.Highcharts" Version="7.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0-preview1-19509-03" />
   </ItemGroup>
 
   <ItemGroup>

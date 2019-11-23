@@ -2,7 +2,6 @@ D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.deps.json
 D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.json
 D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.dev.json
 D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.dll
-D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache
 D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache
 D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs
 D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache
@@ -100,3 +99,10 @@ D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.dll
 D:\tejas\MonoOvenProject\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.pdb
 D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.Views.pdb
 D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csproj.CopyComplete
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Report\ReportList.cshtml.g.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Customer\CreateCustomer.cshtml.g.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Customer\CustomerDetails.cshtml.g.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Customer\CustomersList.cshtml.g.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Customer\Delete.cshtml.g.cs
+D:\tejas\MonoOvenProject\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Customer\EditCustomer.cshtml.g.cs

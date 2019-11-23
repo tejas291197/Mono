@@ -38,7 +38,7 @@ namespace MonoOvens.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public class InputModel
+        public class InputModel:IdentityRole
         {
             [Required]
             [EmailAddress]

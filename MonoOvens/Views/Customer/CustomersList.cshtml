@@ -1,0 +1,205 @@
+﻿@model IEnumerable<MonoOvens.Models.CustomerMaster>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <h2>Customers</h2>
+
+<p>
+    <a asp-action="CreateCustomer">Create New</a>
+</p>
+<table style="width:100%!important" class="table table-bordered" id="customersTable">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Primary Contact Email
+            </th>
+            <th>
+                Primary Contact Name
+            </th>
+            <th>
+                Primary Contact Number
+            </th>
+            <th>
+                @* Html.DisplayNameFor(model => model.HOAddress1)*@
+                Head-Office
+            </th>
+
+            <th>
+                Zone
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreName)
+            </th>
+            <th>
+                @* Html.DisplayNameFor(model => model.StoreAddressLine1)   *@  Store-Address
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @*<tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a asp-action="EditCustomer" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="CustomerDetails" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>*@
+</table>
+
+@section Scripts{ 
+    <script language="javascript" type="text/javascript">
+        var customersTable;
+         function EditCustomerbyAdmin(id) {
+            
+            window.location.href = "/Customer/EditCustomer/" + id;
+        }
+
+        function confirmDelete(callback) {
+            bootbox.confirm({
+                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) callback();
+                }
+            });
+
+        }
+
+        function deleteSelectedItem(id) {
+          //  alert("enteredinto delete");
+            confirmDelete(function () {
+
+                //var data = customersTable.rows({ selected: true }).data();
+                $.ajax({
+                    type: "GET",
+                    url: "/Customer/Delete",
+                    data: { id: id },
+                    success: function (data) {
+
+                       // customersTable.draw(true);
+                         customersTable.draw(true);
+                        // toggleActionButtons(false);
+                        //  document.location.reload(true);
+                    }
+
+                }).fail(function (error) {
+                    alert(error.statusText);
+                    console.log(error);
+                })
+            });
+
+        }
+
+        $(document).ready(function () {
+            //toggleActionButtons(false);
+
+            customersTable = $('#customersTable').DataTable({
+                select: {
+                    style: 'single'
+                },
+                //"order": [[3, "desc"]],
+                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                responsive: true, "bProcessing": true,
+                "bServerSide": true,                                                   // paging
+                "sAjaxSource": '/Customer/CustomerAjaxDataProvider',
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+    return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditCustomerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+   // return '<a href="/User/EditUser/' + data.id + '"  >Edit</a> <a href="/User/UserDetails/' + data.id + '" >Details</a>  <a class="btn btn-danger btn-link" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+  //  return '<a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')"><span class="glyphicon glyphicon-trash"></span></a>'
+                        },
+                        "targets": 13
+                    }
+                ],
+                "columns": [
+                     {"data" :"id" },
+                    { "data": "customerName" },
+                    { "data": "primaryEmail" },
+                    { "data": "primaryContactName" },
+                    { "data": "primaryContactNumber" },
+                  
+                    {
+                        "data": "hOAddress1",
+                        "render": function (data, type, row) {
+                    return row.hoAddress1 + '&nbsp;' + row.hoAddress2  + '&nbsp;' + row.hoAddress3  + '&nbsp;' + row.city   +'&nbsp;' + row.postcode
+                        }
+                    },
+                    { "data": "zone" },
+                    { "data": "region" },
+                    { "data": "area" },
+                    { "data": "storeCode" },
+                    { "data": "type" },
+                    { "data": "storeName" },   
+                    {
+                        "data": "storeAddress1",
+                        "render": function (data, type, row) {
+                    return row.storeAddress1 + '&nbsp;' + row.storeAddress2  + '&nbsp;' + row.postTown + '&nbsp;' +row.storePostcode
+                        }
+                    },
+                    {
+                        "orderable": false,
+                        "searchable": false,
+                        "data": null
+                    }
+                ]
+            });
+            $('#customersTable tbody').on('click', 'tr', function () {
+                setTimeout(function () {
+                    var selectedCount = customersTable.rows({ selected: true }).count();
+                    // toggleActionButtons(selectedCount > 0);
+                }, 100)
+            });
+        });
+
+
+    </script>
+}

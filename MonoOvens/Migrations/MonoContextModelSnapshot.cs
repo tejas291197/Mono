@@ -209,17 +209,19 @@ namespace MonoOvens.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AssetCategory");
+                    b.Property<int>("AssetCategory");
 
-                    b.Property<string>("AssetType");
+                    b.Property<int>("AssetType");
 
-                    b.Property<string>("ControllerType");
+                    b.Property<int>("ControllerType");
 
                     b.Property<int>("Controllers");
 
                     b.Property<string>("Format");
 
                     b.Property<string>("Handed");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Power");
 
@@ -267,6 +269,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("HOAddress3");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("PostTown");
 
                     b.Property<string>("Postcode");
@@ -310,6 +314,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("FirmwareVersion");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("RecipeVersion");
 
                     b.Property<bool>("RemoteKill");
@@ -346,6 +352,57 @@ namespace MonoOvens.Migrations
                     b.ToTable("ControllerType");
                 });
 
+            modelBuilder.Entity("MonoOvens.Models.CustomerMaster", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Area");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("CustomerName");
+
+                    b.Property<string>("HOAddress1");
+
+                    b.Property<string>("HOAddress2");
+
+                    b.Property<string>("HOAddress3");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("PostTown");
+
+                    b.Property<string>("Postcode");
+
+                    b.Property<string>("PrimaryContactName");
+
+                    b.Property<string>("PrimaryContactNumber");
+
+                    b.Property<string>("PrimaryEmail");
+
+                    b.Property<string>("Region");
+
+                    b.Property<string>("StoreAddress1");
+
+                    b.Property<string>("StoreAddress2");
+
+                    b.Property<string>("StoreCode");
+
+                    b.Property<string>("StoreName");
+
+                    b.Property<string>("StorePostcode");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("MonoOvens.Models.DealerMaster", b =>
                 {
                     b.Property<int>("Id")
@@ -357,6 +414,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("DealerPhone");
 
                     b.Property<string>("DealerRegion");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.HasKey("Id");
 
@@ -467,6 +526,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("AccessRole");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName");
 

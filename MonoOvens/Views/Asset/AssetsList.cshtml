@@ -4,14 +4,17 @@
     ViewData["Title"] = "AssetList";
 }
 
-    <h2>Assets</h2>
+<h2>Assets</h2>
 
 <p>
     <a asp-action="CreateAsset">Create New</a>
 </p>
-<table class="table">
+<table style="width:100%!important" class="table  table-bordered" id="assetsTable">
     <thead>
         <tr>
+            <th>
+                Id
+            </th>
             <th>
                 Asset Category
             </th>
@@ -28,7 +31,7 @@
                 number of Trays
             </th>
             <th>
-               TraySize(inch)
+                TraySize(inch)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Handed)
@@ -45,45 +48,117 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AssetCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AssetType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ControllerType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Controllers)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrayHeight_inch)" &Chi;  @Html.DisplayFor(modelItem => item.TrayWidth_inch)"
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Handed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Format)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Power)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PowerConsumption)
-            </td>
-            <td>
-                <a asp-action="EditAsset" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="AssetDetails" asp-route-id="@item.Id">Details</a> 
-                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
+   
 </table>
+@section Scripts{
+
+    <script language="javascript" type="text/javascript">
+        var assetsTable;
+
+         function EditAssetbyAdmin(id) {
+            
+            window.location.href = "/Asset/EditAsset/" + id;
+          }
+         function confirmDelete(callback) {
+            bootbox.confirm({
+                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) callback();
+                }
+            });
+            
+        }
+
+        function deleteSelectedItem(id) {
+
+            confirmDelete(function () {
+
+                //var data = customersTable.rows({ selected: true }).data();
+                $.ajax({
+                    type: "GET",
+                    url:  "/Asset/Delete",
+                    data: { id: id },
+                    success: function (data) {
+                        
+                        assetsTable.draw(true);
+                        // toggleActionButtons(false);
+                      //  document.location.reload(true);
+                    }
+
+                }).fail(function (error) {
+                    alert(error.statusText);
+                    console.log(error);
+                })
+            }); 
+            
+        }               
+
+          $(document).ready(function () {
+            //toggleActionButtons(false);
+             
+             assetsTable = $('#assetsTable').DataTable({
+                select: {
+                    style: 'single'
+                },
+                //"order": [[3, "desc"]],
+                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                responsive: true, "bProcessing": true,
+                "bServerSide": true,                                                   // paging
+                "sAjaxSource": '/Asset/AssetAjaxDataProvider',
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+ // return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> <a href="/Asset/AssetDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+     return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                        },
+                        "targets": 11
+                    }
+                ],
+                 "columns": [   
+                     {"data" :"id" },
+                    { "data": "assetCategory" },
+                    { "data": "assetType" },
+                    { "data": "controllerType" },
+                    { "data": "controllers" },
+                    { "data": "trays" },
+                    {
+                        "data": "trayHeight_inch",
+                        "render": function (data, type, row) {
+                            return row.trayHeight_inch + '&Chi;' + row.trayWidth_inch
+                        }
+                    },
+                    { "data": "handed" },
+                    { "data": "format" },
+                    { "data": "power" },
+                    { "data": "powerConsumption" },
+                    {
+                        "orderable": false,
+                        "searchable": false,
+                        "data": null
+                    }
+                ]
+            });
+            $('#assetsTable tbody').on('click', 'tr', function () {
+                setTimeout(function () {
+                    var selectedCount = assetsTable.rows({ selected: true }).count();
+                    // toggleActionButtons(selectedCount > 0);
+                }, 100)
+            });
+        });
+    </script>
+}

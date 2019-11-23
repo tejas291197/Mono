@@ -16,16 +16,17 @@ namespace MonoOvens.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<UserMaster> _userManager;
         private readonly SignInManager<UserMaster> _signInManager;
-        private readonly IEmailSender _emailSender;
+     //   private readonly IEmailSender _emailSender;
 
         public IndexModel(
             UserManager<UserMaster> userManager,
-            SignInManager<UserMaster> signInManager,
-            IEmailSender emailSender)
+            SignInManager<UserMaster> signInManager
+         //   IEmailSender emailSender
+         )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+          //  _emailSender = emailSender;
         }
 
         public string Username { get; set; }
@@ -114,6 +115,7 @@ namespace MonoOvens.Areas.Identity.Pages.Account.Manage
             return RedirectToPage();
         }
 
+        /*
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
         {
             if (!ModelState.IsValid)
@@ -143,6 +145,8 @@ namespace MonoOvens.Areas.Identity.Pages.Account.Manage
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();
-        }
+
+
+        }*/
     }
 }

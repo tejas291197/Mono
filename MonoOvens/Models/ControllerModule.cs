@@ -17,8 +17,9 @@ namespace MonoOvens.Models
         public string SleepDelay { get; set; }
         public DateTime? ControllerDate { get; set; }
         public bool? Status { get; set; }
-    
+        // enable or disable.
         public bool RemoteKill { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
 }

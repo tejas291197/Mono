@@ -45,17 +45,18 @@
                 <span asp-validation-for="Trays" class="text-danger"></span>
             </div>
             @*<div style="height:100px ; clear:right"> </div>*@
-            <div class="form-group" style=" float:left ; padding-right:100px ">
-                <label>TraySize(Inch) : </label>
-                <input asp-for="TrayHeight_inch" class="form-control" required placeholder="height" />
-                <input asp-for="TrayWidth_inch" class="form-control" required placeholder="width" />
-                <span asp-validation-for="TrayWidth_inch" class="text-danger"></span>
-            </div>
+        <div class="form-group" style=" float:left ; padding-right:100px ">
+            <label>TraySize(Inch) : </label>
+            <input asp-for="TrayHeight_inch" class="form-control" required placeholder="height" id="height" />
+            <input asp-for="TrayWidth_inch" class="form-control" required placeholder="width" id="width" />
+            <span id="sizeError"></span>
+            <span asp-validation-for="TrayWidth_inch" class="text-danger"></span>
+        </div>
 
             <div class="form-group" style=" float:left ; padding-right:100px">
                 <label>Handed : </label>
                 <select asp-for="Handed" class="form-control" required>
-                    <option value="">--Select--</option>
+                    <option value="">--Select--</option>wty
                     <option value="Left-Handed">Left</option>
                     <option value="Right-Handed">Right</option>
                 </select>
@@ -74,8 +75,8 @@
                 <label>Power : </label>
                 <select asp-for="Power" class="form-control" required>
                     <option value="">--Select--</option>
-                    <option value="Single-phase ">Single-phase </option>
-                    <option value="Three-phase">Three-phase</option>
+                    <option value="Single-phase ">Single-Phase </option>
+                    <option value="Three-phase">Three-Phase</option>
                 </select>
                 <span asp-validation-for="Power" class="text-danger"></span>
             </div>
@@ -83,8 +84,8 @@
                 <label>Power Consumption : </label>
                 <select asp-for="PowerConsumption" class="form-control" required>
                     <option value="">--Select--</option>
-                    <option value="Light power ">Light power  </option>
-                    <option value="Heating element">Heating element </option>
+                    <option value="Light power ">Light Power  </option>
+                    <option value="Heating element">Heating Element </option>
                 </select>
                 <span asp-validation-for="PowerConsumption" class="text-danger"></span>
             </div><br />
@@ -129,5 +130,30 @@
                 $("#subbtn").attr("disabled", false);
             }
         }
+
+       
+        // to block the characters to be intered
+        function cal(e) {
+           //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#sizeError").html("Only Digits Allowed").show().fadeOut("slow");
+                  e.preventDefault();
+                // return false;
+            }
+        }
+        
+
+        $(document).ready(function () {
+            
+            $('#height').keypress(function (e) {
+                cal(e);
+            })
+             $('#width').keypress(function (e) {
+             cal(e);   
+          });
+        })
+
+
     </script>
 }

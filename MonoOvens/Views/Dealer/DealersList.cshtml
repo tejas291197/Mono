@@ -9,41 +9,124 @@
 <p>
     <a asp-action="CreateDealer">Create New</a>
 </p>
-<table class="table">
+<table style="width:100%!important" class="table  table-bordered" id="dealersTable">
     <thead>
         <tr>
             <th>
-               Dealer Name
+                Id
+            </th>
+            <th>
+                Dealer Name
             </th>
             <th>
                 Region
             </th>
             <th>
-               Contact
+                Contact
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DealerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DealerPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DealerRegion)
-            </td>
-            
-            <td>
-                <a asp-action="EditDealer" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="DealerDetails" asp-route-id="@item.Id">Details</a> 
-                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
+    
 </table>
+@section Scripts{
+
+    <script language="javascript" type="text/javascript">
+        var dealersTable;
+
+          function EditDealerbyAdmin(id) {
+            
+            window.location.href = "/Dealer/EditDealer/" + id;
+          }
+         function confirmDelete(callback) {
+            bootbox.confirm({
+                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) callback();
+                }
+            });
+
+        }
+
+        function deleteSelectedItem(id) {
+
+            confirmDelete(function () {
+
+                //var data = customersTable.rows({ selected: true }).data();
+                $.ajax({
+                    type: "GET",
+                    url:  "/Dealer/Delete",
+                    data: { id: id },
+                    success: function (data) {
+
+                        dealersTable.draw(true);
+                        // toggleActionButtons(false);
+                      //  document.location.reload(true);
+                    }
+
+                }).fail(function (error) {
+                    alert(error.statusText);
+                    console.log(error);
+                })
+            });
+
+        }
+
+          $(document).ready(function () {
+            //toggleActionButtons(false);
+
+             dealersTable = $('#dealersTable').DataTable({
+                select: {
+                    style: 'single'
+                },
+                //"order": [[3, "desc"]],
+                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                responsive: true, "bProcessing": true,
+                "bServerSide": true,                                                   // paging
+                "sAjaxSource": '/Dealer/DealerAjaxDataProvider',
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+  //return '<a href="/Dealer/EditDealer/' + data.id +'"  >Edit</a> <a href="/Dealer/DealerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+  return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditDealerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                        },
+                        "targets": 4
+                    }
+                ],
+                 "columns": [
+                     {"data" :"id" },
+                    { "data": "dealerName" },
+                    { "data": "dealerRegion" },
+                    { "data": "dealerPhone" },                  
+                    {
+                        "orderable": false,
+                        "searchable": false,
+                        "data": null
+                    }
+                ]
+            });
+            $('#dealersTable tbody').on('click', 'tr', function () {
+                setTimeout(function () {
+                    var selectedCount = dealersTable.rows({ selected: true }).count();
+                    // toggleActionButtons(selectedCount > 0);
+                }, 100)
+            });
+        });
+    </script>
+}

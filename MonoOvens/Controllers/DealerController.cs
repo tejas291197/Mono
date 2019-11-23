@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace MonoOvens.Controllers
     public class DealerController : Controller
     {
         private readonly MonoContext _context;
+        private readonly UserManager<UserMaster> _userManager;
 
-        public DealerController(MonoContext context)
+        public DealerController(MonoContext context,UserManager<UserMaster> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Dealer
@@ -24,6 +27,51 @@ namespace MonoOvens.Controllers
             return View(await _context.Dealers.ToListAsync());
         }
 
+
+
+        //data provider method for the Dealers list.
+        public JsonResult DealerAjaxDataProvider(GridPagination param)
+        {
+            
+            var userId = _userManager.GetUserId(User);
+            var uId = _context.Users.Where(x => x.Id == userId);
+          //  IEnumerable<DealerMaster> Dealers = _context.Dealers;
+            IEnumerable<DealerMaster> Dealers = _context.Dealers.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+            var totalDealers = _context.Dealers.Count();
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
+            var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
+            var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
+            if (!string.IsNullOrEmpty(param.sSearch)) Dealers = Dealers.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower() )
+                                                                                || z.DealerPhone.ToString().ToLower().Contains(param.sSearch.ToLower() )
+                                                                                || z.DealerRegion.ToLower().Contains(param.sSearch.ToLower() )  );
+
+            switch (sortColumnIndex)
+            {
+                case 1:
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerName) : Dealers.OrderByDescending(z => z.DealerName);
+                    break;
+                case 2:
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerRegion) : Dealers.OrderByDescending(z => z.DealerRegion);
+                    break;
+                case 3:
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerPhone) : Dealers.OrderByDescending(z => z.DealerPhone);
+                    break;
+             
+                default:
+                    Dealers = Dealers.OrderByDescending(z => z.Id);
+                    break;
+            }
+            var filteredDealersCount = Dealers.Count();
+            Dealers = Dealers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = totalDealers,
+                iTotalDisplayRecords = filteredDealersCount,
+                aaData = Dealers
+            });
+        }
         // GET: Dealer/Details/5
         public async Task<IActionResult> DealerDetails(int? id)
         {
@@ -115,34 +163,93 @@ namespace MonoOvens.Controllers
             return View(dealerMaster);
         }
 
-        // GET: Dealer/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        //To soft delete a record.
+        public JsonResult Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return Json(new
+                {
+                    success = 0
+                });
+                //return RedirectToAction("NotFound", "Home");
             }
-
-            var dealerMaster = await _context.Dealers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (dealerMaster == null)
+            var dealer = _context.Dealers.Find(id);
+            //  _context.Customers.Remove(customer);
+            if (dealer.IsDeleted == false)
             {
-                return NotFound();
+                dealer.IsDeleted = true;   // flag for a soft delete is set.
             }
-
-            return View(dealerMaster);
+            var result = _context.SaveChanges();
+            if (result != 0)
+            {
+                return Json(new
+                {
+                    success = 1
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = 0
+                });
+            }
         }
 
-        // POST: Dealer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var dealerMaster = await _context.Dealers.FindAsync(id);
-            _context.Dealers.Remove(dealerMaster);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(DealersList));
-        }
+        //// GET: Dealer/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var dealerMaster = await _context.Dealers
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (dealerMaster == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(dealerMaster);
+        //}
+
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<JsonResult> DeleteConfirmed(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return Json(new
+        //        {
+        //            success = 0
+        //        });
+        //    }
+        //    else
+        //    {
+        //        var dealerMaster = await _context.Dealers.FindAsync(id);
+        //        _context.Dealers.Remove(dealerMaster); 
+        //        await _context.SaveChangesAsync(); 
+        //        return Json(new{
+        //            success = 1
+        //        });
+        //    }
+
+        //}
+        //// POST: Dealer/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var dealerMaster = await _context.Dealers.FindAsync(id);
+        //    _context.Dealers.Remove(dealerMaster);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(DealersList));
+        //}
 
         private bool DealerMasterExists(int id)
         {

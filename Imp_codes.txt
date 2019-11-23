@@ -1,0 +1,328 @@
+#this is nav class in old layout page.
+
+ <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+            <div class="container">
+                <a class="text-info navbar-brand " [routerLink]='["/"]'>MonoOvens</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+                        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+                    <ul class="navbar-nav flex-grow">
+                        <li class="nav-item " [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                            <a class="nav-link text-info" href="/home" ]'>Home</a>
+                        </li>
+                        @*<li class="nav-item" [routerLinkActive]='["link-active"]'>
+                            <a class="nav-link text-info" href="/home/about">About</a>
+                        </li>
+                        <li class="nav-item" [routerLinkActive]='["link-active"]'>
+                            <a class="nav-link text-info" href="/home/contact" ]'>Contact</a>
+                        </li>*@
+
+                        @*<li >
+                        <a href="#">Editors</a>
+                         <ul class="dropdown-menu">*@
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li><a class="nav-link text-info" asp-controller="User" asp-action="UsersList">Manage Users</a></li>
+                            <li><a class="nav-link text-info" asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                            <li><a class="nav-link text-info" asp-controller="ControllerModules" asp-action="ControllersList">Manage Controllers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="User" asp-action="EngineersList">Manage Engineers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a></li>
+
+                        }
+
+                        else if (User.IsInRole("Editor"))
+                        {
+                            <li><a class="nav-link text-info" asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                            <li><a class="nav-link text-info" asp-controller="ControllerModules" asp-action="ControllersList">Manage Controllers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="User" asp-action="EngineersList">Manage Engineers</a></li>
+                            <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ControllersList">Manage ClientAdministrator</a></li>
+                        }
+
+                        else if (User.IsInRole("Dealer"))
+                        {
+                            <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a></li>
+                            <li><a class="nav-link text-info" asp-controller="ControllerModules" asp-action="ClientsList">Manage Controller Address</a></li>
+                        }
+
+                        else if (User.IsInRole("Engineer"))
+                        {
+                            <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a></li>
+                            <li><a class="nav-link text-info" asp-controller="ControllerModules" asp-action="ClientsList">Manage Controller Address</a></li>
+                        }
+                        else if (User.IsInRole("ClientAdministrator"))
+                        {
+                            <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a></li>
+
+                        }
+
+                        <li><a class="nav-link text-info" asp-controller="Report" asp-action="ReportList">View Reports</a></li>
+                        @*<li><a class="nav-link text-info" asp-controller="User" asp-action="UsersList">Manage User</a></li>
+                        <li><a class="nav-link text-info" asp-controller="Clients" asp-action="ClientsList">Manage Client</a></li>
+                        <li><a class="nav-link text-info" asp-controller="Dealer" asp-action="DealersList">Manage Dealer</a></li>
+                        <li><a class="nav-link text-info" asp-controller="Asset" asp-action="AssetsList">Manage Asset</a></li>
+                        <li><a class="nav-link text-info" asp-controller="ControllerModules" asp-action="ControllersList">Manage Controller</a></li>*@
+
+
+
+                        @*</ul>
+                        </li>*@
+                        <li class="nav-item" [routerLinkActive]='["link-active"]'>
+                            <a class="nav-link text-info" href="/home/contact" ]'>Contact</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		
+		
+		
+		
+		
+		
+
+
+customer old controller
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using MonoOvens.Models;
+
+namespace MonoOvens.Controllers
+{
+    public class CustomerController : Controller
+    {
+        private readonly MonoContext _context;
+        private readonly UserManager<UserMaster> _userManager;
+
+        public CustomerController(MonoContext context, UserManager<UserMaster> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
+        // GET: Customer
+        public async Task<IActionResult> CustomersList()
+        {
+            return View(await _context.Customers.ToListAsync());
+        }
+
+        //data provider method for the Users list.
+        public JsonResult CustomerAjaxDataProvider(GridPagination param)
+        {
+
+            var userId = _userManager.GetUserId(User);
+            var uId = _context.Users.Where(x => x.Id == userId);
+            IEnumerable<CustomerMaster> Customers = _context.Customers.Where(x=>x.IsDeleted==false).OrderByDescending(x=>x.Id);
+
+           
+            var totalCustomers = Customers.ToList().Count();
+           
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
+            var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
+            var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
+            if (!string.IsNullOrEmpty(param.sSearch)) Customers = Customers.Where(z => z.Address.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.FirmName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.FirstName.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.LastName.ToLower().Contains(param.sSearch.ToLower()));
+
+            switch (sortColumnIndex)
+            {
+                case 1:
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.FirstName + " " + z.LastName)  : Customers.OrderByDescending(z => z.FirstName + " " + z.LastName);
+                    break;
+                case 2:
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.FirmName) : Customers.OrderByDescending(z => z.FirmName);
+                    break;
+                case 3:
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.Address) : Customers.OrderByDescending(z => z.Address);
+                    break;
+
+                default:
+                    Customers = Customers.OrderByDescending(z => z.Id);
+                    break;
+            }
+            var filteredCustomersCount = Customers.Count();
+            Customers = Customers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = totalCustomers,
+                iTotalDisplayRecords = filteredCustomersCount,
+                aaData = Customers
+            });
+        }
+
+        // GET: Customer/Details/5
+        public async Task<IActionResult> CustomerDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customerMaster = await _context.Customers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customerMaster == null)
+            {
+                return NotFound();
+            }
+
+            return View(customerMaster);
+        }
+
+        // GET: Customer/Create
+        public IActionResult CreateCustomer()
+        {
+            return View();
+        }
+
+        // POST: Customer/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCustomer([Bind("Id,FirstName,LastName,FirmName,Address")] CustomerMaster customerMaster)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(customerMaster);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(CustomersList));
+            }
+            return View(customerMaster);
+        }
+
+        // GET: Customer/Edit/5
+        public async Task<IActionResult> EditCustomer(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customerMaster = await _context.Customers.FindAsync(id);
+            if (customerMaster == null)
+            {
+                return NotFound();
+            }
+            return View(customerMaster);
+        }
+
+        // POST: Customer/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,FirstName,LastName,FirmName,Address")] CustomerMaster customerMaster)
+        {
+            if (id != customerMaster.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(customerMaster);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CustomerMasterExists(customerMaster.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(CustomersList));
+            }
+            return View(customerMaster);
+        }
+
+        //To soft delete a record.
+        public JsonResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new
+                {
+                    success = 0
+                });
+                //return RedirectToAction("NotFound", "Home");
+            }
+            var customer =  _context.Customers.Find(id);
+           //  _context.Customers.Remove(customer);
+           if(customer.IsDeleted == false)
+            {
+                customer.IsDeleted = true;   // flag for a soft delete is set.
+            }
+              var result =_context.SaveChanges();
+            if(result!= 0)
+            {
+                return Json(new
+                {
+                    success = 1
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = 0
+                });
+            }
+        }
+        // GET: Customer/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var customerMaster = await _context.Customers
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (customerMaster == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(customerMaster);
+        //}
+
+        // POST: Customer/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var customerMaster = await _context.Customers.FindAsync(id);
+        //    _context.Customers.Remove(customerMaster);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(CustomersList));
+        //}
+
+        private bool CustomerMasterExists(int id)
+        {
+            return _context.Customers.Any(e => e.Id == id);
+        }
+    }
+}
+		

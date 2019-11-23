@@ -1,8 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@*<span class="tp-caption sl1-ly1 tp-resizeme rs-parallaxlevel-3"
+      id="slide1-layer-1"
+      data-x="center" data-hoffset=""
+      data-y="center" data-voffset="-100"
+      data-width="['auto','auto','auto','auto']"
+      data-height="['auto','auto','auto','auto']"
+      data-transform_idle="o:1;"
+      data-transform_in="y:[100%];z:0;rZ:-35deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power4.easeInOut;"
+      data-transform_out="s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+      data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+      data-start="1000"
+      data-splitin="chars"
+      data-splitout="none"
+      data-responsive_offset="on"
+      data-elementdelay="0.05"
+      style="font-size:36px;letter-spacing:0.3px;">Be a king</span>*@
+
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 
 <pre id="csv" style="display:none">Year,Annual mean,5 year mean
 1880,-0.31,
@@ -145,38 +163,40 @@
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script>
-       Highcharts.chart('container', {
+        Highcharts.chart('container', {
 
-    title: {
-        text: 'Global temperature change'
-    },
+            title: {
+                text: 'Global Temperature Change'
+            },
 
-    subtitle: {
-        text: 'Data input from CSV' 
-    },
+            subtitle: {
+                text: 'Data Input from CSV'
+            },
 
-    data: {
-        csv: document.getElementById('csv').innerHTML
-    },
+            data: {
+                csv: document.getElementById('csv').innerHTML
+                // csvURL: '/CSV/csvnewly.csv'
+                //  csv :"Year,Annual mean,5 year mean ,1880,-0.321881,-0.22,1882,-0.28,-0.29"
+            },
 
-    plotOptions: {
-        series: {
-            marker: {
-                enabled: false
-            }
-        }
-    },
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false
+                    }
+                }
+            },
 
-    series: [{
-        lineWidth: 1
-       },
-        {
-        type: 'areaspline',
-        color: '#c4392d',
-        negativeColor: '#5679c4',
-        fillOpacity: 0.5
-    }]
-});
+            series: [{
+                lineWidth: 1
+            },
+            {
+                type: 'areaspline',
+                color: '#c4392d',
+                negativeColor: '#5679c4',
+                fillOpacity: 0.5
+            }]
+        });
     </script>
 
 }
