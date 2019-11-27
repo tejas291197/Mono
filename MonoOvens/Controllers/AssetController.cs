@@ -51,14 +51,23 @@ namespace MonoOvens.Controllers
                                 AssetCategory = astC.AssetCategory,
                                 AssetType = astT.AssetType,
                                 ControllerType = ctr.ControllerType,
+                                ast.FG_Code,
                                 ast.Controllers,
                                 ast.Trays,
-                                ast.TrayHeight_inch,
-                                ast.TrayWidth_inch,
+                                ast.TraySize,                         
                                 ast.Handed,
                                 ast.Format,
                                 ast.Power,
-                                ast.PowerConsumption
+                                ast.Elements,
+                                ast.kWh_Rating_Element,
+                                ast.LightType,
+                                ast.Lights,
+                                ast.kWh_Rating_Light,
+                                ast.Fans,
+                                ast.kWh_Rating_Fan,
+                                ast.kWh_Rating_Damper,
+                                ast.kWh_Rating_WaterSolenoid,
+
 
                             };
 
@@ -71,48 +80,51 @@ namespace MonoOvens.Controllers
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
             if (!string.IsNullOrEmpty(param.sSearch)) viewModel = viewModel.Where(z => z.AssetCategory.ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.AssetType.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.Controllers.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.ControllerType.ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.Trays.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.TrayHeight_inch.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.TrayWidth_inch.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.Handed.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.Power.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.PowerConsumption.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             ||  z.Format.ToLower().Contains(param.sSearch.ToLower()) );
+                                                                             || z.AssetType.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.FG_Code.ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Controllers.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.ControllerType.ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Trays.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.TraySize.ToLower().Contains(param.sSearch.ToLower())                                                                            
+                                                                             || z.Handed.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Power.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Elements.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Format.ToLower().Contains(param.sSearch.ToLower())) ;
 
             switch (sortColumnIndex)
             {
                 case 1:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.AssetCategory) : viewModel.OrderByDescending(z => z.AssetCategory);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.FG_Code) : viewModel.OrderByDescending(x => x.FG_Code);
                     break;
                 case 2:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.AssetType) : viewModel.OrderByDescending(z => z.AssetType);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.AssetCategory) : viewModel.OrderByDescending(z => z.AssetCategory);
                     break;
                 case 3:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.ControllerType) : viewModel.OrderByDescending(z => z.ControllerType);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.AssetType) : viewModel.OrderByDescending(z => z.AssetType);
                     break;
                 case 4:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Controllers) : viewModel.OrderByDescending(z => z.Controllers);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.ControllerType) : viewModel.OrderByDescending(z => z.ControllerType);
                     break;
                 case 5:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Trays) : viewModel.OrderByDescending(z => z.Trays);                  
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Controllers) : viewModel.OrderByDescending(z => z.Controllers);
                     break;
                 case 6:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.TrayHeight_inch + " " + z.TrayWidth_inch) : viewModel.OrderByDescending(z => z.TrayHeight_inch + " " + z.TrayWidth_inch);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Trays) : viewModel.OrderByDescending(z => z.Trays);                  
                     break;
                 case 7:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Handed ) : viewModel.OrderByDescending(z => z.Handed);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.TraySize) : viewModel.OrderByDescending(z => z.TraySize );
                     break;
                 case 8:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Format): viewModel.OrderByDescending(z => z.Format);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Handed ) : viewModel.OrderByDescending(z => z.Handed);
                     break;
                 case 9:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Power) : viewModel.OrderByDescending(z => z.Power);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Format): viewModel.OrderByDescending(z => z.Format);
                     break;
                 case 10:
-                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.PowerConsumption) : viewModel.OrderByDescending(z => z.PowerConsumption);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Power) : viewModel.OrderByDescending(z => z.Power);
+                    break;
+                case 11:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Elements) : viewModel.OrderByDescending(z => z.Elements);
                     break;
                 default:
                     viewModel = viewModel.OrderByDescending(z => z.Id);
@@ -152,18 +164,23 @@ namespace MonoOvens.Controllers
         // GET: Asset/Create
         public IActionResult CreateAsset()
         {
-            List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();
-            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();            
             List<ControllerTypeMaster> CType = new List<ControllerTypeMaster>();
-            Category = (from lists in _context.AssetCategory select lists).ToList();
-            AType = (from lists in _context.AssetType select lists).ToList();
+
+            Category = (from lists in _context.AssetCategory select lists).ToList();         
             CType = (from lists in _context.ControllerType select lists).ToList();
-            Category.Insert(0, new AssetCategoryMaster { Id= 0, AssetCategory = "---Select---" });
-            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            
+            Category.Insert(0, new AssetCategoryMaster { Id= 0, AssetCategory = "---Select---" });       
             CType.Insert(0, new ControllerTypeMaster { Id = 0, ControllerType = "---Select---" });
-            ViewBag.ACateogies = Category;
-            ViewBag.ATypes = AType;
+            
+            ViewBag.ACateogies = Category;         
             ViewBag.CTypes = CType;
+
+            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            AType = (from lists in _context.AssetType select lists).ToList();
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            ViewBag.ATypes = AType;
+
             return View();
         }
 
@@ -172,7 +189,9 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsset([Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
+        public async Task<IActionResult> CreateAsset([Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType," +
+            "Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
+            "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid")] AssetMaster assetMaster)
         {
             if (ModelState.IsValid)
             {               
@@ -196,18 +215,18 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
-            List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();
-            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();        
             List<ControllerTypeMaster> CType = new List<ControllerTypeMaster>();
-            Category = (from lists in _context.AssetCategory select lists).ToList();
-            AType = (from lists in _context.AssetType select lists).ToList();
+            
+            Category = (from lists in _context.AssetCategory select lists).ToList();           
             CType = (from lists in _context.ControllerType select lists).ToList();
-            Category.Insert(0, new AssetCategoryMaster { Id = 0, AssetCategory = "---Select---" });
-            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            
+            Category.Insert(0, new AssetCategoryMaster { Id = 0, AssetCategory = "---Select---" });         
             CType.Insert(0, new ControllerTypeMaster { Id = 0, ControllerType = "---Select---" });
-            ViewBag.ACateogiesedit = Category;
-            ViewBag.ATypesedit = AType;
+            
+            ViewBag.ACateogiesedit = Category;           
             ViewBag.CTypesedit = CType;
+            
             return View(assetMaster);
         }
 
@@ -216,7 +235,9 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsset(int id, [Bind("Id,AssetCategory,AssetType,ControllerType,Controllers,Trays,TrayHeight_inch,TrayWidth_inch,Handed,Format,Power,PowerConsumption")] AssetMaster assetMaster)
+        public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType," +
+            "Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
+            "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid")] AssetMaster assetMaster)
         {
             if (id != assetMaster.Id)
             {
@@ -245,6 +266,26 @@ namespace MonoOvens.Controllers
             }
             return View(assetMaster);
         }
+
+        public JsonResult GetAssetTypeByAssetCategoryId(int id)
+        {
+            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            AType = (from lists in _context.AssetType where lists.AssetCategoryId == id select lists).ToList();
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            ViewBag.ATypes = AType;
+            if (AType == null)
+            {
+                return Json(new
+                {
+                    success = 0
+                });
+            }         
+            return Json(new
+            {
+                success = 1
+            });
+        }
+
 
         //To soft delete a record.
         public JsonResult Delete(int? id)

@@ -17,6 +17,12 @@
             @Html.DisplayFor(model => model.AssetCategory)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.FG_Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FG_Code)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.AssetType)
         </dt>
         <dd>
@@ -41,11 +47,14 @@
             @Html.DisplayFor(model => model.Trays)
         </dd>
         <dt>
-           TraySize
+            Tray size
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TrayHeight_inch)   &Chi;  @Html.DisplayFor(model => model.TrayWidth_inch)
+            @Html.DisplayFor(model => model.TraySize)
         </dd>
+        @*<dd>
+            @Html.DisplayFor(model => model.TrayHeight_inch)   &Chi;  @Html.DisplayFor(model => model.TrayWidth_inch)
+        </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.Handed)
         </dt>
@@ -65,10 +74,59 @@
             @Html.DisplayFor(model => model.Power)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PowerConsumption)
+            @Html.DisplayNameFor(model => model.Elements)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PowerConsumption)
+            @Html.DisplayFor(model => model.Elements)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(Model => Model.kWh_Rating_Element)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.kWh_Rating_Element)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LightType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LightType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lights)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lights)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh_Rating_Light)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.kWh_Rating_Light)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(Model => Model.Fans)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fans)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh_Rating_Fan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.kWh_Rating_Fan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh_Rating_Damper)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.kWh_Rating_Damper)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh_Rating_WaterSolenoid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.kWh_Rating_WaterSolenoid)
         </dd>
     </dl>
 </div>

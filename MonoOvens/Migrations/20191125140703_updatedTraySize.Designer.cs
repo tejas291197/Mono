@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonoOvens.Models;
 
 namespace MonoOvens.Migrations
 {
     [DbContext(typeof(MonoContext))]
-    partial class MonoContextModelSnapshot : ModelSnapshot
+    [Migration("20191125140703_updatedTraySize")]
+    partial class updatedTraySize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,11 +219,7 @@ namespace MonoOvens.Migrations
 
                     b.Property<int>("Controllers");
 
-                    b.Property<int>("Elements");
-
                     b.Property<string>("FG_Code");
-
-                    b.Property<int>("Fans");
 
                     b.Property<string>("Format");
 
@@ -229,25 +227,13 @@ namespace MonoOvens.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("LightType");
-
-                    b.Property<int>("Lights");
-
                     b.Property<string>("Power");
+
+                    b.Property<string>("PowerConsumption");
 
                     b.Property<string>("TraySize");
 
                     b.Property<int>("Trays");
-
-                    b.Property<float>("kWh_Rating_Damper");
-
-                    b.Property<float>("kWh_Rating_Element");
-
-                    b.Property<float>("kWh_Rating_Fan");
-
-                    b.Property<float>("kWh_Rating_Light");
-
-                    b.Property<float>("kWh_Rating_WaterSolenoid");
 
                     b.HasKey("Id");
 
@@ -330,17 +316,9 @@ namespace MonoOvens.Migrations
 
                     b.Property<DateTime?>("ControllerDate");
 
-                    b.Property<int>("Elements");
-
-                    b.Property<int>("Fans");
-
                     b.Property<string>("FirmwareVersion");
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("LightType");
-
-                    b.Property<int>("Lights");
 
                     b.Property<string>("RecipeVersion");
 
@@ -359,16 +337,6 @@ namespace MonoOvens.Migrations
                     b.Property<bool?>("Status");
 
                     b.Property<string>("Wallpaper");
-
-                    b.Property<float>("kWh_Rating_Damper");
-
-                    b.Property<float>("kWh_Rating_Element");
-
-                    b.Property<float>("kWh_Rating_Fan");
-
-                    b.Property<float>("kWh_Rating_Light");
-
-                    b.Property<float>("kWh_Rating_WaterSolenoid");
 
                     b.HasKey("Id");
 

@@ -9,6 +9,6 @@ namespace MonoOvens.Models
     {
         public int Id { get; set; }
         public string AssetType { get; set; }
-
+        public int AssetCategoryId { get; set; }
     }
 }

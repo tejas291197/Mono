@@ -68,7 +68,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n<h2>Controllers</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(143, 47, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2cfccd91cda24c2ba92d8c58d7b9e5b8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "088b300232004feea30dd95c538ed0ca", async() => {
                 BeginContext(176, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
