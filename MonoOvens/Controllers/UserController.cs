@@ -29,18 +29,21 @@ namespace MonoOvens.Controllers
         {
             //var query=  from q in _context.Users u join RoleManager<IdentityRole> r on 
             //            select
-        // var UserInRole = _context.Users.
-        //Join(_roleManager, u => u.Id, uir => uir.UserId,
-        //(u, uir) => new { u, uir }).
-        //Join(_roleManager, r => r.uir.RoleId, ro => ro.RoleId, (r, ro) => new { r, ro })
-       
-        //.Select(m => new 
-        //{
-        //    UserName = m.r.u.FirstName,
-        //    RoleName = m.ro.Name
-        //});
+            // var UserInRole = _context.Users.
+            //Join(_roleManager, u => u.Id, uir => uir.UserId,
+            //(u, uir) => new { u, uir }).
+            //Join(_roleManager, r => r.uir.RoleId, ro => ro.RoleId, (r, ro) => new { r, ro })
 
-
+            //.Select(m => new 
+            //{
+            //    UserName = m.r.u.FirstName,
+            //    RoleName = m.ro.Name
+            //});
+            //var userRole = "";
+            ////if (User.IsInRole("Administrator"))
+            ////{
+            ////    userRole = "Admin";
+            ////}
             
            // return View(viewModel);
             return View(await _context.Users.ToListAsync());

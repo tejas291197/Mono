@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrationsold\**" />
     <Compile Remove="obj\**" />
+    <Content Remove="Migrationsold\**" />
     <Content Remove="obj\**" />
+    <EmbeddedResource Remove="Migrationsold\**" />
     <EmbeddedResource Remove="obj\**" />
+    <None Remove="Migrationsold\**" />
     <None Remove="obj\**" />
   </ItemGroup>
 
@@ -17,142 +21,11 @@
     <Compile Remove="Migrations\20191017100628_CustomerAdded.cs" />
     <Compile Remove="Migrations\20191017100628_CustomerAdded.Designer.cs" />
   </ItemGroup>
-<!--
-  <ItemGroup>
-    <Compile Include="Areas\Identity\IdentityHostingStartup.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\AccessDenied.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Lockout.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\Index.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\ManageNavPages.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ResetPassword.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.cs" />
-    <Compile Include="Areas\Identity\Pages\Error.cshtml.cs" />
-    <Compile Include="Controllers\AccessRoleController.cs" />
-    <Compile Include="Controllers\AssetController.cs" />
-    <Compile Include="Controllers\ClientsController.cs" />
-    <Compile Include="Controllers\ControllerModulesController.cs" />
-    <Compile Include="Controllers\DealerController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Migrations\20190916093918_afterinitialmigration.cs" />
-    <Compile Include="Migrations\20190916093918_afterinitialmigration.Designer.cs" />
-    <Compile Include="Migrations\20190916094427_AssetAddedmigration.cs" />
-    <Compile Include="Migrations\20190916094427_AssetAddedmigration.Designer.cs" />
-    <Compile Include="Migrations\20190916115900_identityaddedwithUsertable.cs" />
-    <Compile Include="Migrations\20190916115900_identityaddedwithUsertable.Designer.cs" />
-    <Compile Include="Migrations\20190916120214_identityaddedwithUsertable1.cs" />
-    <Compile Include="Migrations\20190916120214_identityaddedwithUsertable1.Designer.cs" />
-    <Compile Include="Migrations\20190917060229_dealerAdded.cs" />
-    <Compile Include="Migrations\20190917060229_dealerAdded.Designer.cs" />
-    <Compile Include="Migrations\20190917060415_dealerAdded1.cs" />
-    <Compile Include="Migrations\20190917060415_dealerAdded1.Designer.cs" />
-    <Compile Include="Migrations\20190917060643_dealerAdded2.cs" />
-    <Compile Include="Migrations\20190917060643_dealerAdded2.Designer.cs" />
-    <Compile Include="Migrations\20190917125659_controllerupdated.cs" />
-    <Compile Include="Migrations\20190917125659_controllerupdated.Designer.cs" />
-    <Compile Include="Migrations\20190917133224_clientadded.cs" />
-    <Compile Include="Migrations\20190917133224_clientadded.Designer.cs" />
-    <Compile Include="Migrations\20190917144343_assetModified.cs" />
-    <Compile Include="Migrations\20190917144343_assetModified.Designer.cs" />
-    <Compile Include="Migrations\20190918100647_clientedited2.cs" />
-    <Compile Include="Migrations\20190918100647_clientedited2.Designer.cs" />
-    <Compile Include="Migrations\20190918123107_removedDealer.cs" />
-    <Compile Include="Migrations\20190918123107_removedDealer.Designer.cs" />
-    <Compile Include="Migrations\20190918124132_dealerAdded12.cs" />
-    <Compile Include="Migrations\20190918124132_dealerAdded12.Designer.cs" />
-    <Compile Include="Migrations\20190918131317_dealerUpdated.cs" />
-    <Compile Include="Migrations\20190918131317_dealerUpdated.Designer.cs" />
-    <Compile Include="Migrations\20190918154344_trayWidthAdded.cs" />
-    <Compile Include="Migrations\20190918154344_trayWidthAdded.Designer.cs" />
-    <Compile Include="Migrations\20190919062853_IdAddedinAllTables.cs" />
-    <Compile Include="Migrations\20190919062853_IdAddedinAllTables.Designer.cs" />
-    <Compile Include="Migrations\20190919063603_IdAddedforIndividualTable.cs" />
-    <Compile Include="Migrations\20190919063603_IdAddedforIndividualTable.Designer.cs" />
-    <Compile Include="Migrations\20190919072933_changedTheIdName.cs" />
-    <Compile Include="Migrations\20190919072933_changedTheIdName.Designer.cs" />
-    <Compile Include="Migrations\20190919095906_Authcode.cs" />
-    <Compile Include="Migrations\20190919095906_Authcode.Designer.cs" />
-    <Compile Include="Migrations\20190919132426_IdentityaddedAndChangedreturnType.cs" />
-    <Compile Include="Migrations\20190919132426_IdentityaddedAndChangedreturnType.Designer.cs" />
-    <Compile Include="Migrations\20190919145612_test.cs" />
-    <Compile Include="Migrations\20190919145612_test.Designer.cs" />
-    <Compile Include="Migrations\20190921051706_Namechanged.cs" />
-    <Compile Include="Migrations\20190921051706_Namechanged.Designer.cs" />
-    <Compile Include="Migrations\20190921052500_firstnameTypeChanged.cs" />
-    <Compile Include="Migrations\20190921052500_firstnameTypeChanged.Designer.cs" />
-    <Compile Include="Migrations\MonoContextModelSnapshot.cs" />
-    <Compile Include="Models\AssetCategoryMaster.cs" />
-    <Compile Include="Models\AssetMaster.cs" />
-    <Compile Include="Models\AssetTypeMaster.cs" />
-    <Compile Include="Models\ClientMaster.cs" />
-    <Compile Include="Models\ControllerModule.cs" />
-    <Compile Include="Models\ControllerTypeMaster.cs" />
-    <Compile Include="Models\DealerMaster.cs" />
-    <Compile Include="Models\ErrorViewModel.cs" />
-    <Compile Include="Models\Manufacturer.cs" />
-    <Compile Include="Data\MonoContext.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\RoleMaster.cs" />
-    <Compile Include="Models\UserMaster.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Startup.cs" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.Development.json" />
-    <Content Include="appsettings.json" />
-    <Content Include="obj\Debug\netcoreapp2.1\MonoOvens.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\MonoOvens.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
-    <Content Include="Properties\launchSettings.json" />
-    <Content Include="ScaffoldingReadme.txt" />
-    <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\css\site.min.css" />
-    <Content Include="wwwroot\favicon.ico" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\bootstrap.min.css" />
-    <Content Include="wwwroot\lib\bootstrap-4.3.1-dist\css\responsive.bootstrap.min.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
-    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
-    <Content Include="wwwroot\lib\jquery-validation\.bower.json" />
-    <Content Include="wwwroot\lib\jquery\.bower.json" />
-    <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
+    <Compile Include="Migrationsold\MonoContextModelSnapshot.cs" />
   </ItemGroup>
--->
+
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />

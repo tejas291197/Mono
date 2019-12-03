@@ -16,8 +16,12 @@
                 Id
             </th>
             <th>
+                FG code
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.SerialNumber)
             </th>
+
             <th>
                 Authentication Code
             </th>
@@ -50,6 +54,33 @@
             </th>
             <th>
                 Remote Kill
+            </th>
+            <th>
+                No. of Elements
+            </th>
+            <th>
+                kW/h Rating per Element
+            </th>
+            <th>
+                Type of Light
+            </th>
+            <th>
+                No. of Lights
+            </th>
+            <th>
+                kW/h Rating per Light
+            </th>
+            <th>
+                No. of Fans
+            </th>
+            <th>
+                kW/h Rating per Fan
+            </th>
+            <th>
+                kW/h Rating Damper
+            </th>
+            <th>
+                kW/h Rating WaterSolenoid
             </th>
             <th></th>
         </tr>
@@ -134,25 +165,26 @@
                     {
                         "render": function (data, type, row) {
  // return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
- return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditControllerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+//return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditControllerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+ return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
                         },
-                        "targets": 13
+                        "targets": 23
                     }
                 ],
                  "columns": [
                     {"data" :"id" },
-                    { "data": "serialNumber" },
+                    { "data":"fG_Code"},
+                    { "data": "serialNumber" },                 
                     { "data": "authenticationCode" },
                     { "data": "firmwareVersion" },
                     { "data": "softwareVersion" },
-
-                   
                     { "data": "recipeVersion" },
                     { "data": "skins" },
                     { "data": "wallpaper" },
                     { "data": "sevenDayTimer" },
                     { "data": "sleepDelay" },
-                     {
+
+                      {
                          "data": "controllerDate",
                          "render": function (data, type, row) {                            
                               var date = new Date(row.controllerDate);
@@ -161,7 +193,7 @@
                              return (day.length > 1 ? day : "0" + day) + "/" + (month.length > 1 ? month : "0" + month )+ "/" + date.getFullYear()
                          }
                      },
-                    {
+                      {
                         "data": "status",
                         "render": function (data, type, row) {
                              if (row.status == 1) {
@@ -172,7 +204,8 @@
                                   return '<span style="color:red"> Inactive </span>'
                              }
                         }
-                    },                   
+                     },
+                                         
                      {
                          "data": "remoteKill",
                          "render": function (data, row, type) {
@@ -185,6 +218,17 @@
                              }
                          }
                      },
+                     { "data": "elements" },
+                     { "data": "kWh_Rating_Element" },
+                     { "data": "lightType" },
+                     { "data": "lights" },
+                     { "data": "kWh_Rating_Light" },
+                     { "data": "fans" },
+                     { "data": "kWh_Rating_Fan" },
+                     { "data": "kWh_Rating_Damper" },
+                     { "data": "kWh_Rating_WaterSolenoid" },
+                   
+                    
                       {
                         "orderable": false,
                         "searchable": false,

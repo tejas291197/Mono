@@ -19,6 +19,9 @@
                 Client Name
             </th>
             <th>
+                Client Account No.
+            </th>
+            <th>
                 Primary Contact Email
             </th>
             <th>
@@ -33,7 +36,7 @@
             </th>
 
             <th>
-                Zone
+                Country
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Region)
@@ -154,7 +157,7 @@
                     return row.hoAddress1 + '&nbsp;' + row.hoAddress2  + '&nbsp;' + row.hoAddress3  + '&nbsp;' + row.city   +'&nbsp;' + row.postcode
                         }
                     },
-                    { "data": "zone" },
+                    { "data": "country" },
                     { "data": "region" },
                     { "data": "area" },
                     { "data": "storeCode" },

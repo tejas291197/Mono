@@ -19,7 +19,7 @@ namespace MonoOvens.Models
         public string PrimaryEmail { get; set; }
 
 
-        public string Zone { get; set; }
+        public string Country { get; set; }
         public string Region { get; set; }
         public string Area { get; set; }
         public string StoreCode { get; set; }

@@ -10,7 +10,7 @@ namespace MonoOvens.Models
     {
         
         public int Id { get; set; }
-        //public string ClientId { get; set; }
+        public string ClientAccountNo { get; set; }
         public string ClientName { get; set; }
         public string HOAddress1 { get; set; }
         public string HOAddress2 { get; set; }
@@ -21,9 +21,9 @@ namespace MonoOvens.Models
         public string PrimaryContactNumber { get; set; }
         // public string PrimaryContactEmail { get; set; }
         public string PrimaryEmail { get; set; }
-        
 
-        public string Zone { get; set; }
+      //  public string Country { get; set; }
+        public string Country { get; set; }
         public string Region { get; set; }
         public string Area { get; set; }
         public string	StoreCode { get; set; }

@@ -6,6 +6,7 @@ namespace MonoOvens.Models
     public partial class ControllerModule
     {
         public int Id { get; set; }
+        public string FG_Code { get; set; }
         public string SerialNumber { get; set; }
         public string AuthenticationCode { get; set; }
         public string FirmwareVersion { get; set; }
@@ -21,6 +22,7 @@ namespace MonoOvens.Models
         public bool RemoteKill { get; set; }
 
         // fields added for the power consumptions for perticuler controller.
+        //public string Power { get; set; }
         public int Elements { get; set; }
         public float kWh_Rating_Element { get; set; }
         public string LightType { get; set; }

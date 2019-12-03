@@ -28,13 +28,13 @@
                 Controller Type
             </th>
             <th>
-                Number of Controllers
+                No. of Controllers
             </th>
             <th>
-                number of Trays
+                No. of Tray
             </th>
             <th>
-                TraySize(inch)
+                Tray Size(inch/mm)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Handed)
@@ -55,13 +55,13 @@
                 Type of Light
             </th>
             <th>
-                No of Lights
+                No. of Lights
             </th>
             <th>
                 kW/h Rating per Light
             </th>
             <th>
-                No of Fans
+                No. of Fans
             </th>
             <th>
                 kW/h Rating per Fan
@@ -88,7 +88,7 @@
           }
          function confirmDelete(callback) {
             bootbox.confirm({
-                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                message: "<h3>Are you sure, You want to Delete this record...!!</h3>",
                 buttons: {
                     confirm: {
                         label: 'Yes',
@@ -105,6 +105,7 @@
             });
             
         }
+
 
         function deleteSelectedItem(id) {
 
@@ -150,16 +151,15 @@
                     },
                     {
                         "render": function (data, type, row) {
- // return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> <a href="/Asset/AssetDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
-     return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                            return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> <a href="/Asset/AssetDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                            //return '<a class="btn btn-primary btn-link" id="' + data.id + '" data-toggle="tooltrip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id = "' + data.id + '" data - toggle="tooltip" title = "" data - original - title="View Detail" onclick = "deleteSelectedItem(' + data.id + ')" > Delete</a > '
                         },
                         "targets": 20
                     }
                 ],
                  "columns": [   
-                     { "data": "id" },
-                       { "data": "fG_Code" },
-                     
+                    { "data": "id" },
+                    { "data": "fG_Code" },                    
                     { "data": "assetCategory" },
                     { "data": "assetType" },
                     { "data": "controllerType" },

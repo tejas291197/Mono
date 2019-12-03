@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonoOvens.Models;
 
 namespace MonoOvens.Migrations
 {
     [DbContext(typeof(MonoContext))]
-    partial class MonoContextModelSnapshot : ModelSnapshot
+    [Migration("20191202140538_ClientAccountEditController")]
+    partial class ClientAccountEditController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,6 +281,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("ClientAccountNo");
+
                     b.Property<string>("ClientName");
 
                     b.Property<string>("HOAddress1");
@@ -313,7 +317,7 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Type");
 
-                    b.Property<string>("Zone");
+                    b.Property<string>("Country");
 
                     b.HasKey("Id");
 
@@ -331,6 +335,8 @@ namespace MonoOvens.Migrations
                     b.Property<DateTime?>("ControllerDate");
 
                     b.Property<int>("Elements");
+
+                    b.Property<string>("FG_Code");
 
                     b.Property<int>("Fans");
 
@@ -432,7 +438,7 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Type");
 
-                    b.Property<string>("Zone");
+                    b.Property<string>("Country");
 
                     b.HasKey("Id");
 

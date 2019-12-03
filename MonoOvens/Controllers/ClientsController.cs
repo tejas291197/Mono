@@ -42,6 +42,7 @@ namespace MonoOvens.Controllers
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
             if (!string.IsNullOrEmpty(param.sSearch)) Clients = Clients.Where(z => z.Area.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.ClientAccountNo.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.City.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.ClientName.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.HOAddress1.ToLower().Contains(param.sSearch.ToLower())
@@ -58,46 +59,48 @@ namespace MonoOvens.Controllers
                                                                                 || z.StoreName.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StorePostcode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Type.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Zone.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Country.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PrimaryEmail.ToLower().Contains(param.sSearch.ToLower()));
 
             switch (sortColumnIndex)
             {
-                
                 case 1:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.ClientName) : Clients.OrderByDescending(z => z.ClientName);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.ClientAccountNo) : Clients.OrderByDescending(z => z.ClientAccountNo);
                     break;
                 case 2:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryEmail) : Clients.OrderByDescending(z => z.PrimaryEmail);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.ClientName) : Clients.OrderByDescending(z => z.ClientName);
                     break;
                 case 3:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryContactName) : Clients.OrderByDescending(z => z.PrimaryContactName);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryEmail) : Clients.OrderByDescending(z => z.PrimaryEmail);
                     break;
                 case 4:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryContactNumber) : Clients.OrderByDescending(z => z.PrimaryContactNumber);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryContactName) : Clients.OrderByDescending(z => z.PrimaryContactName);
                     break;
                 case 5:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2+" "+z.HOAddress3+" "+z.City+" "+z.Postcode) : Clients.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode);                    
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.PrimaryContactNumber) : Clients.OrderByDescending(z => z.PrimaryContactNumber);
                     break;
                 case 6:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Zone) : Clients.OrderByDescending(z => z.Zone);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2+" "+z.HOAddress3+" "+z.City+" "+z.Postcode) : Clients.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode);                    
                     break;
                 case 7:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Region) : Clients.OrderByDescending(z => z.Region);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Country) : Clients.OrderByDescending(z => z.Country);
                     break;
                 case 8:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Area) : Clients.OrderByDescending(z => z.Area);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Region) : Clients.OrderByDescending(z => z.Region);
                     break;
                 case 9:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.StoreCode) : Clients.OrderByDescending(z => z.StoreCode);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Area) : Clients.OrderByDescending(z => z.Area);
                     break;
                 case 10:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Type) : Clients.OrderByDescending(z => z.Type);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.StoreCode) : Clients.OrderByDescending(z => z.StoreCode);
                     break;
                 case 11:
-                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.StoreName) : Clients.OrderByDescending(z => z.StoreName);
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.Type) : Clients.OrderByDescending(z => z.Type);
                     break;
                 case 12:
+                    Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.StoreName) : Clients.OrderByDescending(z => z.StoreName);
+                    break;
+                case 13:
                     Clients = sortDirection == "asc" ? Clients.OrderBy(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostcode) : Clients.OrderByDescending(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostcode);
                     break;
 
@@ -146,7 +149,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateClient([Bind("Id,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
+        public async Task<IActionResult> CreateClient([Bind("Id,ClientAccountNo,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Country,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
         {
             if (ModelState.IsValid)
             {
@@ -178,7 +181,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditClient(int id, [Bind("Id,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
+        public async Task<IActionResult> EditClient(int id, [Bind("Id,ClientAccountNo,ClientName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Country,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] ClientMaster client)
         {
             if (id != client.Id)
             {

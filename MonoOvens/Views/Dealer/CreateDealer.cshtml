@@ -13,26 +13,106 @@
         <form asp-action="CreateDealer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" style="padding-right:50px ; float:left ">
-                <label asp-for="DealerName" class="control-label"></label><span style="color:red"> *</span>
+                <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
                 <input asp-for="DealerName" class="form-control" id="dname" required />
                 <span id="nameError" style="color:red"></span>
                 <span asp-validation-for="DealerName" class="text-danger"></span>
             </div>
             <div class="form-group" style="padding-right:50px ; float:left ">
-                <label asp-for="DealerPhone" class="control-label"></label><span style="color:red"> *</span>
+                <label asp-for="DealerPhone" class="control-label">Dealer Phone:</label><span style="color:red"> *</span>
                 <input asp-for="DealerPhone" class="form-control" id="phone" required />
                 <span id="phoneError" style="color:red"></span>
                 <span asp-validation-for="DealerPhone" class="text-danger"></span>
             </div>
             <div class="form-group" style="padding-right:50px ; float:left ">
-                <label asp-for="DealerRegion" class="control-label"></label><span style="color:red"> *</span>
-                <input asp-for="DealerRegion" class="form-control" id="dname" required />
+                <label asp-for="DealerRegion" class="control-label">Dealer Region:</label><span style="color:red"> *</span>
+                <input asp-for="DealerRegion" class="form-control" id="dregion" required />
                 <span id="nameError" style="color:red"></span>
                 <span asp-validation-for="DealerRegion" class="text-danger"></span>
             </div>
-            <div class="form-group" style=" clear:left ; padding-left:400px">
-                <input type="submit" value="Create" class="btn btn-success" />
+            <div style="clear:left">
+                <fieldset>
+                    <legend>Coustomer Detail:</legend><br />
+                    <div class="form-group" style="padding-right:50px ; float:left ">
+                        <label asp-for="CustomerName" class="control-label">Name: </label><span style="color:red"> *</span>
+                        <input asp-for="CustomerName" class="form-control" id="cname" required />
+                        <span id="nameError" style="color:red"></span>
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding-right:50px ; float:left ">
+                        <label asp-for="CustomerNumber" class="control-label">Number:</label><span style="color:red"> *</span>
+                        <input asp-for="CustomerNumber" class="form-control" id="cnumber" required />
+                        <span id="nameError" style="color:red"></span>
+                        <span asp-validation-for="CustomerNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding-right:50px ; float:left ">
+                        <label asp-for="Email" class="control-label">Email:</label><span style="color:red"> *</span>
+                        <input asp-for="Email" class="form-control" required />
+                        <span id="nameError" style="color:red"></span>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </fieldset>
             </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+                        <label asp-for="Region" class="control-label">Region:</label>
+                        <select asp-for="Region" class="form-control" required>
+                            <option value="">--select--</option>
+                            <option value="71">71</option>
+                            <option value="C01">C01</option>
+                            <option value="C02">C02</option>
+                            <option value="C03">C03</option>
+                            <option value="C04">C04</option>
+                        </select>
+                        <span asp-validation-for="Region" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="Area" class="control-label">Area:</label>
+                        <input asp-for="Area" class="form-control" required id="area" />
+                        <span asp-validation-for="Area" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+                        <label asp-for="StoreCode" class="control-label">Store Code:</label>
+                        <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" required />
+                        <span asp-validation-for="StoreCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="Type" class="control-label">Type:</label>
+                        <select asp-for="Type" class="form-control" required>
+                            <option value="">--select--</option>
+                            <option value="Convenience">Convenience</option>
+                            <option value="Supermarket">Supermarket</option>
+                            <option value="OFC">OFC</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="StoreName" class="control-label">Store Name:</label>
+                        <input asp-for="StoreName" class="form-control" id="sname" required />
+                        <span asp-validation-for="StoreName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="StoreAddress1" class="control-label">Store Address 1:</label>
+                        <input asp-for="StoreAddress1" class="form-control" required />
+                        <span asp-validation-for="StoreAddress1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="StoreAddress2" class="control-label">Store Address 2:</label>
+                        <input asp-for="StoreAddress2" class="form-control" />
+                        <span asp-validation-for="StoreAddress2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="PostTown" class="control-label">Post Town:</label>
+                        <input asp-for="PostTown" class="form-control" required />
+                        <span asp-validation-for="PostTown" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" float:left ; padding-right:50px">
+                        <label asp-for="StorePostcode" class="control-label">Store Post Code:</label>
+                        <input asp-for="StorePostcode" class="form-control" placeholder="GT DFG3" />
+                        <span asp-validation-for="StorePostcode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style=" clear:left ; padding-left:400px">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
         </form>
     </div>
 </div>
@@ -68,19 +148,26 @@
            {
                Charactors(e);
             });
-           $("#dcity").keydown(function(e)
+           $("#area").keypress(function(e)
+           {
+               return Digits(e);
+           });
+           $("#sname").keypress(function(e)
+           {
+               return Digits(e);
+           });
+           $("#dregion").keypress(function(e)
+           {
+               return Digits(e);
+           });
+           $("#cnumber").keypress(function(e)
+           {
+               return Digits(e);
+           });
+            $("#cname").keydown(function(e)
            {
                Charactors(e);
-           });
-           $("#dstate").keydown(function(e)
-           {
-               Charactors(e);
-           });
-           $("#dcountry").keydown(function(e)
-           {
-               Charactors(e);
-           });
-          
+            });
          });
    </script>
     }

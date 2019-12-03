@@ -11,10 +11,12 @@ using MonoOvens.Models;
 
 namespace MonoOvens.Controllers
 {
-    public class AssetController : Controller
+       public class AssetController : Controller
     {
         private readonly MonoContext _context;
         private readonly UserManager<UserMaster> _userManager;
+        private static int selectid;
+        
 
         public AssetController(MonoContext context,UserManager<UserMaster> userManager)
         {
@@ -148,7 +150,7 @@ namespace MonoOvens.Controllers
         {
             if (id == null)
             {
-                return RedirectToPage("Home/Notfound");
+                return RedirectToAction("Home/Notfound");
             }
 
             var assetMaster = await _context.Assets
@@ -177,9 +179,13 @@ namespace MonoOvens.Controllers
             ViewBag.CTypes = CType;
 
             List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
-            AType = (from lists in _context.AssetType select lists).ToList();
-            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            AType = (from lists in _context.AssetType where lists.AssetCategoryId == selectid select lists).ToList();
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---", AssetCategoryId = 0 });
             ViewBag.ATypes = AType;
+            //List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            //AType = (from lists in _context.AssetType select lists).ToList();
+            //AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            //ViewBag.ATypes = AType;
 
             return View();
         }
@@ -217,15 +223,19 @@ namespace MonoOvens.Controllers
             }
             List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();        
             List<ControllerTypeMaster> CType = new List<ControllerTypeMaster>();
-            
+            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+
             Category = (from lists in _context.AssetCategory select lists).ToList();           
             CType = (from lists in _context.ControllerType select lists).ToList();
-            
+            AType = (from lists in _context.AssetType select lists).ToList();
+
             Category.Insert(0, new AssetCategoryMaster { Id = 0, AssetCategory = "---Select---" });         
             CType.Insert(0, new ControllerTypeMaster { Id = 0, ControllerType = "---Select---" });
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
             
             ViewBag.ACateogiesedit = Category;           
             ViewBag.CTypesedit = CType;
+            ViewBag.ATypesedit = AType;
             
             return View(assetMaster);
         }
@@ -268,23 +278,24 @@ namespace MonoOvens.Controllers
         }
 
         public JsonResult GetAssetTypeByAssetCategoryId(int id)
-        {
+          {
+            selectid = id;
             List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
             AType = (from lists in _context.AssetType where lists.AssetCategoryId == id select lists).ToList();
-            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" ,AssetCategoryId=0});
             ViewBag.ATypes = AType;
-            if (AType == null)
-            {
-                return Json(new
-                {
-                    success = 0
-                });
-            }         
+            //if (AType == null)
+            //{
+            //    return Json(new
+            //    {
+            //        data = null
+            //    });
+            //}         
             return Json(new
             {
-                success = 1
+               data = AType
             });
-        }
+          }
 
 
         //To soft delete a record.
