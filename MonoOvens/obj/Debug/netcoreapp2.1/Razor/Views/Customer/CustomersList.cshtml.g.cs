@@ -68,7 +68,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("    <h2>Customers</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(131, 45, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c1c5c19594445d482a2e865d44ff74c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d98d66ad4594939ad8208292622ca01", async() => {
                 BeginContext(162, 10, true);
                 WriteLiteral("Create New");
                 EndContext();

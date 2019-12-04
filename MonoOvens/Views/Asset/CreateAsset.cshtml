@@ -34,7 +34,7 @@
 
                 </select>*@
                 <select id="atypemain" asp-for="AssetType" class="form-control">
-                    
+                    <option value="">--Select--</option>
                 </select>
                 <span asp-validation-for="AssetType" class="text-danger"></span>
             </div>
@@ -67,7 +67,7 @@
             @*<div style="height:100px ; clear:right"> </div>*@
             <div class="form-group" style=" float:left ; padding-right:100px ">
                 <label>Tray size : </label>
-                <select class="form-control" asp-for="TraySize" id="height">
+                <select class="form-control" asp-for="TraySize" >
                     <option value="">--select--</option>
                     <option value="18” x 26”">18” x 26”</option>
                     <option value="18” x 30”">18” x 30”</option>
@@ -141,7 +141,7 @@
                     <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>Type of Light : </label>
-                            <select asp-for="LightType" class="form-control" required>
+                            <select asp-for="LightType" class="form-control" id="LightType" required >
                                 <option value="">--Select--</option>
                                 <option value="Halogen">Halogen </option>
                                 <option value="LED">LED</option>
@@ -164,7 +164,7 @@
                     <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>kW/h Rating per Light : </label>
-                            <select asp-for="kWh_Rating_Light" class="form-control" required>
+                            <select asp-for="kWh_Rating_Light" class="form-control" id="lightRating" required>
                                 <option value="">--Select--</option>
                                 <option value="0.02">0.02 KWh(Halogen)</option>
                                 <option value="0.0024">0.0024 KWh(LED)</option>
@@ -231,7 +231,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
  
     <script>
-        var AtypeList;
+       
         var val;
         var id;
         function check(n) {
@@ -272,44 +272,38 @@
         }
         
 
-        $(document).ready(function () {
-            
-            $('#height').keypress(function (e) {
-                cal(e);
-            })
-           
-           
+        $(document).ready(function () {                                             
             //  var categoryTxt = $('#acategory option:selected').text();
             $('#acategory').on('change', function () {
-                var categoryVal = $('#acategory option:selected').val();
-                
-                console.log(categoryVal);
+                var categoryVal = $('#acategory option:selected').val();                                
                 $.ajax({
                     url: '/Asset/GetAssetTypeByAssetCategoryId',
                     method: 'POST',
                     data: { id:categoryVal } ,              
-                    success: function (data) {
-                        $("#atypemain").empty();
-                             console.log($("#atypemain").val())
-                      // $("#atypemain").append("<option value='0'>--Select--</option>");
-                       $.each(data, function (index, optiondata) {
-                           $("#atypemain").append("<option value='" + optiondata.Id + "'>" + optiondata.AssetType + "</option>");
-                            console.log($("#atypemain").val())
-                       });
-                      //  console.log($("#atypemain").val())
-
+                    success: function (data) {                     
+                        $("#atypemain").empty();              
+                        $.each(data, function (index, optiondata) {                                                       
+                            for (var i = 0; i < optiondata.length; i++){                                                  
+                                $("#atypemain").append("<option value='" + optiondata[i].id + "'>" + optiondata[i].assetType + "</option>");
+                            }                                                   
+                       });                     
                     },
                     error: function (data) {
                         alert("There is some error in asset category classification.")
                     }
-
                 })
-            });
+            });    
 
-            
-           
+
+            $('#LightType').on('change', function () {
+                var lights = $('#LightType option:selected').val();
+                if (lights == "Halogen") {
+                    $("#lightRating option[value='0.02']").attr("selected","selected");
+                }
+                else {
+                      $("#lightRating option[value='0.0024']").attr("selected","selected");
+                }
+            })
         })
-
-
     </script>
 }

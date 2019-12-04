@@ -147,7 +147,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Country,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
         {
             if (ModelState.IsValid)
             {
@@ -179,7 +179,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Country,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
         {
             if (id != customerMaster.Id)
             {
