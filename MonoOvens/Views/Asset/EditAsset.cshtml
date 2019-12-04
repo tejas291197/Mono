@@ -4,12 +4,12 @@
     ViewData["Title"] = "EditAsset";
 }
 
-    <h2>Edit Asset</h2>
+<h2>Edit Asset</h2>
 
 
 <hr />
 <div class="row">
-    <div >
+    <div>
         <form asp-action="EditAsset">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -29,11 +29,16 @@
             </div>
             <div class="form-group" style="float:left ; padding-right:100px">
                 <label>Asset Type : </label>
-                <select asp-for="AssetType" class="form-control" onblur="check(2)"
-                        asp-items="@(new SelectList(@ViewBag.ATypesedit,"Id" , "AssetType" ) ) " id="atype" required>
+                @*<select asp-for="AssetType" class="form-control" onblur="check(2)"
+                    asp-items="@(new SelectList(@ViewBag.ATypesedit,"Id" , "AssetType" ) ) " id="atype" required>
+            </select>*@
+                <select id="atypemain" asp-for="AssetType" class="form-control">
                 </select>
                 <span asp-validation-for="AssetType" class="text-danger"></span>
             </div>
+
+            <span asp-validation-for="AssetType" class="text-danger"></span>
+</div>
             <div class="form-group" style="float:left ; padding-right:100px">
                 <label>ControllerType: </label>
                 <select asp-for="ControllerType" class="form-control" onblur="check(3)"
@@ -119,7 +124,7 @@
                             <span asp-validation-for="Elements" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>kW/h Rating per Element : </label>
                             <select asp-for="kWh_Rating_Element" class="form-control" required>
@@ -132,10 +137,10 @@
                             <span asp-validation-for="kWh_Rating_Element" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>Type of Light : </label>
-                            <select asp-for="LightType" class="form-control" required>
+                            <select asp-for="LightType" class="form-control" id="lightstype" required>
                                 <option value="">--Select--</option>
                                 <option value="Halogen">Halogen </option>
                                 <option value="LED">LED</option>
@@ -143,7 +148,7 @@
                             <span asp-validation-for="LightType" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>No. of Lights : </label>
                             <select asp-for="Lights" class="form-control" required>
@@ -155,10 +160,10 @@
                             <span asp-validation-for="Lights" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>kW/h Rating per Light : </label>
-                            <select asp-for="kWh_Rating_Light" class="form-control" required>
+                            <select asp-for="kWh_Rating_Light" class="form-control" id="lightRating" required>
                                 <option value="">--Select--</option>
                                 <option value="0.02">0.02 KWh(Halogen)</option>
                                 <option value="0.0024">0.0024 KWh(LED)</option>
@@ -166,7 +171,7 @@
                             <span asp-validation-for="kWh_Rating_Light" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>No. of Fans : </label>
                             <select asp-for="Fans" class="form-control" required>
@@ -178,7 +183,7 @@
                             <span asp-validation-for="Fans" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>kW/h Rating per Fan : </label>
                             <select asp-for="kWh_Rating_Fan" class="form-control" required>
@@ -187,7 +192,7 @@
                             <span asp-validation-for="kWh_Rating_Fan" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /><label>kW/h Rating Damper : </label>
                             <select asp-for="kWh_Rating_Damper" class="form-control" required>
@@ -196,7 +201,7 @@
                             <span asp-validation-for="kWh_Rating_Damper" class="text-danger"></span>
                         </div>
                         @*</div>
-                <div class="form-group">*@
+                            <div class="form-group">*@
                         <div style=" float:left ; padding-right:100px">
                             <br /> <label>kW/h Rating Water Solenoid : </label>
                             <select asp-for="kWh_Rating_WaterSolenoid" class="form-control" required>
@@ -208,9 +213,9 @@
                 </fieldset>
             </div><br />
 
-                <div class="form-group" style=" clear:left" align="center">                      
-                    <input type="submit" value="Save" class="btn btn-info" id="subbtn" />
-                </div>
+            <div class="form-group" style=" clear:left" align="center">
+                <input type="submit" value="Save" class="btn btn-info" id="subbtn" />
+            </div>
         </form>
     </div>
 </div>
@@ -251,24 +256,82 @@
 
         // to block the characters to be intered
         function cal(e) {
-           //if the letter is not digit then display error and don't type anything
+            //if the letter is not digit then display error and don't type anything
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
                 //display error message
                 $("#sizeError").html("Only Digits Allowed").show().fadeOut("slow");
-                 e.preventDefault();
-                    //  return false;
+                e.preventDefault();
+                //  return false;
             }
         }
-        
+
 
         $(document).ready(function () {
-            
-            $('#height').keypress(function (e) {
-                cal(e);
+
+
+            //  var categoryTxt = $('#acategory option:selected').text();
+            $('#acategory').on('change', function () {
+                var categoryVal = $('#acategory option:selected').val();
+
+                console.log(categoryVal);
+                $.ajax({
+                    url: '/Asset/GetAssetTypeByAssetCategoryId',
+                    method: 'POST',
+                    data: { id: categoryVal },
+                    success: function (data) {
+
+                        $("#atypemain").empty();
+
+                        // $("#atypemain").append("<option value='0'>--Select--</option>");
+                        console.log("old list type", $("#atypemain"))
+                        $.each(data, function (index, optiondata) {
+                            console.log("length of optiondata", optiondata.length)
+                            console.log("optiondata", optiondata)
+                            for (var i = 0; i < optiondata.length; i++) {
+                                // console.log(i.Id, i.AssetType)
+                                $("#atypemain").append("<option value=" + optiondata[i].id + ">" + optiondata[i].assetType + "</option>")
+                                // $("#atypemain").append($("<option />").val(optiondata[i].id).text(optiondata[i].assetType));
+                            }
+
+                            // console.log($("#atypemain"))
+                        });
+                        //  console.log($("#atypemain").val())
+
+                    },
+                    error: function (data) {
+                        alert("There is some error in asset category classification.")
+                    }
+
+                })
             })
-             $('#width').keypress(function (e) {
-             cal(e);   
-          });
+            $('#lightstype').on('change', function () {
+                var lights = $('#lightstype option:selected').val();
+
+                if (lights == "Halogen") {
+                    $("#lightRating option[value='0.02']").removeAttr("selected", "selected");
+                    $("#lightRating option[value='0.02']").attr("selected", "selected");
+                }
+                else {
+                    $("#lightRating option[value='0.0024']").removeAttr("selected", "selected");
+                    $("#lightRating option[value='0.0024']").attr("selected", "selected");
+                }
+            })
+
+
         })
+
+
     </script>
 }
+
+@*$(document).ready(function () {
+
+                $('#height').keypress(function (e) {
+                    cal(e);
+                })
+                 $('#width').keypress(function (e) {
+                 cal(e);
+              });
+            })
+        </script>
+    }*@
