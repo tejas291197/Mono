@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {}
+    "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj": {}
   },
   "projects": {
-    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {
+    "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "projectUniqueName": "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj",
         "projectName": "MonoOvens",
-        "projectPath": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
-        "packagesPath": "C:\\Users\\Rakesh\\.nuget\\packages\\",
-        "outputPath": "E:\\Mono\\MonoOvens\\obj\\",
+        "projectPath": "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "D:\\tejas\\MonoOvenProject\\MonoOvens\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Rakesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
