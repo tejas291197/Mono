@@ -10,7 +10,7 @@ namespace MonoOvens.Models
      public partial class MonoContext : IdentityDbContext
     // public partial class MonoOvenContext : IdentityDbContext<IdentityUser>
     {
-       
+        
 
         public MonoContext(DbContextOptions<MonoContext> options)
             : base(options)

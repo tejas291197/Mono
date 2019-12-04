@@ -290,11 +290,11 @@
                     data: { id:categoryVal } ,              
                     success: function (data) {
                         $("#atypemain").empty();
-                             console.log($("#atypemain").val())
+                             console.log($("#atypemain") )
                       // $("#atypemain").append("<option value='0'>--Select--</option>");
                        $.each(data, function (index, optiondata) {
                            $("#atypemain").append("<option value='" + optiondata.Id + "'>" + optiondata.AssetType + "</option>");
-                            console.log($("#atypemain").val())
+                            console.log($("#atypemain"))
                        });
                       //  console.log($("#atypemain").val())
 

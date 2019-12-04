@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MonoOvens"
+    "\\MonoOvens",
+    "\\MonoOvens\\Models"
   ],
-  "SelectedNode": "\\MonoOvens\\appsettings.json",
+  "SelectedNode": "\\MonoOvens\\Models\\ControllerModule.cs",
   "PreviewInSolutionExplorer": false
 }
