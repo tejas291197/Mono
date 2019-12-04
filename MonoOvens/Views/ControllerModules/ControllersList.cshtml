@@ -146,7 +146,8 @@
           $(document).ready(function () {
             //toggleActionButtons(false);
 
-             controllersTable = $('#controllersTable').DataTable({
+
+               controllersTable = $('#controllersTable').DataTable({
                 select: {
                     style: 'single'
                 },
@@ -155,6 +156,17 @@
                 responsive: true, "bProcessing": true,
                 "bServerSide": true,                                                   // paging
                 "sAjaxSource": '/ControllerModules/ControllerAjaxDataProvider',
+
+
+             //controllersTable = $('#controllersTable').DataTable({
+             //   select: {
+             //       style: 'single'
+             //   },
+             //   //"order": [[3, "desc"]],
+             //   "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+             //   responsive: true, "bProcessing": true,
+             //   "bServerSide": true,                                                   // paging
+             //   "sAjaxSource": '/ControllerModules/ControllerAjaxDataProvider',
                  "columnDefs": [
                      {
                         "targets": [0],
@@ -226,9 +238,7 @@
                      { "data": "fans" },
                      { "data": "kWh_Rating_Fan" },
                      { "data": "kWh_Rating_Damper" },
-                     { "data": "kWh_Rating_WaterSolenoid" },
-                   
-                    
+                     { "data": "kWh_Rating_WaterSolenoid" },                                       
                       {
                         "orderable": false,
                         "searchable": false,

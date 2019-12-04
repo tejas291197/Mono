@@ -12,136 +12,144 @@
 <hr />
 <div class="row">
     <div>
+        <span class="text-danger" id="phoneError"></span>
+        <span class="text-danger" id="nameError"></span>
         <form asp-action="EditClient">
-            <p class="form-group text-danger" align="center">(*)fields are mandatory</p>
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-              <div class="form-group" style=" float:left ; padding-right:50px">
-                  <label asp-for="ClientAccountNo" class="control-label">Client Account No.:</label>
+            <div class="form-group" style="float:left">
+                <label asp-for="ClientAccountNo" class="control-label">Client Account No:</label>
                 <input asp-for="ClientAccountNo" class="form-control" placeholder="CLI007" required />
                 <span asp-validation-for="ClientAccountNo" class="text-danger"></span>
-              </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label> Client Name: </label><span style="color:red">*</span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left ">
+                <label asp-for="ClientName" class="control-label">Client Name:</label>
                 <input asp-for="ClientName" class="form-control" required placeholder="Alex Perry" id="cliname" />
                 <span asp-validation-for="ClientName" class="text-danger"></span>
             </div>
             <div class="form-group" style=" float:left ; padding-right:50px">
-                <label> Primary Email: </label><span style="color:red">*</span>
+                <label asp-for="PrimaryEmail" class="control-label">Primary Email:</label>
                 <input asp-for="PrimaryEmail" class="form-control" type="email" required placeholder="Alex@gmail.com" />
                 <span asp-validation-for="PrimaryEmail" class="text-danger"></span>
             </div>
-            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
-                <label>Primary Contact Name:</label><span style="color:red">*</span>
+            <div class="form-group" style=" float:left ; padding-right:50px">
+                <label asp-for="PrimaryContactName" class="control-label">Primary Contact Name:</label>
                 <input asp-for="PrimaryContactName" class="form-control" placeholder="Smith" id="cname" required />
                 <span asp-validation-for="PrimaryContactName" class="text-danger"></span>
             </div>
             <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Primary Contact Number:</label><span style="color:red">*</span>
+                <label asp-for="PrimaryContactNumber" class="control-label">Primary Contact Number:</label>
                 <input asp-for="PrimaryContactNumber" class="form-control" placeholder="+44 7911 123456" required id="cnum" />
-                <span asp-validation-for="PrimaryContactNumber" class="text-danger" id="phoneError"></span>
+
             </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Address Line 1:</label><span style="color:red">*</span>
-                <input asp-for="HOAddress1" class="form-control" required placeholder="Plot no.,Street Name " />
-                <span asp-validation-for="HOAddress1" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Address Line 2:</label><span style="color:red">*</span>
-                <input asp-for="HOAddress2" class="form-control" required placeholder="Landmark" />
-                <span asp-validation-for="HOAddress2" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
-                <label>Address Line 3:</label><span style="color:red">*</span>
-                <input asp-for="HOAddress3" class="form-control" placeholder="Locality" />
-                <span asp-validation-for="HOAddress3" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>City: </label><span style="color:red">*</span>
-                <input asp-for="City" class="form-control" required id="city" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Post Code: </label><span style="color:red">*</span>
-                <input asp-for="Postcode" class="form-control" required placeholder="WC2N 5DU" />
-                <span asp-validation-for="Postcode" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Country:</label>
-                <select asp-for="Country" class="form-control" required>
+            <fieldset style="float:left">
+                <legend>Head Office Details:</legend>
+
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="HOAddress1" class="control-label">Address Line 1:</label>
+                    <input asp-for="HOAddress1" class="form-control" required placeholder="Plot no.,Street Name " />
+                    <span asp-validation-for="HOAddress1" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="HOAddress2" class="control-label">Address Line 2:</label>
+                    <input asp-for="HOAddress2" class="form-control" required placeholder="Landmark" />
+                    <span asp-validation-for="HOAddress2" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px ">
+                    <label asp-for="HOAddress3" class="control-label">Address Line 3:</label>
+                    <input asp-for="HOAddress3" class="form-control" placeholder="Locality" />
+                    <span asp-validation-for="HOAddress3" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="City" class="control-label">City:</label>
+                    <input asp-for="City" class="form-control" required id="city" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="Postcode" class="control-label">Post Code:</label>
+                    <input asp-for="Postcode" class="form-control" required placeholder="WC2N 5DU" />
+                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="Country" class="control-label">Country:</label>
+                    @*<select asp-for="Country" class="form-control" required>
                     <option value="">--select--</option>
                     <option value="Zone South">Zone South</option>
                     <option value="Supermarket Central">Supermarket Central</option>
                     <option value="Supermarket North">Supermarket North</option>
                     <option value="Supermarket South">Supermarket South</option>
                     <option value="Supermarket West">Supermarket West</option>
-                </select>
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
-                <label>Region: </label>
-                <select asp-for="Region" class="form-control" required>
-                    <option value="">--select--</option>
-                    <option value="71">71</option>
-                    <option value="C01">C01</option>
-                    <option value="C02">C02</option>
-                    <option value="C03">C03</option>
-                    <option value="C04">C04</option>
-                </select>
-                <span asp-validation-for="Region" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Area: </label>
-                <input asp-for="Area" class="form-control" required id="area" />
-                <span asp-validation-for="Area" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
-                <label>Store Code: </label>
-                <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" required />
-                <span asp-validation-for="StoreCode" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Type: </label>
-                <select asp-for="Type" class="form-control" required>
-                    <option value="">--select--</option>
-                    <option value="Convenience">Convenience</option>
-                    <option value="Supermarket">Supermarket</option>
-                    <option value="OFC">OFC</option>
-                </select>
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Store Name: </label>
-                <input asp-for="StoreName" class="form-control" id="sname" required />
-                <span asp-validation-for="StoreName" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Address Line 1: </label>
-                <input asp-for="StoreAddress1" class="form-control" required />
-                <span asp-validation-for="StoreAddress1" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Address Line 2: </label>
-                <input asp-for="StoreAddress2" class="form-control" />
-                <span asp-validation-for="StoreAddress2" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <label>Post Town: </label>
-                <input asp-for="PostTown" class="form-control" required />
-                <span asp-validation-for="PostTown" class="text-danger"></span>
-            </div>
-            <div class="form-group" style=" float:left ; padding-right:50px">
-                <lable>Store Post Code:</lable>
-                <input asp-for="StorePostcode" class="form-control" placeholder="GT DFG3" />
-                <span asp-validation-for="StorePostcode" class="text-danger"></span>
-            </div>
-
+                </select>*@
+                    <input asp-for="Country" class="form-control" required />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+                    <label asp-for="Region" class="control-label">Region:</label>
+                    <select asp-for="Region" class="form-control" required>
+                        <option value="">--select--</option>
+                        <option value="71">71</option>
+                        <option value="C01">C01</option>
+                        <option value="C02">C02</option>
+                        <option value="C03">C03</option>
+                        <option value="C04">C04</option>
+                    </select>
+                    <span asp-validation-for="Region" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="Area" class="control-label">Area:</label>
+                    <input asp-for="Area" class="form-control" required id="area" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px ">
+                    <label asp-for="StoreCode" class="control-label">Store Code:</label>
+                    <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" required />
+                    <span asp-validation-for="StoreCode" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="Type" class="control-label">Type:</label>
+                    <select asp-for="Type" class="form-control" required>
+                        <option value="">--select--</option>
+                        <option value="Convenience">Convenience</option>
+                        <option value="Supermarket">Supermarket</option>
+                        <option value="OFC">OFC</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="StoreName" class="control-label">Store Name:</label>
+                    <input asp-for="StoreName" class="form-control" id="sname" required />
+                    <span asp-validation-for="StoreName" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="StoreAddress1" class="control-label">Store Address 1:</label>
+                    <input asp-for="StoreAddress1" class="form-control" required />
+                    <span asp-validation-for="StoreAddress1" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="StoreAddress2" class="control-label">Store Address 2:</label>
+                    <input asp-for="StoreAddress2" class="form-control" />
+                    <span asp-validation-for="StoreAddress2" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="PostTown" class="control-label">Post Town:</label>
+                    <input asp-for="PostTown" class="form-control" required />
+                    <span asp-validation-for="PostTown" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="StorePostcode" class="control-label">Store Post code:</label>
+                    <input asp-for="StorePostcode" class="form-control" placeholder="GT DFG3" />
+                    <span asp-validation-for="StorePostcode" class="text-danger"></span>
+                </div>
+            </fieldset>
             <div class="form-group" style=" float:left ; clear:left  ; padding-left:400px">
-                <input type="submit" value="Save" class="btn btn-info" />
+                <input type="submit" value="Save" class="btn btn-info"/>
             </div>
         </form>
     </div>
 </div>
+
+
 
 <div>
     <a asp-action="ClientsList">Back to List</a>
