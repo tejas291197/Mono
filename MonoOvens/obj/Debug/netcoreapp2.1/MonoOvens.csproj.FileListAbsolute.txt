@@ -116,13 +116,15 @@ E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.json
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.runtimeconfig.dev.json
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.dll
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.pdb
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfo.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.dll
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.pdb
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.dll
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.pdb
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs
-E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfoInputs.cache
-E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.AssemblyInfo.cs
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.TagHelpers.input.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.TagHelpers.output.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorCoreGenerate.cache
@@ -211,6 +213,4 @@ E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.cshtml.g.cs
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorTargetAssemblyInfo.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorTargetAssemblyInfo.cs
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.Views.pdb
-E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.dll
-E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.pdb
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csproj.CopyComplete

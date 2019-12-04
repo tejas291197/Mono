@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj": {}
+    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {}
   },
   "projects": {
-    "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj": {
+    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj",
+        "projectUniqueName": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
         "projectName": "MonoOvens",
-        "projectPath": "D:\\tejas\\MonoOvenProject\\MonoOvens\\MonoOvens.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\tejas\\MonoOvenProject\\MonoOvens\\obj\\",
+        "projectPath": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "packagesPath": "C:\\Users\\Rakesh\\.nuget\\packages\\",
+        "outputPath": "E:\\Mono\\MonoOvens\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +41,10 @@
             "Highsoft.Highcharts": {
               "target": "Package",
               "version": "[7.2.0, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
             },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",

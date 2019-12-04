@@ -160,6 +160,7 @@
 
   <ItemGroup>
     <PackageReference Include="Highsoft.Highcharts" Version="7.2.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
