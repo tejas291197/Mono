@@ -60,7 +60,7 @@ namespace MonoOvens.Controllers
                                                                                 || z.StoreName.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StorePostcode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Type.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Country.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Zone.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PrimaryEmail.ToLower().Contains(param.sSearch.ToLower()));
 
             switch (sortColumnIndex)
@@ -81,7 +81,7 @@ namespace MonoOvens.Controllers
                     Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode) : Customers.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode);
                     break;
                 case 6:
-                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.Country) : Customers.OrderByDescending(z => z.Country);
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.Zone) : Customers.OrderByDescending(z => z.Zone);
                     break;
                 case 7:
                     Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.Region) : Customers.OrderByDescending(z => z.Region);
