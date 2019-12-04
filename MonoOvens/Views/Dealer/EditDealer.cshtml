@@ -11,7 +11,7 @@
 <div class="row">
     <div>
         <form asp-action="EditDealer">
-            <p class="form-group text-info">(*)fields are mandatory</p>
+            <p class="form-group text-danger">(*)fields are mandatory</p>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group" style="padding-right:50px ; float:left ">
@@ -57,7 +57,7 @@
             </div>
                     <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
                         <label asp-for="Region" class="control-label">Region:</label>
-                        <select asp-for="Region" class="form-control" required>
+                        <select asp-for="Region" class="form-control" >
                             <option value="">--select--</option>
                             <option value="71">71</option>
                             <option value="C01">C01</option>
@@ -69,17 +69,17 @@
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
                         <label asp-for="Area" class="control-label">Area:</label>
-                        <input asp-for="Area" class="form-control" required id="area" />
+                        <input asp-for="Area" class="form-control"  id="area" />
                         <span asp-validation-for="Area" class="text-danger"></span>
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
                         <label asp-for="StoreCode" class="control-label">Store Code:</label>
-                        <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" required />
+                        <input asp-for="StoreCode" class="form-control" placeholder="PLO0100"  />
                         <span asp-validation-for="StoreCode" class="text-danger"></span>
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
                         <label asp-for="Type" class="control-label">Type:</label>
-                        <select asp-for="Type" class="form-control" required>
+                        <select asp-for="Type" class="form-control" >
                             <option value="">--select--</option>
                             <option value="Convenience">Convenience</option>
                             <option value="Supermarket">Supermarket</option>
@@ -89,12 +89,12 @@
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
                         <label asp-for="StoreName" class="control-label">Store Name:</label>
-                        <input asp-for="StoreName" class="form-control" id="sname" required />
+                        <input asp-for="StoreName" class="form-control" id="sname"  />
                         <span asp-validation-for="StoreName" class="text-danger"></span>
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
                         <label asp-for="StoreAddress1" class="control-label">Store Address 1:</label>
-                        <input asp-for="StoreAddress1" class="form-control" required />
+                        <input asp-for="StoreAddress1" class="form-control"  />
                         <span asp-validation-for="StoreAddress1" class="text-danger"></span>
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">
                         <label asp-for="PostTown" class="control-label">Post Town:</label>
-                        <input asp-for="PostTown" class="form-control" required />
+                        <input asp-for="PostTown" class="form-control"  />
                         <span asp-validation-for="PostTown" class="text-danger"></span>
                     </div>
                     <div class="form-group" style=" float:left ; padding-right:50px">

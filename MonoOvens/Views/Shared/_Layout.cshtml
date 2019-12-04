@@ -93,11 +93,22 @@
                         <a class="navbar-brand"  asp-controller="Home" asp-action="Index" >MonoOvens</a>
                     </div>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="nav navbar-nav" id="menu">  
+                        <ul class="nav navbar-nav" id="menu">
 
 
                             <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-
+                            <li>
+                                <a href="#" name="">Manage</a>
+                                <ul class="dropdown-menu">
+                                    <li> <a asp-controller="User" asp-action="UsersList">Manage Users</a>                       </li>
+                                    <li> <a asp-controller="Customer" asp-action="CustomersList">Manage Customers</a>               </li>
+                                    <li> <a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a>                   </li>
+                                    <li> <a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a>                     </li>
+                                    <li> <a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a>  </li>
+                                    <li> <a asp-controller="User" asp-action="UsersList">Manage Engineers</a>                   </li>
+                                    <li> <a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a>       </li>
+                                </ul>
+                            </li>
                             @if (User.IsInRole("Administrator"))
                             {
                                 <li>
