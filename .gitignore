@@ -31,13 +31,15 @@ x64/
 x86/
 build/
 bld/
-[Bb]in/
-[Oo]bj/
+bin/*
+obj/*
 [Oo]ut/
 msbuild.log
 msbuild.err
 msbuild.wrn
+**/obj
+**/bin
 
 # Visual Studio 2015
 .vs/
-appsettings.json
+MonoOvens/appsettings.json
