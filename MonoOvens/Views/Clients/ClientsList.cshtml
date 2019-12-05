@@ -140,7 +140,7 @@
                     {
                         "render": function (data, type, row) {
   //return '<a href="/Clients/EditClient/' + data.id +'"  >Edit</a> <a href="/Clients/ClientDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
-    return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditClientbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+    return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditClientbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                         },
                         "targets": 14
                     }
