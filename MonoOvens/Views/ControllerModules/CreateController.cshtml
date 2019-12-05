@@ -112,7 +112,7 @@
 
                     <div style=" float:left ; padding-right:100px">
                         <br /><label>Type of Light: </label>
-                        <select asp-for="LightType" class="form-control" required>
+                        <select asp-for="LightType" class="form-control" id="lightsType" required>
                             <option value="">--Select--</option>
                             <option value="Halogen">Halogen </option>
                             <option value="LED">LED</option>
@@ -133,7 +133,7 @@
 
                     <div style=" float:left ; padding-right:100px">
                         <br /><label>kW/h Rating per Light: </label>
-                        <select asp-for="kWh_Rating_Light" class="form-control" required>
+                        <select asp-for="kWh_Rating_Light" class="form-control"  id="lightsRating"required>
                             <option value="">--Select--</option>
                             <option value="0.02">0.02 KWh(Halogen)</option>
                             <option value="0.0024">0.0024 KWh(LED)</option>
@@ -163,7 +163,7 @@
                     <div style=" float:left ; padding-right:100px">
                         <br /><label>kW/h Rating Damper: </label>
                         <select asp-for="kWh_Rating_Damper" class="form-control" required>
-                            <option value="0">--Select--</option>
+                            <option value="0.0">--Select--</option>
                         </select>
                         <span asp-validation-for="kWh_Rating_Damper" class="text-danger"></span>
                     </div>
@@ -190,4 +190,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('#lightsType').on('change', function () {
+            var light = $('#lightsType option:selected').val();
+            if (light == "Halogen") {
+                $("#lightsRating option[value='0.02']").removeAttr("selected", "selected");
+                $("#lightsRating option[value='0.02']").attr("selected", "selected");
+            }
+            else {
+                $("#lightsRating option[value='0.0024']").removeAttr("selected", "selected");
+                $("#lightsRating option[value='0.0024']").attr("selected", "selected");
+            
+            }
+        })
+    </script>
 }
