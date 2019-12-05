@@ -49,7 +49,7 @@ namespace MonoOvens.Controllers
                                                                                 || z.HOAddress1.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.HOAddress2.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.HOAddress3.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Postcode.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.PostCode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PostTown.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PrimaryContactName.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PrimaryContactNumber.ToLower().Contains(param.sSearch.ToLower())
@@ -58,7 +58,7 @@ namespace MonoOvens.Controllers
                                                                                 || z.StoreAddress2.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreCode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreName.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StorePostcode.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.StorePostCode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Type.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Zone.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PrimaryEmail.ToLower().Contains(param.sSearch.ToLower()));
@@ -78,7 +78,7 @@ namespace MonoOvens.Controllers
                     Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.PrimaryContactNumber) : Customers.OrderByDescending(z => z.PrimaryContactNumber);
                     break;
                 case 5:
-                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode) : Customers.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode);
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.PostCode) : Customers.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.PostCode);
                     break;
                 case 6:
                     Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.Zone) : Customers.OrderByDescending(z => z.Zone);
@@ -99,7 +99,7 @@ namespace MonoOvens.Controllers
                     Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.StoreName) : Customers.OrderByDescending(z => z.StoreName);
                     break;
                 case 12:
-                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostcode) : Customers.OrderByDescending(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostcode);
+                    Customers = sortDirection == "asc" ? Customers.OrderBy(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostCode) : Customers.OrderByDescending(z => z.StoreAddress1 + " " + z.StoreAddress2 + " " + z.StoreCode + " " + z.PostTown + " " + z.StorePostCode);
                     break;
 
                 default:
@@ -147,7 +147,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,PostCode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostCode")] CustomerMaster customerMaster)
         {
             if (ModelState.IsValid)
             {
@@ -179,7 +179,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,PostCode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostCode")] CustomerMaster customerMaster)
         {
             if (id != customerMaster.Id)
             {

@@ -16,7 +16,7 @@
                 Id
             </th>
             <th>
-                FG code
+                FG. Code
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SerialNumber)
@@ -178,7 +178,7 @@
                         "render": function (data, type, row) {
  // return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
 //return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditControllerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
- return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+ return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                         },
                         "targets": 23
                     }

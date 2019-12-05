@@ -16,7 +16,7 @@
                 Id
             </th>
             <th>
-                FG code
+                FG. Code
             </th>
             <th>
                 Asset Category
@@ -151,7 +151,7 @@
                     },
                     {
                         "render": function (data, type, row) {
-                            return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> |  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                            return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> |  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                             //return '<a class="btn btn-primary btn-link" id="' + data.id + '" data-toggle="tooltrip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id = "' + data.id + '" data - toggle="tooltip" title = "" data - original - title="View Detail" onclick = "deleteSelectedItem(' + data.id + ')" > Delete</a > '
                         },
                         "targets": 20
