@@ -63,18 +63,18 @@
             <th></th>
         </tr>
     </thead>
-    
+
 </table>
 @section Scripts{
 
     <script language="javascript" type="text/javascript">
         var dealersTable;
 
-          function EditDealerbyAdmin(id) {
-            
+        function EditDealerbyAdmin(id) {
+
             window.location.href = "/Dealer/EditDealer/" + id;
-          }
-         function confirmDelete(callback) {
+        }
+        function confirmDelete(callback) {
             bootbox.confirm({
                 message: "<h3>Are you sure, You want to delete this record...!!</h3>",
                 buttons: {
@@ -101,13 +101,13 @@
                 //var data = customersTable.rows({ selected: true }).data();
                 $.ajax({
                     type: "GET",
-                    url:  "/Dealer/Delete",
+                    url: "/Dealer/Delete",
                     data: { id: id },
                     success: function (data) {
 
                         dealersTable.draw(true);
                         // toggleActionButtons(false);
-                      //  document.location.reload(true);
+                        //  document.location.reload(true);
                     }
 
                 }).fail(function (error) {
@@ -118,10 +118,10 @@
 
         }
 
-          $(document).ready(function () {
+        $(document).ready(function () {
             //toggleActionButtons(false);
 
-             dealersTable = $('#dealersTable').DataTable({
+            dealersTable = $('#dealersTable').DataTable({
                 select: {
                     style: 'single'
                 },
@@ -138,34 +138,34 @@
                     },
                     {
                         "render": function (data, type, row) {
-  //return '<a href="/Dealer/EditDealer/' + data.id +'"  >Edit</a> <a href="/Dealer/DealerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
-  return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditDealerbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
+                            //return '<a href="/Dealer/EditDealer/' + data.id +'"  >Edit</a> <a href="/Dealer/DealerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
+                            return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditDealerbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                         },
                         "targets": 16
                     }
                 ],
-                 "columns": [
-                     {"data" :"id" },
-                     { "data": "dealerName" },
-                     { "data": "dealerRegion" },
-                     { "data": "dealerPhone" },
-                     { "data": "customerName" },
-                     { "data": "customerNumber" },
-                     { "data": "email" },
-                     { "data": "region" },
-                     { "data": "area" },
-                     { "data": "storeCode" },
-                     { "data": "type" },
-                     { "data": "storeName" },
-                     { "data": "storeAddress1" },
-                     { "data": "storeAddress2" },
-                     { "data": "postTown" },
-                     {"data" :"storePostcode" },
-                     {
+                "columns": [
+                    { "data": "id" },
+                    { "data": "dealerName" },
+                    { "data": "dealerRegion" },
+                    { "data": "dealerPhone" },
+                    { "data": "customerName" },
+                    { "data": "customerNumber" },
+                    { "data": "email" },
+                    { "data": "region" },
+                    { "data": "area" },
+                    { "data": "storeCode" },
+                    { "data": "type" },
+                    { "data": "storeName" },
+                    { "data": "storeAddress1" },
+                    { "data": "storeAddress2" },
+                    { "data": "postTown" },
+                    { "data": "storePostcode" },
+                    {
                         "orderable": false,
                         "searchable": false,
                         "data": null
-                     }
+                    }
                 ]
             });
             $('#dealersTable tbody').on('click', 'tr', function () {
