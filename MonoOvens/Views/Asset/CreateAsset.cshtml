@@ -273,7 +273,30 @@
         
 
         $(document).ready(function () {
-            
+             $('#acategory').click( function () {
+                var categoryVal = $('#acategory option:selected').val();
+
+                console.log(categoryVal);
+                $.ajax({
+                    url: '/Asset/GetAssetTypeByAssetCategoryId',
+                    method: 'POST',
+                    data: { id: categoryVal },
+                    success: function (data) {
+                        $("#atypemain").empty();
+                        // $("#atypemain").append("<option value='0'>--Select--</option>");                       
+                        $.each(data, function (index, optiondata) {                          
+                            for (var i = 0; i < optiondata.length; i++) {                               
+                                $("#atypemain").append("<option value=" + optiondata[i].id + ">" + optiondata[i].assetType + "</option>")
+                                // $("#atypemain").append($("<option />").val(optiondata[i].id).text(optiondata[i].assetType));
+                            }                           
+                        });                        
+                    },
+                    error: function (data) {
+                        alert("There is some error in asset category classification.")
+                    }
+
+                })
+            })
            
             //  var categoryTxt = $('#acategory option:selected').text();
             $('#acategory').on('change', function () {
