@@ -32,7 +32,14 @@ namespace MonoOvens.Models
         public DbSet<MonoOvens.Models.RoleMaster> RoleMaster { get; set; }
          
         public DbSet<MonoOvens.Models.CustomerMaster> Customers { get; set; }
-      
+
+        // new models class added.
+        public DbSet<MonoOvens.Models.StoreMaster> Stores { get; set; }
+        public DbSet<MonoOvens.Models.StoreGroupMaster> StoreGroups { get; set; }
+        public DbSet<ImporterMaster> Importers { get; set; }
+
+
+
 
         //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //        {

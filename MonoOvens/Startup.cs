@@ -34,11 +34,13 @@ namespace MonoOvens
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+           
             services.AddDbContextPool<MonoContext>(options =>
            {
                options.UseSqlServer(Configuration.GetConnectionString("connection"));
 
            });
+            
 
             services.AddIdentity<UserMaster, IdentityRole>()
            .AddEntityFrameworkStores<MonoContext>()
@@ -67,7 +69,7 @@ namespace MonoOvens
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+               // app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 
@@ -81,14 +83,14 @@ namespace MonoOvens
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //CreateRoles(serviceProvider).Wait();
+           // CreateRoles(serviceProvider).Wait();
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //initializing custom roles   
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<UserMaster>>();
-            string[] roleNames = { "Administrator ", "Editor", "Dealer", "Engineer" , "ClientAdministrator" , "Client" };
+            string[] roleNames = { "Administrator", "Editor", "Dealer", "Engineer" , "ClientAdministrator" , "Client" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)

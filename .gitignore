@@ -31,8 +31,8 @@ x64/
 x86/
 build/
 bld/
-MonoOvens/*bin/
-MonoOvens/*obj/
+/MonoOvens/*bin/
+/MonoOvens/*obj/
 ../bin/
 ../obj/
 [Oo]ut/
@@ -42,4 +42,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-MonoOvens/appsettings.json
+/MonoOvens/appsettings.json
+/MonoOvens/.config

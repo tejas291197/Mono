@@ -20,5 +20,11 @@ namespace MonoOvens
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+                //.UseKestrel(options =>                                                              // added just to increase the uploading capecity.
+                // {
+                //    options.Limits.MaxRequestBodySize = long.MaxValue;
+                // })
+                //.UseIISIntegration()       
+                //.UseContentRoot(Directory.GetCurrentDirectory());
     }
 }

@@ -16,7 +16,13 @@
         <form asp-action="CreateDealer">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="ImporterName" class="control-label">Importer Name:</label><span style="color:red"> *</span>
+                <input asp-for="ImporterName" class="form-control" id="dname" required />
 
+                <span asp-validation-for="ImporterName" class="text-danger"></span>
+            </div>
             <div class="form-group" style="padding-right:50px ; float:left ">
                 <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
                 <input asp-for="DealerName" class="form-control" id="dname" required />
@@ -33,8 +39,8 @@
                 <input asp-for="DealerRegion" class="form-control" id="dregion" required />
                 <span asp-validation-for="DealerRegion" class="text-danger"></span>
             </div>
-            <div style="clear:left" class="dynamic_form">
-                <fieldset>                    
+            @*<div style="clear:left" class="dynamic_form">
+                <fieldset>
                     <legend>Customer Detail:</legend>
                     <div class="form-group" style="padding-right:50px ; float:left ">
                         <label asp-for="CustomerName" class="control-label">Name: </label><span style="color:red"> *</span>
@@ -47,15 +53,15 @@
                         <input asp-for="CustomerNumber" class="form-control" id="cnumber" required />
 
                         <span asp-validation-for="CustomerNumber" class="text-danger"></span>
-                    </div>
+                    </div>*@
                     <div class="form-group" style="padding-right:50px ; float:left ">
                         <label asp-for="Email" class="control-label">Email:</label><span style="color:red"> *</span>
                         <input asp-for="Email" class="form-control" required />
 
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                </fieldset>
-            </div>
+                @*</fieldset>
+            </div>*@
             <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
                 <label asp-for="Region" class="control-label">Region:</label>
                 <select asp-for="Region" class="form-control">
@@ -73,7 +79,7 @@
                 <input asp-for="Area" class="form-control" id="area" />
                 <span asp-validation-for="Area" class="text-danger"></span>
             </div>
-            <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+            @*<div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
                 <label asp-for="StoreCode" class="control-label">Store Code:</label>
                 <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" />
                 <span asp-validation-for="StoreCode" class="text-danger"></span>
@@ -112,12 +118,12 @@
                 <label asp-for="StorePostcode" class="control-label">Store Post Code:</label>
                 <input asp-for="StorePostcode" class="form-control" placeholder="GT DFG3" />
                 <span asp-validation-for="StorePostcode" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group" style=" clear:left ; padding-left:400px">
                 <p>
                     <span class="btn btn-info" style="clear:left">Add Customer</span>
                 </p>
-                <br/><input type="submit" value="Create" class="btn btn-success" />
+                <br /><input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>

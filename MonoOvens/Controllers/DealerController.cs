@@ -41,69 +41,76 @@ namespace MonoOvens.Controllers
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
-            if (!string.IsNullOrEmpty(param.sSearch)) Dealers = Dealers.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower() )
-                                                                                || z.DealerPhone.ToString().ToLower().Contains(param.sSearch.ToLower() )
-                                                                                || z.DealerRegion.ToLower().Contains(param.sSearch.ToLower() )
-                                                                                || z.CustomerName.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.CustomerNumber.ToLower().Contains(param.sSearch.ToLower())
+            if (!string.IsNullOrEmpty(param.sSearch)) Dealers = Dealers.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.DealerPhone.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.DealerRegion.ToLower().Contains(param.sSearch.ToLower())
+                                                                                //         || z.CustomerName.ToLower().Contains(param.sSearch.ToLower())
+                                                                                //         || z.CustomerNumber.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Email.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Region.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Area.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StoreCode.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Type.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StoreName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StoreAddress1.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StoreAddress2.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.PostTown.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StorePostcode.ToString().ToLower().Contains(param.sSearch.ToLower()));
+                                                                                        //          || z.StoreCode.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //            || z.Type.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //           || z.StoreName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //            || z.StoreAddress1.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //            || z.StoreAddress2.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //            || z.PostTown.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                        //           || z.StorePostcode.ToString().ToLower().Contains(param.sSearch.ToLower())
+
+                                                                               || z.ImporterName.ToString().ToLower().Contains(param.sSearch.ToLower())); // new line added
+                                                                                                                
 
             switch (sortColumnIndex)
             {
                 case 1:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerName) : Dealers.OrderByDescending(z => z.DealerName);
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.ImporterName) : Dealers.OrderByDescending(z => z.ImporterName);
                     break;
                 case 2:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerRegion) : Dealers.OrderByDescending(z => z.DealerRegion);
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerName) : Dealers.OrderByDescending(z => z.DealerName);
                     break;
                 case 3:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerPhone) : Dealers.OrderByDescending(z => z.DealerPhone);
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerRegion) : Dealers.OrderByDescending(z => z.DealerRegion);
                     break;
                 case 4:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerName) : Dealers.OrderByDescending(z => z.CustomerName);
+                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerPhone) : Dealers.OrderByDescending(z => z.DealerPhone);
                     break;
+
+                //case 4:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerName) : Dealers.OrderByDescending(z => z.CustomerName);
+                //    break;
+                //case 5:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerNumber) : Dealers.OrderByDescending(z => z.CustomerNumber);
+                //    break;
                 case 5:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerNumber) : Dealers.OrderByDescending(z => z.CustomerNumber);
-                    break;
-                case 6:
                     Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Email) : Dealers.OrderByDescending(z => z.Email);
                     break;
-                case 7:
+                case 6:
                     Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Region) : Dealers.OrderByDescending(z => z.Region);
                     break;
-                case 8:
+                case 7:
                     Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Area) : Dealers.OrderByDescending(z => z.Area);
                     break;
-                case 9:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreCode) : Dealers.OrderByDescending(z => z.StoreCode);
-                    break;
-                case 10:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Type) : Dealers.OrderByDescending(z => z.Type);
-                    break;
-                case 11:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreName) : Dealers.OrderByDescending(z => z.StoreName);
-                    break;
-                case 12:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreAddress1) : Dealers.OrderByDescending(z => z.StoreAddress1);
-                    break;
-                case 13:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreAddress2) : Dealers.OrderByDescending(z => z.StoreAddress2);
-                    break;
-                case 14:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.PostTown) : Dealers.OrderByDescending(z => z.PostTown);
-                    break;
-                case 15:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StorePostcode) : Dealers.OrderByDescending(z => z.StorePostcode);
-                    break;
+                //case 9:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreCode) : Dealers.OrderByDescending(z => z.StoreCode);
+                //    break;
+                //case 10:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Type) : Dealers.OrderByDescending(z => z.Type);
+                //    break;
+                //case 11:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreName) : Dealers.OrderByDescending(z => z.StoreName);
+                //    break;
+                //case 12:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreAddress1) : Dealers.OrderByDescending(z => z.StoreAddress1);
+                //    break;
+                //case 13:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreAddress2) : Dealers.OrderByDescending(z => z.StoreAddress2);
+                //    break;
+                //case 14:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.PostTown) : Dealers.OrderByDescending(z => z.PostTown);
+                //    break;
+                //case 15:
+                //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StorePostcode) : Dealers.OrderByDescending(z => z.StorePostcode);
+                //    break;
                 default:
                     Dealers = Dealers.OrderByDescending(z => z.Id);
                     break;
@@ -148,7 +155,8 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDealer([Bind("Id,DealerName,DealerPhone,DealerRegion,CustomerName,CustomerNumber,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] DealerMaster dealerMaster)
+        //  public async Task<IActionResult> CreateDealer([Bind("Id,DealerName,DealerPhone,DealerRegion,CustomerName,CustomerNumber,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] DealerMaster dealerMaster)
+        public async Task<IActionResult> CreateDealer([Bind("Id,ImporterName,DealerName,DealerPhone,DealerRegion,Email,Region,Area")] DealerMaster dealerMaster)        
         {
             if (ModelState.IsValid)
             {
@@ -180,7 +188,9 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditDealer(int id, [Bind("Id,DealerName,DealerPhone,DealerRegion,CustomerName,CustomerNumber,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] DealerMaster dealerMaster)
+        //   public async Task<IActionResult> EditDealer(int id, [Bind("Id,DealerName,DealerPhone,DealerRegion,CustomerName,CustomerNumber,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] DealerMaster dealerMaster)
+        public async Task<IActionResult> EditDealer(int id, [Bind("Id,ImporterName,DealerName,DealerPhone,DealerRegion,Email,Region,Area")] DealerMaster dealerMaster)
+      
         {
             if (id != dealerMaster.Id)
             {
