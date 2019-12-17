@@ -217,11 +217,9 @@ namespace MonoOvens.Migrations
 
                     b.Property<int>("Controllers");
 
-                    b.Property<int>("Elements");
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("FG_Code");
-
-                    b.Property<int>("Fans");
 
                     b.Property<string>("Format");
 
@@ -229,25 +227,13 @@ namespace MonoOvens.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("LightType");
-
-                    b.Property<int>("Lights");
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("Power");
 
                     b.Property<string>("TraySize");
 
                     b.Property<int>("Trays");
-
-                    b.Property<float>("kWh_Rating_Damper");
-
-                    b.Property<float>("kWh_Rating_Element");
-
-                    b.Property<float>("kWh_Rating_Fan");
-
-                    b.Property<float>("kWh_Rating_Light");
-
-                    b.Property<float>("kWh_Rating_WaterSolenoid");
 
                     b.HasKey("Id");
 
@@ -332,6 +318,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<DateTime?>("ControllerDate");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<int>("Elements");
 
                     b.Property<string>("FG_Code");
@@ -345,6 +333,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("LightType");
 
                     b.Property<int>("Lights");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("RecipeVersion");
 
@@ -402,6 +392,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("CustomerName");
 
                     b.Property<string>("HOAddress1");
@@ -411,6 +403,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("HOAddress3");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("PostTown");
 
@@ -451,6 +445,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Area");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("DealerName");
 
                     b.Property<string>("DealerPhone");
@@ -462,6 +458,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("ImporterName");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("Region");
 
@@ -478,6 +476,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Area");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("ImporterName");
@@ -487,6 +487,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("ImporterRegion");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("Region");
 
@@ -590,6 +592,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Area");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("DealerName");
 
                     b.Property<string>("Email");
@@ -597,6 +601,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("ImporterName");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("Region");
 
@@ -619,6 +625,8 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Area");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("CustomerName");
 
                     b.Property<string>("CustomerPhone");
@@ -630,6 +638,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("ImporterName");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("PostTown");
 
@@ -670,11 +680,15 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("AccessRole");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<string>("FirstName");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.ToTable("UserMaster");
 

@@ -10,49 +10,53 @@
 <hr />
 <div class="row">
     <div>
-        <form asp-action="EditAsset">
+        <p class="form-group text-danger">(*)fields are mandatory</p>
+        <form asp-action="EditAsset" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group" style="float:left ; padding-right:10px">
-                <label>FG. Code:</label>
-                <input asp-for="FG_Code" class="form-control" />
+            <div class="form-group" style="float:left ; padding-right:2px">
+                <label>FG. Code :</label><span style="color:red"> *</span>
+                <input asp-for="FG_Code" class="form-control" placeholder="FG code" required />
                 <span asp-validation-for="FG_Code" class="text-danger"></span>
-            </div>
-            <div class="alert-info" style="   float:left ; margin-top:27px  "><p>(This is description for FG. Code.)</p></div>
-            <div class="form-group" style=" float:left ; padding-right:100px ; clear:left ">
-                <label>Asset Category : </label>
+            </div>.
+
+            <div class="alert-info" style="   float:left ; margin-top:27px  ">  <p>(This is description for FG. Code.)</p></div>
+            <div class="form-group" style=" clear:left ; float:left ; padding-right:100px">
+                <label>Asset Category : </label><span style="color:red"> *</span>
                 @*<input asp-for="AssetCategory" class="form-control" />*@
                 <select asp-for="AssetCategory" class="form-control" onblur="check(1)"
-                        asp-items="@(new SelectList(@ViewBag.ACateogiesedit, "Id" ,"AssetCategory" ) )" id="acategory" required>
+                        asp-items="@(new SelectList(@ViewBag.ACateogies, "Id" ,"AssetCategory" ) )" id="acategory" required>
                 </select>
                 <span asp-validation-for="AssetCategory" class="text-danger"></span>
             </div>
+
             <div class="form-group" style="float:left ; padding-right:100px">
-                <label>Asset Type : </label>
+                <label>Asset Type : </label><span style="color:red"> *</span>
                 @*<select asp-for="AssetType" class="form-control" onblur="check(2)"
-                    asp-items="@(new SelectList(@ViewBag.ATypesedit,"Id" , "AssetType" ) ) " id="atype" required>
+                    asp-items="@(new SelectList(@ViewBag.ATypes,"Id" , "AssetType" ) ) " id="atype" required>
+
             </select>*@
-                <select id="atypemain" asp-for="AssetType" class="form-control">
+                <select id="atypemain" asp-for="AssetType" class="form-control" required>
                 </select>
                 <span asp-validation-for="AssetType" class="text-danger"></span>
             </div>
 
-
             <div class="form-group" style="float:left ; padding-right:100px">
-                <label>ControllerType: </label>
+                <label>ControllerType: </label><span style="color:red"> *</span>
                 <select asp-for="ControllerType" class="form-control" onblur="check(3)"
-                        asp-items="@(new SelectList(@ViewBag.CTypesedit,"Id","ControllerType"))" id="ctype" required>
+                        asp-items="@(new SelectList(@ViewBag.CTypes,"Id","ControllerType"))" id="ctype" required>
                 </select>
                 <span asp-validation-for="ControllerType" class="text-danger"></span>
             </div>
+
             <div class="form-group" style=" float:left ; padding-right:100px">
-                <label>No. of Controllers : </label>
+                <label>No. of Controllers : </label><span style="color:red"> *</span>
                 <input asp-for="Controllers" class="form-control" />
                 <span asp-validation-for="Controllers" class="text-danger"></span>
             </div>
             <div class="form-group" style=" float:left ; padding-right:100px">
-                <label>No. of Trays : </label>
-                <select asp-for="Trays" class="form-control">
+                <label>No. of Trays : </label><span style="color:red"> *</span>
+                <select asp-for="Trays" class="form-control" required>
                     <option value="">--Select--</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -64,9 +68,10 @@
                 </select>
                 <span asp-validation-for="Trays" class="text-danger"></span>
             </div>
+
             <div class="form-group" style=" float:left ; padding-right:100px ">
-                <label>Tray size : </label>
-                <select class="form-control" asp-for="TraySize" id="height">
+                <label>Tray size : </label><span style="color:red"> *</span>
+                <select class="form-control" asp-for="TraySize" required>
                     <option value="">--select--</option>
                     <option value="18” x 26”">18” x 26”</option>
                     <option value="18” x 30”">18” x 30”</option>
@@ -75,12 +80,13 @@
                     <option value="400mm x 800mm">400mm x 800mm</option>
                     <option value="600mm x 800mm">600mm x 800mm</option>
                 </select>
-                <span id="sizeError"></span>
+
+                
                 <span asp-validation-for="TraySize" class="text-danger"></span>
             </div>
 
             <div class="form-group" style=" float:left ; padding-right:100px">
-                <label>Handed : </label>
+                <label>Handed : </label><span style="color:red"> *</span>
                 <select asp-for="Handed" class="form-control" required>
                     <option value="">--Select--</option>
                     <option value="Left-Handed">Left</option>
@@ -90,8 +96,9 @@
                 </select>
                 <span asp-validation-for="Handed" class="text-danger"></span>
             </div>
-            <div class="form-group" style=" float:left ; padding-right:100px">
-                <label>Format : </label>
+
+            <div class="form-group" style=" float:left ; padding-right:100px ">
+                <label>Format : </label><span style="color:red"> *</span>
                 <select asp-for="Format" class="form-control" required>
                     <option value="">--Select--</option>
                     <option value="Portrait ">Portrait </option>
@@ -99,8 +106,9 @@
                 </select>
                 <span asp-validation-for="Format" class="text-danger"></span>
             </div>
+
             <div class="form-group" style=" float:left ; padding-right:100px">
-                <label>Power : </label>
+                <label>Power : </label><span style="color:red"> *</span>
                 <select asp-for="Power" class="form-control" required>
                     <option value="">--Select--</option>
                     <option value="Single-phase ">Single-Phase </option>
@@ -108,112 +116,10 @@
                 </select>
                 <span asp-validation-for="Power" class="text-danger"></span>
             </div>
-            <div style=" clear:left">
-                <fieldset>
-                    <legend>Power Consumption :</legend><br />
-                    <div class="form-group">
-                        <div style=" clear:left; float:left ; padding-right:100px">
-                            <br /><label>No. of Elements: </label>
-                            <select asp-for="Elements" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <span asp-validation-for="Elements" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Element : </label>
-                            <select asp-for="kWh_Rating_Element" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option value="7">7 kWh</option>
-                                <option value="9">9 kWh</option>
-                                <option value="8">8 kWh</option>
-                                <option value="11">11 kWh</option>
-                            </select>
-                            <span asp-validation-for="kWh_Rating_Element" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>Type of Light : </label>
-                            <select asp-for="LightType" class="form-control" id="lightstype" required>
-                                <option value="">--Select--</option>
-                                <option value="Halogen">Halogen </option>
-                                <option value="LED">LED</option>
-                            </select>
-                            <span asp-validation-for="LightType" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>No. of Lights : </label>
-                            <select asp-for="Lights" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                            </select>
-                            <span asp-validation-for="Lights" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Light : </label>
-                            <select asp-for="kWh_Rating_Light" class="form-control" id="lightRating" required>
-                                <option value="">--Select--</option>
-                                <option value="0.02">0.02 KWh(Halogen)</option>
-                                <option value="0.0024">0.0024 KWh(LED)</option>
-                            </select>
-                            <span asp-validation-for="kWh_Rating_Light" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>No. of Fans : </label>
-                            <select asp-for="Fans" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <span asp-validation-for="Fans" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Fan : </label>
-                            <select asp-for="kWh_Rating_Fan" class="form-control" required>
-                                <option value="0.37">0.37 KWh</option>
-                            </select>
-                            <span asp-validation-for="kWh_Rating_Fan" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating Damper : </label>
-                            <select asp-for="kWh_Rating_Damper" class="form-control" required>
-                                <option value="0">--Select--</option>
-                            </select>
-                            <span asp-validation-for="kWh_Rating_Damper" class="text-danger"></span>
-                        </div>
-                        @*</div>
-                    <div class="form-group">*@
-                        <div style=" float:left ; padding-right:100px">
-                            <br /> <label>kW/h Rating Water Solenoid : </label>
-                            <select asp-for="kWh_Rating_WaterSolenoid" class="form-control" required>
-                                <option value="0.007">0.007 KWh</option>
-                            </select>
-                            <span asp-validation-for="kWh_Rating_WaterSolenoid" class="text-danger"></span>
-                        </div>
-                    </div>
-                </fieldset>
-            </div><br />
+          
 
             <div class="form-group" style=" clear:left" align="center">
-                <input type="submit" value="Save" class="btn btn-info" id="subbtn" />
+                <button type="submit" value="Save" class="btn btn-success" id="subbtn" >Save</button>
             </div>
         </form>
     </div>
@@ -230,7 +136,7 @@
         var id;
         function check(n) {
             if (n == 1) {
-                id = $("acategory");
+                id = $("#acategory");
                 val = $("#acategory option:selected").val();
             }
             else if (n == 2) {
@@ -316,18 +222,18 @@
 
                 })
             })
-            $('#lightstype').on('change', function () {
-                var lights = $('#lightstype option:selected').val();
+            //$('#lightstype').on('change', function () {
+            //    var lights = $('#lightstype option:selected').val();
 
-                if (lights == "Halogen") {
-                    $("#lightRating option[value='0.02']").removeAttr("selected", "selected");
-                    $("#lightRating option[value='0.02']").attr("selected", "selected");
-                }
-                else {
-                    $("#lightRating option[value='0.0024']").removeAttr("selected", "selected");
-                    $("#lightRating option[value='0.0024']").attr("selected", "selected");
-                }
-            })
+            //    if (lights == "Halogen") {
+            //        $("#lightRating option[value='0.02']").removeAttr("selected", "selected");
+            //        $("#lightRating option[value='0.02']").attr("selected", "selected");
+            //    }
+            //    else {
+            //        $("#lightRating option[value='0.0024']").removeAttr("selected", "selected");
+            //        $("#lightRating option[value='0.0024']").attr("selected", "selected");
+            //    }
+            //})
 
 
         })

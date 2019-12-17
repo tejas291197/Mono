@@ -1,0 +1,65 @@
+﻿@model MonoOvens.Models.StoreGroupMaster
+
+@{
+    ViewData["Title"] = "StoreGroupDetails";
+}
+
+    <h2>Store Group Details</h2>
+
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporterName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImporterName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DealerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DealerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreGroupName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreGroupName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreGroupPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreGroupPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreGroupRegion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreGroupRegion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <a asp-action="EditStoreGroup" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="StoreGroupList">Back to List</a>
+</div>

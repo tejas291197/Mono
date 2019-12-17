@@ -32,7 +32,10 @@ namespace MonoOvens.Models
         public float kWh_Rating_Fan { get; set; }
         public float kWh_Rating_Damper { get; set; }
         public float kWh_Rating_WaterSolenoid { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
+
     }
 
 }

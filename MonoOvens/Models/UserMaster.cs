@@ -12,6 +12,9 @@ namespace MonoOvens.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }        
         public string AccessRole { get; set; }
+        public string CreatedBy { get; set; }
+        
+        public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
         //// public int Id { get; set; }
         // public string EmployeeId { get; set; }

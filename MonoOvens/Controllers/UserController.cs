@@ -105,7 +105,8 @@ namespace MonoOvens.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = totalUsers,
+                //   iTotalRecords = totalUsers,
+                iTotalRecords = filteredUsersCount,
                 iTotalDisplayRecords = filteredUsersCount,
                 aaData = viewModel
             });
@@ -148,6 +149,9 @@ namespace MonoOvens.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = _userManager.GetUserId(User);
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                userMaster.CreatedBy = userName;
                 // _context.Add(userMaster);
                 userMaster.UserName = userMaster.Email;
                 var rolename = _roleManager.Roles.Where(e=>e.Id == userMaster.AccessRole).Select(e=>e.Name).FirstOrDefault();
@@ -200,6 +204,10 @@ namespace MonoOvens.Controllers
             {
                 try
                 {
+                    var user = _userManager.GetUserId(User);
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    userMaster.ModifiedBy = userName;
+
                     var edituser = _context.Users.FirstOrDefault(x => x.Id == userMaster.Id);
                    
                     edituser.UserName = userMaster.Email;

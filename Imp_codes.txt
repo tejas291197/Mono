@@ -1,3 +1,17 @@
+how to access the website running of VM publically from its public Ip hosted on IIS server.
+
+1. configure the IIS manager properly through the Server Manager.( go to Control Panel -> Programs -> Turn on features)
+2. install the dotnet sdk bundle tools to launch the site.
+3. add a site to iis manager sites  and give a path to the publish folder of the project.
+4. configure the bindings by selecting the port to 80.
+5. add the inbound rules in the windows firewall advance setting for port 80.
+6. add the same inbound rules in the azure web portal for the port 80.
+7. publish the wensite and select the physical of site to the publish folder.
+8. start the site.  
+
+
+
+
 #this is nav class in old layout page.
 
  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>

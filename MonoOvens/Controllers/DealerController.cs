@@ -121,7 +121,8 @@ namespace MonoOvens.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = totalDealers,
+             //   iTotalRecords = totalDealers,
+                iTotalRecords = filteredDealersCount,
                 iTotalDisplayRecords = filteredDealersCount,
                 aaData = Dealers
             });
@@ -160,6 +161,9 @@ namespace MonoOvens.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = _userManager.GetUserId(User);
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                dealerMaster.CreatedBy = userName;
                 _context.Add(dealerMaster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(DealersList));
@@ -201,6 +205,9 @@ namespace MonoOvens.Controllers
             {
                 try
                 {
+                    var user = _userManager.GetUserId(User);
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    dealerMaster.ModifiedBy = userName;
                     _context.Update(dealerMaster);
                     await _context.SaveChangesAsync();
                 }

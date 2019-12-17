@@ -1,0 +1,53 @@
+﻿@model MonoOvens.Models.ImporterMaster
+
+@{
+    ViewData["Title"] = "ImporterDetails";
+}
+
+    <h2>Importer Details</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporterName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImporterName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporterPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImporterPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporterRegion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImporterRegion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <a asp-action="EditImporter" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="ImporterList">Back to List</a>
+</div>

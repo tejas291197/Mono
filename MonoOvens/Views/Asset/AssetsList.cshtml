@@ -45,7 +45,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Power)
             </th>
-            <th>
+            @*<th>
                 No. of Elements
             </th>
             <th>
@@ -71,7 +71,7 @@
             </th>
             <th>
                 kW/h Rating WaterSolenoid
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -154,7 +154,7 @@
                             return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> |  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                             //return '<a class="btn btn-primary btn-link" id="' + data.id + '" data-toggle="tooltrip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id = "' + data.id + '" data - toggle="tooltip" title = "" data - original - title="View Detail" onclick = "deleteSelectedItem(' + data.id + ')" > Delete</a > '
                         },
-                        "targets": 20
+                        "targets": 11
                     }
                 ],
                  "columns": [   
@@ -175,15 +175,15 @@
                     { "data": "handed" },
                     { "data": "format" },
                     { "data": "power" },
-                     { "data": "elements" },
-                     { "data": "kWh_Rating_Element" },
-                     { "data": "lightType" },
-                     { "data": "lights" },
-                     { "data": "kWh_Rating_Light" },
-                     { "data": "fans" },
-                     { "data": "kWh_Rating_Fan" },
-                     { "data": "kWh_Rating_Damper" },
-                     { "data": "kWh_Rating_WaterSolenoid" },
+                     //{ "data": "elements" },
+                     //{ "data": "kWh_Rating_Element" },
+                     //{ "data": "lightType" },
+                     //{ "data": "lights" },
+                     //{ "data": "kWh_Rating_Light" },
+                     //{ "data": "fans" },
+                     //{ "data": "kWh_Rating_Fan" },
+                     //{ "data": "kWh_Rating_Damper" },
+                     //{ "data": "kWh_Rating_WaterSolenoid" },
 
                     {
                         "orderable": false,

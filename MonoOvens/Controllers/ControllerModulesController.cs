@@ -247,7 +247,7 @@ namespace MonoOvens.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = totalControllers,
+                iTotalRecords = filteredControllersCount,
                 iTotalDisplayRecords = filteredControllersCount,
                 aaData = Controllers
             });
@@ -287,6 +287,9 @@ namespace MonoOvens.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = _userManager.GetUserId(User);
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                controllerModule.CreatedBy = userName;
                 _context.Add(controllerModule);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ControllersList));
@@ -327,6 +330,9 @@ namespace MonoOvens.Controllers
             {
                 try
                 {
+                    var user = _userManager.GetUserId(User);
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    controllerModule.ModifiedBy = userName;
                     _context.Update(controllerModule);
                     await _context.SaveChangesAsync();
                 }

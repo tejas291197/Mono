@@ -16,20 +16,18 @@
                 Id
             </th>
             <th>
-                Dealer Name
+                Importer Name
             </th>
             <th>
-                Dealer Phone
+                Dealer Name
             </th>
             <th>
                 Dealer Region
             </th>
             <th>
-                Customer Name
+                Dealer Phone
             </th>
-            <th>
-                Customer Number
-            </th>
+          
             <th>
                 Email
             </th>
@@ -39,27 +37,7 @@
             <th>
                 Area
             </th>
-            <th>
-                Store Code
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Store Name
-            </th>
-            <th>
-                Store Address 1
-            </th>
-            <th>
-                Store Address 2
-            </th>
-            <th>
-                Post Town
-            </th>
-            <th>
-                Store Post Code
-            </th>
+          
             <th></th>
         </tr>
     </thead>
@@ -141,26 +119,28 @@
                             //return '<a href="/Dealer/EditDealer/' + data.id +'"  >Edit</a> <a href="/Dealer/DealerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                             return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditDealerbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                         },
-                        "targets": 16
+                        //"targets": 16
+                         "targets": 8
                     }
                 ],
                 "columns": [
                     { "data": "id" },
+                    { "data": "importerName" },
                     { "data": "dealerName" },
                     { "data": "dealerRegion" },
                     { "data": "dealerPhone" },
-                    { "data": "customerName" },
-                    { "data": "customerNumber" },
                     { "data": "email" },
                     { "data": "region" },
                     { "data": "area" },
-                    { "data": "storeCode" },
-                    { "data": "type" },
-                    { "data": "storeName" },
-                    { "data": "storeAddress1" },
-                    { "data": "storeAddress2" },
-                    { "data": "postTown" },
-                    { "data": "storePostcode" },
+                    //{ "data": "customerName" },
+                    //{ "data": "customerNumber" },                    
+                    //{ "data": "storeCode" },
+                    //{ "data": "type" },
+                    //{ "data": "storeName" },
+                    //{ "data": "storeAddress1" },
+                    //{ "data": "storeAddress2" },
+                    //{ "data": "postTown" },
+                    //{ "data": "storePostcode" },
                     {
                         "orderable": false,
                         "searchable": false,

@@ -23,6 +23,8 @@ namespace MonoOvens.Models
         public string StoreAddress2 { get; set; }
         public string PostTown { get; set; }
         public string StorePostcode { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
 
     }

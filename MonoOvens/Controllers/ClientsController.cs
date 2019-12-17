@@ -114,7 +114,7 @@ namespace MonoOvens.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = totalClients,
+                iTotalRecords = filteredClientsCount,
                 iTotalDisplayRecords = filteredClientsCount,
                 aaData = Clients
             });

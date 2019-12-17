@@ -1,0 +1,30 @@
+1. make assset category only for oven. remove everything else from dropdown.
+
+2. kw/h rating damper should be text. not dropdown.
+3. rating water solinoid should be text box.nnot dropdown.  in text box default value should be seen .007 kwh but they should be able to redit it.
+
+rating damper should be text boxx not dropdown nad . .021 kwh
+
+same will apply to edit assets.
+
+
+---Edit controller doesn't need Power consumption.
+
+
+--- remove power consumption for listing of controller as well.
+
+--Edit customer to Edit Client
+
+--USA
+
+select importer
+
+select Dealer
+
+Select Store Group/Customer
+
+Select Store --- Add Client is store.
+So we should not have them here.
+
+
+ 

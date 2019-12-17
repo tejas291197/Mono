@@ -73,8 +73,8 @@
     </style>
 
 
-    @*google reCaptcha code.*@
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    @*google reCaptcha code.
+    <script src='https://www.google.com/recaptcha/api.js'></script>*@
 </head>
 <body>
     <header>
@@ -98,33 +98,88 @@
 
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         @*<li>
-                                <a href="#" name="">Manage</a>
-                                <ul class="dropdown-menu">
-                                    <li> <a asp-controller="User" asp-action="UsersList">Manage Users</a>                       </li>
-                                    <li> <a asp-controller="Customer" asp-action="CustomersList">Manage Customers</a>               </li>
-                                    <li> <a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a>                   </li>
-                                    <li> <a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a>                     </li>
-                                    <li> <a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a>  </li>
-                                    <li> <a asp-controller="User" asp-action="UsersList">Manage Engineers</a>                   </li>
-                                    <li> <a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a>       </li>
-                                </ul>
-                            </li>*@
+            <a href="#" name="">Manage</a>
+            <ul class="dropdown-menu">
+                <li> <a asp-controller="User" asp-action="UsersList">Manage Users</a>                       </li>
+                <li> <a asp-controller="Customer" asp-action="CustomersList">Manage Customers</a>               </li>
+                <li> <a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a>                   </li>
+                <li> <a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a>                     </li>
+                <li> <a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a>  </li>
+                <li> <a asp-controller="User" asp-action="UsersList">Manage Engineers</a>                   </li>
+                <li> <a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a>       </li>
+            </ul>
+        </li>*@
                         @if (User.IsInRole("Administrator"))
                         {
                             <li>
                                 <a href="#" name="">Administrator Management</a>
                                 <ul class="dropdown-menu">
                                     <li> <a asp-controller="User" asp-action="UsersList">Manage Users</a>                       </li>
-                                    <li> <a asp-controller="Customer" asp-action="CustomersList">Manage Customers</a>               </li>
-                                    <li> <a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a>                   </li>
                                     <li> <a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a>                     </li>
                                     <li> <a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a>  </li>
-                                    <li> <a asp-controller="User" asp-action="UsersList">Manage Engineers</a>                   </li>
-                                    <li> <a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a>       </li>
+                                    <li> <a asp-controller="Importer" asp-action="ImporterList">Manage Importers</a>                   </li>
+                                    <li> <a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a>                   </li>
+                                    <li><a asp-controller="StoreGroup" asp-action="StoreGroupList">Manage StoreGroups</a></li>
+                                    <li><a asp-controller="Store" asp-action="StoreList">Manage Stores</a></li>
+                                    <li> <a asp-controller="Customer" asp-action="CustomersList">Manage Customers</a>               </li>
+
+                                    @*<li> <a asp-controller="User" asp-action="UsersList">Manage Engineers</a>                   </li>
+                    <li> <a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a>       </li>*@
                                 </ul>
                             </li>
                         }
 
+                        else if (User.IsInRole("Importer"))
+                        {
+                            <li>
+                                <a href="#" name="">Importer Management</a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                                    <li><a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a></li>
+                                    <li><a asp-controller="Dealer" asp-action="DealersList">Manage Dealers</a></li>
+                                    <li><a asp-controller="StoreGroup" asp-action="StoreGroupList">Manage StoreGroups</a></li>
+                                    <li><a asp-controller="Store" asp-action="StoreList">Manage Stores</a></li>
+                                    <li><a asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        else if (User.IsInRole("Dealer"))
+                        {
+                            <li>
+                                <a href="#" name="">Dealer Management</a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                                    <li><a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a></li>
+                                    <li><a asp-controller="StoreGroup" asp-action="StoreGroupList">Manage StoreGroups</a></li>
+                                    <li><a asp-controller="Store" asp-action="StoreList">Manage Stores</a></li>
+                                    <li><a asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else if (User.IsInRole("StoreGroup"))
+                        {
+                            <li>
+                                <a href="#" name="">StoreGroup Management</a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                                    <li><a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a></li>
+                                    <li><a asp-controller="Store" asp-action="StoreList">Manage Stores</a></li>
+                                    <li><a asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else if (User.IsInRole("Store"))
+                        {
+                            <li>
+                                <a href="#" name="">Store Management</a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Asset" asp-action="AssetsList">Manage Assets</a></li>
+                                    <li><a asp-controller="ControllerModules" asp-action="ControllersList">Activate Controllers</a></li>
+                                    <li><a asp-controller="User" asp-action="CustomerList">Manage Customers</a></li>
+                                </ul>
+                            </li>
+                        }
                         else if (User.IsInRole("Editor"))
                         {
                             <li>
@@ -139,18 +194,6 @@
                                 </ul>
                             </li>
                         }
-
-                        else if (User.IsInRole("Dealer"))
-                        {
-                            <li>
-                                <a href="#" name="">Dealer Management</a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-controller="Clients" asp-action="ClientsList">Manage ClientAdministrator</a></li>
-                                    <li><a asp-controller="ControllerModules" asp-action="ControllersList">Manage Controller Address</a></li>
-                                </ul>
-                            </li>
-                        }
-
                         else if (User.IsInRole("Engineer"))
                         {
                             <li>
@@ -175,11 +218,8 @@
                         {
 
                         }
-
                         <li><a asp-controller="Report" asp-action="ReportList">View Reports</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-
-
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -1,0 +1,107 @@
+﻿@model MonoOvens.Models.StoreMaster
+
+@{
+    ViewData["Title"] = "StoreDetails";
+}
+
+    <h2>Store Details</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporterName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImporterName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DealerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DealerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreGroupName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreGroupName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreAddress1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreAddress1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreAddress2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreAddress2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PostTown)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostTown)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StorePostcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StorePostcode)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditStore" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="StoreList">Back to List</a>
+</div>

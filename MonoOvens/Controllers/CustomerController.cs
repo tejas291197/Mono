@@ -112,7 +112,7 @@ namespace MonoOvens.Controllers
             return Json(new
             {
                 sEcho = param.sEcho,
-                iTotalRecords = totalCustomers,
+                iTotalRecords = filteredCustomersCount,
                 iTotalDisplayRecords = filteredCustomersCount,
                 aaData = Customers
             });
@@ -147,10 +147,13 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,PostCode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostCode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> CreateCustomer([Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
         {
             if (ModelState.IsValid)
             {
+                var user = _userManager.GetUserId(User);
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                customerMaster.CreatedBy = userName;
                 _context.Add(customerMaster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(CustomersList));
@@ -179,7 +182,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,PostCode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostCode")] CustomerMaster customerMaster)
+        public async Task<IActionResult> EditCustomer(int id, [Bind("Id,CustomerName,PrimaryEmail,PrimaryContactName,PrimaryContactNumber,HOAddress1,HOAddress2,HOAddress3,City,Postcode,Zone,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode")] CustomerMaster customerMaster)
         {
             if (id != customerMaster.Id)
             {
@@ -190,6 +193,9 @@ namespace MonoOvens.Controllers
             {
                 try
                 {
+                    var user = _userManager.GetUserId(User);
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    customerMaster.ModifiedBy = userName;
                     _context.Update(customerMaster);
                     await _context.SaveChangesAsync();
                 }

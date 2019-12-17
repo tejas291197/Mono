@@ -76,21 +76,24 @@ namespace MonoOvens
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            //app.useAuthorization();
             app.UseAuthentication();
+         
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-           // CreateRoles(serviceProvider).Wait();
+            CreateRoles(serviceProvider).Wait();
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //initializing custom roles   
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<UserMaster>>();
-            string[] roleNames = { "Administrator", "Editor", "Dealer", "Engineer" , "ClientAdministrator" , "Client" };
+            string[] roleNames = { "Administrator", "Importer", "Dealer", "StoreGroup", "Store", "Customer" };
+            // string[] roleNames = { "Administrator", "Editor", "Dealer", "Engineer", "ClientAdministrator", "Client" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)

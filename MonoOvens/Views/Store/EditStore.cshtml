@@ -1,0 +1,161 @@
+﻿@model MonoOvens.Models.StoreMaster
+
+@{
+    ViewData["Title"] = "EditStore";
+}
+
+<h2>Edit Store</h2>
+<hr/>
+<div class="row">
+    <div>
+        <span id="nameError" style="color:red"></span>
+        <span id="phoneError" style="color:red"></span>
+        <p class="form-group text-danger">(*)fields are mandatory</p>
+        <form asp-action="EditStore">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="ImporterName" class="control-label">Importer Name:</label><span style="color:red"> *</span>
+                <input asp-for="ImporterName" class="form-control" id="iname" required value="Mono" />
+                <span asp-validation-for="ImporterName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
+                <input asp-for="DealerName" class="form-control" id="dname" required value="Mono" />
+                <span asp-validation-for="DealerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="StoreGroupName" class="control-label">Store Group Name:</label><span style="color:red"> *</span>
+                <input asp-for="StoreGroupName" class="form-control" id="sgname" required />
+                <span asp-validation-for="StoreGroupName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px ; clear:left">
+
+                <label asp-for="CustomerName" class="control-label">Customer Name:</label>  <span style="color:red"> *</span>
+                <input asp-for="CustomerName" class="form-control" id="cname" required />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="CustomerPhone" class="control-label">Customer Phone:</label><span style="color:red"> *</span>
+                <input asp-for="CustomerPhone" class="form-control" id="phone" required />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="Email" class="control-label">Email:</label><span style="color:red"> *</span>
+                <input asp-for="Email" class="form-control" type="email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="Region" class="control-label">Region:</label>
+                <input asp-for="Region" class="form-control" id="Region" />
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="Area" class="control-label">Area:</label>
+                <input asp-for="Area" class="form-control" id="Area" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="StoreCode" class="control-label">Store Code:</label>
+                <input asp-for="StoreCode" class="form-control" id="StoreCode" />
+                <span asp-validation-for="StoreCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="Type" class="control-label">Type:</label>
+                <input asp-for="Type" class="form-control" id="Type" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px ; clear:left">
+                <label asp-for="StoreName" class="control-label">Store Name:</label><span style="color:red"> *</span>
+                <input asp-for="StoreName" class="form-control" id="sname" required />
+                <span asp-validation-for="StoreName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="StoreAddress1" class="control-label">Store Address 1:</label><span style="color:red"> *</span>
+                <input asp-for="StoreAddress1" class="form-control" id="StoreAddress1" required />
+                <span asp-validation-for="StoreAddress1" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="StoreAddress2" class="control-label">Store Address 2:</label>
+                <input asp-for="StoreAddress2" class="form-control" id="StoreAddress2" />
+                <span asp-validation-for="StoreAddress2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="PostTown" class="control-label">Post Town:</label>
+                <input asp-for="PostTown" class="form-control" id="PostTown" />
+                <span asp-validation-for="PostTown" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="float:left ; padding-right:50px">
+                <label asp-for="StorePostcode" class="control-label">Store Post Code:</label>
+                <input asp-for="StorePostcode" class="form-control" id="StorePostCode" />
+                <span asp-validation-for="StorePostcode" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" padding-left:450px  ; clear:left">
+                <input type="submit" value="Save" class="btn btn-success" id="subbtn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="StoreList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        // to allow only digits to be entered from the user side.
+        function Digits(e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#phoneError").html(" **** Only Digits Allowed **** ").show().fadeOut("slow");
+                return false;
+            }
+        }
+
+        // to allow only charactors to be entered from the user side .
+        function Charactors(e) {
+            var key = e.keyCode;
+            if (!((key == 8) || (key == 9) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122)    ) ) {
+                e.preventDefault();
+                $("#nameError").html(" **** Only Charactors Allowed **** ").show().fadeOut("slow");
+            }
+        }
+        $(document).ready(function () {
+            $("#phone").keypress(function (e) {
+                return Digits(e);
+            });
+            $("#iname").keypress(function (e) {
+                Charactors(e);
+            });
+              $("#dname").keypress(function (e) {
+                Charactors(e);
+              });
+               $("#sgname").keypress(function (e) {
+                Charactors(e);
+               });
+            $("#sname").keypress(function (e) {
+                Charactors(e);
+            });
+            $("#cname").keypress(function (e) {
+                Charactors(e);
+            });
+        });
+    </script>
+}
+
