@@ -219,7 +219,11 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("CreatedBy");
 
+                    b.Property<int>("Elements");
+
                     b.Property<string>("FG_Code");
+
+                    b.Property<int>("Fans");
 
                     b.Property<string>("Format");
 
@@ -227,13 +231,27 @@ namespace MonoOvens.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("ModifiedBy");
+                    b.Property<string>("LightType");
+
+                    b.Property<int>("Lights");
 
                     b.Property<string>("Power");
 
                     b.Property<string>("TraySize");
 
                     b.Property<int>("Trays");
+
+                    b.Property<float>("kWh_Rating_Damper");
+
+                    b.Property<float>("kWh_Rating_Element");
+
+                    b.Property<float>("kWh_Rating_Fan");
+
+                    b.Property<float>("kWh_Rating_Light");
+
+                    b.Property<float>("kWh_Rating_WaterSolenoid");
+
+                    b.Property<string>("modifiedby");
 
                     b.HasKey("Id");
 
@@ -314,25 +332,19 @@ namespace MonoOvens.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AssignedToStore");
+
                     b.Property<string>("AuthenticationCode");
 
                     b.Property<DateTime?>("ControllerDate");
 
                     b.Property<string>("CreatedBy");
 
-                    b.Property<int>("Elements");
-
                     b.Property<string>("FG_Code");
-
-                    b.Property<int>("Fans");
 
                     b.Property<string>("FirmwareVersion");
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("LightType");
-
-                    b.Property<int>("Lights");
 
                     b.Property<string>("ModifiedBy");
 
@@ -353,16 +365,6 @@ namespace MonoOvens.Migrations
                     b.Property<bool?>("Status");
 
                     b.Property<string>("Wallpaper");
-
-                    b.Property<float>("kWh_Rating_Damper");
-
-                    b.Property<float>("kWh_Rating_Element");
-
-                    b.Property<float>("kWh_Rating_Fan");
-
-                    b.Property<float>("kWh_Rating_Light");
-
-                    b.Property<float>("kWh_Rating_WaterSolenoid");
 
                     b.HasKey("Id");
 
@@ -592,17 +594,27 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("Area");
 
+                    b.Property<string>("City");
+
                     b.Property<string>("CreatedBy");
 
                     b.Property<string>("DealerName");
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("HOAddress1");
+
+                    b.Property<string>("HOAddress2");
+
+                    b.Property<string>("HOAddress3");
+
                     b.Property<string>("ImporterName");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("ModifiedBy");
+
+                    b.Property<string>("Postcode");
 
                     b.Property<string>("Region");
 
@@ -627,13 +639,7 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("CreatedBy");
 
-                    b.Property<string>("CustomerName");
-
-                    b.Property<string>("CustomerPhone");
-
                     b.Property<string>("DealerName");
-
-                    b.Property<string>("Email");
 
                     b.Property<string>("ImporterName");
 
@@ -651,13 +657,19 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("StoreCode");
 
+                    b.Property<string>("StoreContact");
+
                     b.Property<string>("StoreGroupName");
 
                     b.Property<string>("StoreName");
 
+                    b.Property<string>("StorePhone");
+
                     b.Property<string>("StorePostcode");
 
                     b.Property<string>("Type");
+
+                    b.Property<string>("Zone");
 
                     b.HasKey("Id");
 

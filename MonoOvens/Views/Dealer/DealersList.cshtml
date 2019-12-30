@@ -118,29 +118,20 @@
                         "render": function (data, type, row) {
                             //return '<a href="/Dealer/EditDealer/' + data.id +'"  >Edit</a> <a href="/Dealer/DealerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
                             return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditDealerbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
-                        },
-                        //"targets": 16
+                        },                        
                          "targets": 8
                     }
                 ],
                 "columns": [
                     { "data": "id" },
-                    { "data": "importerName" },
+               //     { "data": "importerName" },
+                    { "data": "impName" },
                     { "data": "dealerName" },
                     { "data": "dealerRegion" },
                     { "data": "dealerPhone" },
                     { "data": "email" },
                     { "data": "region" },
-                    { "data": "area" },
-                    //{ "data": "customerName" },
-                    //{ "data": "customerNumber" },                    
-                    //{ "data": "storeCode" },
-                    //{ "data": "type" },
-                    //{ "data": "storeName" },
-                    //{ "data": "storeAddress1" },
-                    //{ "data": "storeAddress2" },
-                    //{ "data": "postTown" },
-                    //{ "data": "storePostcode" },
+                    { "data": "area" },                    
                     {
                         "orderable": false,
                         "searchable": false,

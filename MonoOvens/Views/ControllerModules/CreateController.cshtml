@@ -11,11 +11,19 @@
 <div class="row">
     <form asp-action="CreateController">
         <div asp-validation-summary="ModelOnly" class="form-group" style="float:left"></div>
-        <div class="form-group" style="float:left; padding-right:100px">
+        @*<div class="form-group" style="float:left; padding-right:100px">
             <label>FG code:</label>
             <input asp-for="FG_Code" class="form-control" />
             <span asp-validation-for="FG_Code" class="text-danger"></span>
+        </div>*@
+        <div class="form-group" style=" float:left ; padding-right:100px">
+            <label>FG Code : </label><span style="color:red"> *</span>
+            <select asp-for="FG_Code" class="form-control" onblur="check(1)"
+                    asp-items="@(new SelectList(@ViewBag.FGAsset, "Id" ,"FG_Code"))" id="acategory" required>
+            </select>
+            <span asp-validation-for="FG_Code" class="text-danger"></span>
         </div>
+
         <div class="form-group" style="float:left; padding-right:100px">
             <label asp-for="SerialNumber" class="control-label">Serial Number:</label>
             <input asp-for="SerialNumber" class="form-control" />
@@ -26,161 +34,227 @@
             <input asp-for="AuthenticationCode" class="form-control" />
             <span asp-validation-for="AuthenticationCode" class="text-danger"></span>
         </div>
-        @*<div class="form-group">
-            <label asp-for="FirmwareVersion" class="control-label"></label>
-            <input asp-for="FirmwareVersion" class="form-control" />
-            <span asp-validation-for="FirmwareVersion" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="SoftwareVersion" class="control-label"></label>
-            <input asp-for="SoftwareVersion" class="form-control" />
-            <span asp-validation-for="SoftwareVersion" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="RecipeVersion" class="control-label"></label>
-            <input asp-for="RecipeVersion" class="form-control" />
-            <span asp-validation-for="RecipeVersion" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Skins" class="control-label"></label>
-            <input asp-for="Skins" class="form-control" />
-            <span asp-validation-for="Skins" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Wallpaper" class="control-label"></label>
-            <input asp-for="Wallpaper" class="form-control" />
-            <span asp-validation-for="Wallpaper" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="SevenDayTimer" class="control-label"></label>
-            <input asp-for="SevenDayTimer" class="form-control" />
-            <span asp-validation-for="SevenDayTimer" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="SleepDelay" class="control-label"></label>
-            <input asp-for="SleepDelay" class="form-control" />
-            <span asp-validation-for="SleepDelay" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ControllerDate" class="control-label"></label>
-            <input asp-for="ControllerDate" class="form-control" />
-            <span asp-validation-for="ControllerDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Status" class="control-label"></label>
-            <input asp-for="Status" class="form-control" />
-            <span asp-validation-for="Status" class="text-danger"></span>
-        </div>*@
-
-
-        @*<div class="form-group" style=" float:left ; padding-right:100px">
-            <label>Power : </label>
-            <select asp-for="Power" class="form-control" required>
-                <option value="">--Select--</option>
-                <option value="Single-phase ">Single-Phase </option>
-                <option value="Three-phase">Three-Phase</option>
-            </select>
-            <span asp-validation-for="Power" class="text-danger"></span>
-        </div>*@
         <div style=" clear:left">
             <br />
             <fieldset>
-                <legend style=" text-align:center">Power Consumption:</legend>
-                <div class="form-group">
-                    <div style=" clear:left; float:left ; padding-right:100px">
-                        <br /><label>No. of Elements: </label>
-                        <select asp-for="Elements" class="form-control" required>
-                            <option value="">--Select--</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                        <span asp-validation-for="Elements" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>kW/h Rating per Element: </label>
-                        <select asp-for="kWh_Rating_Element" class="form-control" required>
-                            <option value="">--Select--</option>
-                            <option value="7">7 kWh</option>
-                            <option value="9">9 kWh</option>
-                            <option value="8">8 kWh</option>
-                            <option value="11">11 kWh</option>
-                        </select>
-                        <span asp-validation-for="kWh_Rating_Element" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>Type of Light: </label>
-                        <select asp-for="LightType" class="form-control" id="lightsType" required>
-                            <option value="">--Select--</option>
-                            <option value="Halogen">Halogen </option>
-                            <option value="LED">LED</option>
-                        </select>
-                        <span asp-validation-for="LightType" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>No. of Lights: </label>
-                        <select asp-for="Lights" class="form-control" required>
-                            <option value="">--Select--</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="4">4</option>
-                        </select>
-                        <span asp-validation-for="Lights" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>kW/h Rating per Light: </label>
-                        <select asp-for="kWh_Rating_Light" class="form-control"  id="lightsRating"required>
-                            <option value="">--Select--</option>
-                            <option value="0.02">0.02 KWh(Halogen)</option>
-                            <option value="0.0024">0.0024 KWh(LED)</option>
-                        </select>
-                        <span asp-validation-for="kWh_Rating_Light" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>No. of Fans: </label>
-                        <select asp-for="Fans" class="form-control" required>
-                            <option value="">--Select--</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                        <span asp-validation-for="Fans" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>kW/h Rating per Fan: </label>
-                        <select asp-for="kWh_Rating_Fan" class="form-control" required>
-                            <option value="0.37">0.37 KWh</option>
-                        </select>
-                        <span asp-validation-for="kWh_Rating_Fan" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /><label>kW/h Rating Damper: </label>
-                        <select asp-for="kWh_Rating_Damper" class="form-control" required>
-                            <option value="0.0">--Select--</option>
-                        </select>
-                        <span asp-validation-for="kWh_Rating_Damper" class="text-danger"></span>
-                    </div>
-
-                    <div style=" float:left ; padding-right:100px">
-                        <br /> <label>kW/h Rating Water Solenoid: </label>
-                        <select asp-for="kWh_Rating_WaterSolenoid" class="form-control" required>
-                            <option value="0.007">0.007 KWh</option>
-                        </select>
-                        <span asp-validation-for="kWh_Rating_WaterSolenoid" class="text-danger"></span>
-                    </div>
+                <legend align="center">Assign Asset :</legend><br />
+                @if (User.IsInRole("Administrator"))
+                {                              
+                <div class="form-group" style="float:left; padding-right:25px">
+                    <label class="control-label">Select Importer :</label>
+                    <input asp-items="@ViewBag.ImportersList" class="form-control" />
                 </div>
+
+                <div class="form-group" style="float:left; padding-right:25px">
+                    <label class="control-label">Select Dealer :</label>
+                    <input asp-items="@ViewBag.DealersList" class="form-control" />
+                </div>
+                <div class="form-group" style="float:left; padding-right:25px">
+                    <label class="control-label">Select StoreGroup :</label>
+                    <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
+
+                </div>
+                <div class="form-group" style="float:left; padding-right:25px">
+                    <label class="control-label">Select Store :</label>
+                    <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                </div>
+                }
+                else if (User.IsInRole("Importer"))
+                {                   
+
+                    <div class="form-group" style="float:left; padding-right:33px">
+                        <label class="control-label">Select Dealer:</label>
+                        <input asp-items="@ViewBag.DealersList" class="form-control" />
+                    </div>
+                    <div class="form-group" style="float:left; padding-right:33px">
+                        <label class="control-label">Select StoreGroup:</label>
+                        <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
+
+                    </div>
+                    <div class="form-group" style="float:left; padding-right:33px">
+                        <label class="control-label">Select Store:</label>
+                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                    </div>
+                }
+                else if (User.IsInRole("Dealer"))
+                {
+                    <div class="form-group" style="float:left; padding-right:50px">
+                        <label class="control-label">Select StoreGroup:</label>
+                        <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
+
+                    </div>
+                    <div class="form-group" style="float:left; padding-right:50px">
+                        <label class="control-label">Select Store:</label>
+                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                    </div>
+                }
+                else if (User.IsInRole("StoreGroup"))
+                {
+                    <div class="form-group" style="float:left; padding-right:100px">
+                        <label class="control-label">Select Store:</label>
+                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                    </div>
+                }
+                else { }
             </fieldset>
-        </div>
-        <div class="form-group" style=" clear:left" align="center">
-            <br />    <input type="submit" value="Create" class="btn btn-primary" id="subbtn" />
-        </div>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="FirmwareVersion" class="control-label"></label>
+                <input asp-for="FirmwareVersion" class="form-control" />
+                <span asp-validation-for="FirmwareVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoftwareVersion" class="control-label"></label>
+                <input asp-for="SoftwareVersion" class="form-control" />
+                <span asp-validation-for="SoftwareVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeVersion" class="control-label"></label>
+                <input asp-for="RecipeVersion" class="form-control" />
+                <span asp-validation-for="RecipeVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Skins" class="control-label"></label>
+                <input asp-for="Skins" class="form-control" />
+                <span asp-validation-for="Skins" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wallpaper" class="control-label"></label>
+                <input asp-for="Wallpaper" class="form-control" />
+                <span asp-validation-for="Wallpaper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SevenDayTimer" class="control-label"></label>
+                <input asp-for="SevenDayTimer" class="form-control" />
+                <span asp-validation-for="SevenDayTimer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SleepDelay" class="control-label"></label>
+                <input asp-for="SleepDelay" class="form-control" />
+                <span asp-validation-for="SleepDelay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ControllerDate" class="control-label"></label>
+                <input asp-for="ControllerDate" class="form-control" />
+                <span asp-validation-for="ControllerDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>*@
+
+
+            @*<div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Power : </label>
+                <select asp-for="Power" class="form-control" required>
+                    <option value="">--Select--</option>
+                    <option value="Single-phase ">Single-Phase </option>
+                    <option value="Three-phase">Three-Phase</option>
+                </select>
+                <span asp-validation-for="Power" class="text-danger"></span>
+            </div>*@
+
+
+            @*<div style=" clear:left">
+                <br />
+                <fieldset>
+                    <legend style=" text-align:center">Power Consumption:</legend>
+                    <div class="form-group">
+                        <div style=" clear:left; float:left ; padding-right:100px">
+                            <br /><label>No. of Elements: </label><span style="color:red"> *</span>
+                            <select asp-for="Elements" class="form-control" required>
+                                <option value="">--Select--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <span asp-validation-for="Elements" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>kW/h Rating per Element: </label><span style="color:red"> *</span>
+                            <select asp-for="kWh_Rating_Element" class="form-control" required>
+                                <option value="">--Select--</option>
+                                <option value="7">7 kWh</option>
+                                <option value="9">9 kWh</option>
+                                <option value="8">8 kWh</option>
+                                <option value="11">11 kWh</option>
+                            </select>
+                            <span asp-validation-for="kWh_Rating_Element" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>Type of Light: </label><span style="color:red"> *</span>
+                            <select asp-for="LightType" class="form-control" id="lightsType" required>
+                                <option value="">--Select--</option>
+                                <option value="Halogen">Halogen </option>
+                                <option value="LED">LED</option>
+                            </select>
+                            <span asp-validation-for="LightType" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>No. of Lights: </label><span style="color:red"> *</span>
+                            <select asp-for="Lights" class="form-control" required>
+                                <option value="">--Select--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                            </select>
+                            <span asp-validation-for="Lights" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>kW/h Rating per Light: </label><span style="color:red"> *</span>
+                            <select asp-for="kWh_Rating_Light" class="form-control"  id="lightsRating"required>
+                                <option value="">--Select--</option>
+                                <option value="0.02">0.02 KWh(Halogen)</option>
+                                <option value="0.0024">0.0024 KWh(LED)</option>
+                            </select>
+                            <span asp-validation-for="kWh_Rating_Light" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>No. of Fans: </label><span style="color:red"> *</span>
+                            <select asp-for="Fans" class="form-control" required>
+                                <option value="">--Select--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <span asp-validation-for="Fans" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>kW/h Rating per Fan: </label><span style="color:red"> *</span>
+                            <select asp-for="kWh_Rating_Fan" class="form-control" required>
+                                <option value="0.37">0.37 KWh</option>
+                            </select>
+                            <span asp-validation-for="kWh_Rating_Fan" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /><label>kW/h Rating Damper: </label><span style="color:red"> *</span>
+                            <select asp-for="kWh_Rating_Damper" class="form-control" required>
+                                <option value="0.0">--Select--</option>
+                            </select>
+                            <span asp-validation-for="kWh_Rating_Damper" class="text-danger"></span>
+                        </div>
+
+                        <div style=" float:left ; padding-right:100px">
+                            <br /> <label>kW/h Rating Water Solenoid: </label><span style="color:red"> *</span>
+                            <select asp-for="kWh_Rating_WaterSolenoid" class="form-control" required>
+                                <option value="0.007">0.007 KWh</option>
+                            </select>
+                            <span asp-validation-for="kWh_Rating_WaterSolenoid" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>*@
+            <div class="form-group" style=" clear:left" align="center">
+                <br />    <input type="submit" value="Create" class="btn btn-primary" id="subbtn" />
+            </div>
     </form>
     </div>
 
@@ -190,7 +264,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
+    @*<script>
         $('#lightsType').on('change', function () {
             var light = $('#lightsType option:selected').val();
             if (light == "Halogen") {
@@ -203,5 +277,5 @@
             
             }
         })
-    </script>
+    </script>*@
 }

@@ -16,6 +16,11 @@ namespace MonoOvens.Models
         public string Email { get; set; }
         public string Region { get; set; }
         public string Area { get; set; }
+        public string HOAddress1 { get; set; }
+        public string HOAddress2 { get; set; }
+        public string HOAddress3 { get; set; }
+        public string City { get; set; }
+        public string Postcode { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }

@@ -150,7 +150,8 @@ namespace MonoOvens.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                //       var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 userMaster.CreatedBy = userName;
                 // _context.Add(userMaster);
                 userMaster.UserName = userMaster.Email;
@@ -205,7 +206,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    // var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     userMaster.ModifiedBy = userName;
 
                     var edituser = _context.Users.FirstOrDefault(x => x.Id == userMaster.Id);

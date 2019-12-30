@@ -24,7 +24,7 @@
                 <label>Asset Category : </label><span style="color:red"> *</span>
                 @*<input asp-for="AssetCategory" class="form-control" />*@
                 <select asp-for="AssetCategory" class="form-control" onblur="check(1)"
-                        asp-items="@(new SelectList(@ViewBag.ACateogies, "Id" ,"AssetCategory" ) )" id="acategory" required>
+                        asp-items="@(new SelectList(@ViewBag.ACateogies, "Id" ,"AssetCategory"))" id="acategory" required>
                 </select>
                 <span asp-validation-for="AssetCategory" class="text-danger"></span>
             </div>
@@ -115,12 +115,12 @@
                 </select>
                 <span asp-validation-for="Power" class="text-danger"></span>
             </div>
-            @*<div style="clear:left">
+            <div style="clear:left">
                 <fieldset>
-                    <legend>Power Consumption :</legend><br/>
+                    <legend align="center">Power Consumption :</legend><br/>
                     <div class="form-group">
                         <div style=" clear:left;float:left ;  padding-right:100px">
-                            <br /><label>No. of Elements: </label>
+                            <br /><label>No. of Elements: </label><span style="color:red"> *</span>
                             <select asp-for="Elements" class="form-control" required>
                                 <option value="">--Select--</option>
                                 <option value="1">1</option>
@@ -131,7 +131,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Element : </label>
+                            <br /><label>kW/h Rating per Element : </label><span style="color:red"> *</span>
                             <select asp-for="kWh_Rating_Element" class="form-control" required>
                                 <option value="">--Select--</option>
                                 <option value="7">7 kWh</option>
@@ -143,7 +143,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>Type of Light : </label>
+                            <br /><label>Type of Light : </label><span style="color:red"> *</span>
                             <select asp-for="LightType" class="form-control" id="lightstype" required>
                                 <option value="">--Select--</option>
                                 <option value="Halogen">Halogen </option>
@@ -153,7 +153,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>No. of Lights : </label>
+                            <br /><label>No. of Lights : </label><span style="color:red"> *</span>
                             <select asp-for="Lights" class="form-control" required>
                                 <option value="">--Select--</option>
                                 <option value="1">1</option>
@@ -164,7 +164,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Light : </label>
+                            <br /><label>kW/h Rating per Light : </label><span style="color:red"> *</span>
                             <select asp-for="kWh_Rating_Light" class="form-control" id="lightRating" required>
                                 <option value="">--Select--</option>
                                 <option value="0.02">0.02 KWh(Halogen)</option>
@@ -174,7 +174,7 @@
                         </div><br />
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>No. of Fans : </label>
+                            <br /><label>No. of Fans : </label><span style="color:red"> *</span>
                             <select asp-for="Fans" class="form-control" required>
                                 <option value="">--Select--</option>
                                 <option value="1">1</option>
@@ -185,7 +185,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating per Fan : </label>
+                            <br /><label>kW/h Rating per Fan : </label><span style="color:red"> *</span>
                             <select asp-for="kWh_Rating_Fan" class="form-control" required>
                                 <option value="0.37">0.37 KWh</option>
                             </select>
@@ -193,7 +193,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating Damper : </label>
+                            <br /><label>kW/h Rating Damper : </label><span style="color:red"> *</span>
                             <select asp-for="kWh_Rating_Damper" class="form-control" required>
                                 <option value="0">--Select--</option>
                             </select>
@@ -201,7 +201,7 @@
                         </div>
 
                         <div style=" float:left ; padding-right:100px">
-                            <br /><label>kW/h Rating Water Solenoid :</label>
+                            <br /><label>kW/h Rating Water Solenoid :</label><span style="color:red"> *</span>
                             <select asp-for="kWh_Rating_WaterSolenoid" class="form-control" required>
                                 <option value="0.007">0.007 KWh</option>
                             </select>
@@ -209,8 +209,7 @@
                         </div>
                     </div>
                 </fieldset>
-            </div><br />*@
-
+            </div><br />
             <div class="form-group" style=" clear:left" align="center">
                 <input type="submit" value="Create" class="btn btn-primary" id="subbtn" />
             </div>
@@ -330,18 +329,18 @@
 
                 })
             })
-            //$('#lightstype').on('change', function () {
-            //    var lights = $('#lightstype option:selected').val();
+            $('#lightstype').on('change', function () {
+                var lights = $('#lightstype option:selected').val();
                
-            //    if (lights == "Halogen") {
-            //        $("#lightRating option[value='0.02']").removeAttr("selected", "selected");
-            //        $("#lightRating option[value='0.02']").attr("selected", "selected");
-            //    }
-            //    else {
-            //          $("#lightRating option[value='0.0024']").removeAttr("selected", "selected");
-            //        $("#lightRating option[value='0.0024']").attr("selected", "selected");
-            //    }
-            //})
+                if (lights == "Halogen") {
+                    $("#lightRating option[value='0.02']").removeAttr("selected", "selected");
+                    $("#lightRating option[value='0.02']").attr("selected", "selected");
+                }
+                else {
+                      $("#lightRating option[value='0.0024']").removeAttr("selected", "selected");
+                    $("#lightRating option[value='0.0024']").attr("selected", "selected");
+                }
+            })
             
            
         })

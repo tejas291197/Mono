@@ -29,7 +29,7 @@
         <dd>
             @Html.DisplayFor(model => model.StoreGroupName)
         </dd>
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.CustomerName)
         </dt>
         <dd>
@@ -58,7 +58,7 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Area)
-        </dd>
+        </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.StoreCode)
         </dt>
@@ -90,6 +90,36 @@
             @Html.DisplayFor(model => model.StoreAddress2)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.StorePhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StorePhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreContact)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StoreContact)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.PostTown)
         </dt>
         <dd>
@@ -100,7 +130,7 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.StorePostcode)
-        </dd>        
+        </dd>
     </dl>
     
     <form asp-action="Delete">

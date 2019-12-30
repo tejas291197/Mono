@@ -15,25 +15,38 @@
         <form asp-action="CreateStoreGroup">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group" style="float:left ; padding-right:50px ">
-                <label asp-for="ImporterName" class="control-label">Importer Name:</label><span style="color:red"> *</span>
-                <input asp-for="ImporterName" class="form-control" id="iname" required value="Mono"/>
-                <span asp-validation-for="ImporterName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group" style="float:left ; padding-right:50px ">
+            @*<div class="form-group" style="float:left ; padding-right:50px ">
+            <label asp-for="ImporterName" class="control-label">Importer Name:</label><span style="color:red"> *</span>
+            <input asp-for="ImporterName" class="form-control" id="iname" required value="Mono" />
+            <span asp-validation-for="ImporterName" class="text-danger"></span>
+        </div>*@
+        <div class="form-group" style=" float:left ; padding-right:100px">
+            <label>Importer Name : </label><span style="color:red"> *</span>
+            <select asp-for="ImporterName" class="form-control" onblur="check(1)"
+                    asp-items="@(new SelectList(@ViewBag.ImporterList, "Id" ,"ImporterName"))" id="iname" required>
+            </select>
+            <span asp-validation-for="ImporterName" class="text-danger"></span>
+        </div>
+            @*<div class="form-group" style="float:left ; padding-right:50px ">
                 <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
-                <input asp-for="DealerName" class="form-control" id="dname"  required value="Mono"/>
+                <input asp-for="DealerName" class="form-control" id="dname" required value="Mono" />
+                <span asp-validation-for="DealerName" class="text-danger"></span>
+            </div>*@
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Dealer Name : </label><span style="color:red"> *</span>
+                <select asp-for="DealerName" class="form-control" onblur="check(1)"
+                    asp-items="@(new SelectList(@ViewBag.DealerList, "Id" ,"DealerName"))" id="dname" required>                   
+            </select>
                 <span asp-validation-for="DealerName" class="text-danger"></span>
             </div>
             <div class="form-group" style="float:left ; padding-right:50px ">
                 <label asp-for="StoreGroupName" class="control-label">Store Group Name:</label><span style="color:red"> *</span>
-                <input asp-for="StoreGroupName" class="form-control" id="sname"   required />
+                <input asp-for="StoreGroupName" class="form-control" id="sname" required />
                 <span asp-validation-for="StoreGroupName" class="text-danger"></span>
             </div>
             <div class="form-group" style="float:left ; padding-right:50px ">
                 <label asp-for="StoreGroupPhone" class="control-label">Store Group Phone:</label><span style="color:red"> *</span>
-                <input asp-for="StoreGroupPhone" class="form-control" id="phone"  required />
+                <input asp-for="StoreGroupPhone" class="form-control" id="phone" required />
                 <span asp-validation-for="StoreGroupPhone" class="text-danger"></span>
             </div>
             <div class="form-group" style="float:left ; padding-right:50px ">
@@ -56,6 +69,35 @@
                 <input asp-for="Area" class="form-control" />
                 <span asp-validation-for="Area" class="text-danger"></span>
             </div>
+            <fieldset style=" float:left  ">
+                <legend>Head Office Address :</legend>
+                <div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+
+                    <label asp-for="HOAddress1" class="control-label"> Address Line 1:</label><span style="color:red"> *</span>
+                    <input asp-for="HOAddress1" class="form-control" required placeholder="Plot no.,Street Name " />
+                    <span asp-validation-for="HOAddress1" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="HOAddress2" class="control-label">Address Line 2:</label><span style="color:red"> *</span>
+                    <input asp-for="HOAddress2" class="form-control" required placeholder="Landmark" />
+                    <span asp-validation-for="HOAddress2" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="HOAddress3" class="control-label"> Address Line 3:</label>
+                    <input asp-for="HOAddress3" class="form-control" placeholder="Locality" />
+                    <span asp-validation-for="HOAddress3" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="City" class="control-label">City:</label><span style="color:red"> *</span>
+                    <input asp-for="City" class="form-control" required id="city" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group" style=" float:left ; padding-right:50px">
+                    <label asp-for="Postcode" class="control-label">Post Code:</label><span style="color:red"> *</span>
+                    <input asp-for="Postcode" class="form-control" required placeholder="WC2N 5DU" />
+                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                </div>
+            </fieldset>
             <div class="form-group" style=" padding-left:450px  ; clear:left">
                 <input type="submit" value="Create" class="btn btn-primary" id="subbtn" />
             </div>

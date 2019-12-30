@@ -1,190 +1,4 @@
-﻿<!--
-    model IEnumerable<MonoOvens.Models.StoreGroupMaster>
-
-{
-    ViewData["Title"] = "StoreGroupList";
-}
-
-<h2>Store Group</h2>
-
-<p>
-    <a asp-action="CreateStoreGroup">Create New</a>
-</p>
-<table style="width:100%!important" class="table  table-bordered" id="StoreGroupsTable">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.ImporterName)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.StoreGroupName)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.StoreGroupPhone)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.StoreGroupRegion)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    @*<tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                     Id
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImporterName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DealerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StoreGroupName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StoreGroupPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StoreGroupRegion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Region)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Area)
-                </td>
-                <td>
-                    <a asp-action="EditStoreGroup" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-            }
-        </tbody>*@
-
-section Scripts{
-
-    <script language="javascript" type="text/javascript">
-        var StoreGroupsTable;
-        function EditAssetbyAdmin(id) {
-
-            window.location.href = "/StoreGroup/EditStoreGroup/" + id;
-        }
-        function confirmDelete(callback) {
-            bootbox.confirm({
-                message: "<h3>Are you sure, You want to Delete this record...!!</h3>",
-                buttons: {
-                    confirm: {
-                        label: 'Yes',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: 'No',
-                        className: 'btn-danger'
-                    }
-                },
-                callback: function (result) {
-                    if (result) callback();
-                }
-            });
-
-        }
-
-
-        function deleteSelectedItem(id) {
-
-            confirmDelete(function () {
-
-                //var data = customersTable.rows({ selected: true }).data();
-                $.ajax({
-                    type: "GET",
-                    url: "/StoreGroup/Delete",
-                    data: { id: id },
-                    success: function (data) {
-
-                        assetsTable.draw(true);
-                        // toggleActionButtons(false);
-                        //  document.location.reload(true);
-                    }
-
-                }).fail(function (error) {
-                    alert(error.statusText);
-                    console.log(error);
-                })
-            });
-
-        }
-
-        $(document).ready(function () {
-            //toggleActionButtons(false);
-
-            StoreGroupsTable = $('#StoreGroupsTable').DataTable({
-                select: {
-                    style: 'single'
-                },
-                //"order": [[3, "desc"]],
-                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
-                responsive: true, "bProcessing": true,
-                "bServerSide": true,                                                   // paging
-                "sAjaxSource": '/StoreGroup/StoreGroupAjaxDataProvider',
-                "columnDefs": [
-                    {
-                        "targets": [0],
-                        "visible": false,
-                        "searchable": false
-                    },
-                    {
-                        "render": function (data, type, row) {
-                            //return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditStoreGroupbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
-                            return '<a href="/StoreGroup/EditStoreGroup/' + data.id + '"  >Edit</a> |  <a id="' + data.id + '" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
-                        },
-                        "targets": 8
-                    }
-                ],
-                "columns": [
-                    { "data": "id" },
-                    { "data": "importerName" },
-                    { "data": "storeGroupName" },
-                    { "data": "storeGroupPhone" },
-                    { "data": "storeGroupRegion" },
-                    { "data": "email" },
-                    { "data": "region" },
-                    { "data": "area" },
-                    {
-                        "orderable": false,
-                        "searchable": false,
-                        "data": null
-                    }
-                ]
-            });
-            $('#StoreGroupsTable tbody').on('click', 'tr', function () {
-                setTimeout(function () {
-                    var selectedCount = StoreGroupsTable.rows({ selected: true }).count();
-                    // toggleActionButtons(selectedCount > 0);
-                }, 100)
-            });
-        });
-    </script>
-}
--->
-@model IEnumerable<MonoOvens.Models.StoreGroupMaster>
+﻿@model IEnumerable<MonoOvens.Models.StoreGroupMaster>
 
 @{
     ViewData["Title"] = "StoreGroups List";
@@ -197,36 +11,39 @@ section Scripts{
 </p>
 <table style="width:100%!important" class="table  table-bordered" id="storeGroupsTable">
     <thead>
-        <th>
-            Id
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.ImporterName)*@    Importer Name
-        </th>
-        <th>
-            Dealer Name
-        </th>
-        <th>
-            StoreGroup Name
-        </th>
-        <th>
-            Phone Number
-        </th>
-        <th>
-            StoreGroup Region
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area)
-        </th>
-        <th></th>
+    <th>
+        Id
+    </th>
+    <th>
+        @*@Html.DisplayNameFor(model => model.ImporterName)*@    Importer Name
+    </th>
+    <th>
+        Dealer Name
+    </th>
+    <th>
+        StoreGroup Name
+    </th>
+    <th>
+        Phone Number
+    </th>
+    <th>
+        StoreGroup Region
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Email)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Region)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Area)
+    </th>
+    <th>        
+        Head-Office
+    </th>
+    <th></th>
     </tr>
-   </thead>
+    </thead>
 
 </table>
 
@@ -306,20 +123,29 @@ section Scripts{
                         "render": function (data, type, row) {
                             return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(`' + data.id + '`)">Delete</a>'
                         },
-                        "targets": 9
+                        "targets": 10
                     }
                 ],
                 "columns": [
 
                     { "data": "id" },
-                    { "data": "importerName" },
-                    { "data": "dealerName" },
+                    //{ "data": "importerName" },
+                    //{ "data": "dealerName" },
+                    
+                    { "data": "impName" },
+                    { "data": "dlrName" },
                     { "data": "storeGroupName" },
                     { "data": "storeGroupPhone" },
                     { "data": "storeGroupRegion" },
                     { "data": "email" },
                     { "data": "region" },
                     { "data": "area" },
+                    {
+                        "data": "hOAddress1",
+                        "render": function (data, type, row) {
+                    return row.hoAddress1 + '&nbsp;' + row.hoAddress2  + '&nbsp;' + row.hoAddress3  + '&nbsp;' + row.city   +'&nbsp;' + row.postcode
+                        }
+                    },
                     {
                         "orderable": false,
                         "searchable": false,

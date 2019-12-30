@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj": {}
+    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {}
   },
   "projects": {
-    "D:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj": {
+    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "projectUniqueName": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
         "projectName": "MonoOvens",
-        "projectPath": "D:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\tejas\\temp\\Mono\\MonoOvens\\obj\\",
+        "projectPath": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "packagesPath": "C:\\Users\\Rakesh\\.nuget\\packages\\",
+        "outputPath": "E:\\Mono\\MonoOvens\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,10 +38,6 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
-            "BenchmarkDotNet": {
-              "target": "Package",
-              "version": "[0.12.0, )"
-            },
             "Highsoft.Highcharts": {
               "target": "Package",
               "version": "[7.2.0, )"
@@ -62,7 +55,11 @@
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.DotNet.Cli.Utils": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -74,9 +71,17 @@
               "version": "[2.1.0, )",
               "autoReferenced": true
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration": {
+              "target": "Package",
+              "version": "[2.1.10, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.0-preview1-19509-03, )"
+              "version": "[2.1.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Utils": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             }
           },
           "imports": [

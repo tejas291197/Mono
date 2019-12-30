@@ -14,6 +14,7 @@ namespace MonoOvens.Controllers
     {
         private readonly MonoContext _context;
         private readonly UserManager<UserMaster> _userManager;
+   
 
         public DealerController(MonoContext context,UserManager<UserMaster> userManager)
         {
@@ -32,16 +33,53 @@ namespace MonoOvens.Controllers
         //data provider method for the Dealers list.
         public JsonResult DealerAjaxDataProvider(GridPagination param)
         {
-            
             var userId = _userManager.GetUserId(User);
-            var uId = _context.Users.Where(x => x.Id == userId);
-          //  IEnumerable<DealerMaster> Dealers = _context.Dealers;
-            IEnumerable<DealerMaster> Dealers = _context.Dealers.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
-            var totalDealers = _context.Dealers.Count();
+            var uId = _context.Users.Where(x => x.Id == userId).Select(x => x.UserName).FirstOrDefault();
+            var  viewModel = from dlr in _context.Dealers
+                            join imp in _context.Importers on dlr.ImporterName equals imp.Id.ToString()
+                            where dlr.ImporterName == imp.Id.ToString()
+                            where dlr.IsDeleted == false
+                            where dlr.CreatedBy == userId
+                            select new
+                            {
+                                dlr.Id,
+                                impName = imp.ImporterName,
+                                dlr.Region,
+                                dlr.Area,
+                                dlr.DealerName,
+                                dlr.DealerPhone,
+                                dlr.DealerRegion,
+                                dlr.Email,
+                            };
+                               
+            //  IEnumerable<DealerMaster> Dealers = _context.Dealers;
+            // IEnumerable<DealerMaster> Dealers = _context.Dealers.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+            if (User.IsInRole("Administrator"))
+            {
+                //IEnumerable<DealerMaster> Dealers = _context.Dealers.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+                 viewModel = from dlr in _context.Dealers
+                            join imp in _context.Importers on dlr.ImporterName equals imp.Id.ToString()
+                            where dlr.ImporterName == imp.Id.ToString()
+                            where dlr.IsDeleted == false
+                            //  where dlr.CreatedBy == userId
+                            select new
+                            {
+                                dlr.Id,
+                                impName = imp.ImporterName,
+                                dlr.Region,
+                                dlr.Area,
+                                dlr.DealerName,
+                                dlr.DealerPhone,
+                                dlr.DealerRegion,
+                                dlr.Email,
+                            };
+            }
+                     
+             var totalDealers = viewModel.ToList().Count();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
-            if (!string.IsNullOrEmpty(param.sSearch)) Dealers = Dealers.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower())
+            if (!string.IsNullOrEmpty(param.sSearch)) viewModel = viewModel.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.DealerPhone.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.DealerRegion.ToLower().Contains(param.sSearch.ToLower())
                                                                                 //         || z.CustomerName.ToLower().Contains(param.sSearch.ToLower())
@@ -57,24 +95,23 @@ namespace MonoOvens.Controllers
                                                                                         //            || z.PostTown.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                         //           || z.StorePostcode.ToString().ToLower().Contains(param.sSearch.ToLower())
 
-                                                                               || z.ImporterName.ToString().ToLower().Contains(param.sSearch.ToLower())); // new line added
+                                                                               || z.impName.ToString().ToLower().Contains(param.sSearch.ToLower())); // new line added
                                                                                                                 
 
             switch (sortColumnIndex)
             {
                 case 1:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.ImporterName) : Dealers.OrderByDescending(z => z.ImporterName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.impName) : viewModel.OrderByDescending(z => z.impName);
                     break;
                 case 2:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerName) : Dealers.OrderByDescending(z => z.DealerName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.DealerName) : viewModel.OrderByDescending(z => z.DealerName);
                     break;
                 case 3:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerRegion) : Dealers.OrderByDescending(z => z.DealerRegion);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.DealerRegion) : viewModel.OrderByDescending(z => z.DealerRegion);
                     break;
                 case 4:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.DealerPhone) : Dealers.OrderByDescending(z => z.DealerPhone);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.DealerPhone) : viewModel.OrderByDescending(z => z.DealerPhone);
                     break;
-
                 //case 4:
                 //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerName) : Dealers.OrderByDescending(z => z.CustomerName);
                 //    break;
@@ -82,13 +119,13 @@ namespace MonoOvens.Controllers
                 //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.CustomerNumber) : Dealers.OrderByDescending(z => z.CustomerNumber);
                 //    break;
                 case 5:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Email) : Dealers.OrderByDescending(z => z.Email);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Email) : viewModel.OrderByDescending(z => z.Email);
                     break;
                 case 6:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Region) : Dealers.OrderByDescending(z => z.Region);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Region) : viewModel.OrderByDescending(z => z.Region);
                     break;
                 case 7:
-                    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.Area) : Dealers.OrderByDescending(z => z.Area);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Area) : viewModel.OrderByDescending(z => z.Area);
                     break;
                 //case 9:
                 //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StoreCode) : Dealers.OrderByDescending(z => z.StoreCode);
@@ -112,11 +149,11 @@ namespace MonoOvens.Controllers
                 //    Dealers = sortDirection == "asc" ? Dealers.OrderBy(z => z.StorePostcode) : Dealers.OrderByDescending(z => z.StorePostcode);
                 //    break;
                 default:
-                    Dealers = Dealers.OrderByDescending(z => z.Id);
+                    viewModel = viewModel.OrderByDescending(z => z.Id);
                     break;
             }
-            var filteredDealersCount = Dealers.Count();
-            Dealers = Dealers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+            var filteredDealersCount = viewModel.Count();
+            viewModel = viewModel.Skip(param.iDisplayStart).Take(param.iDisplayLength);
 
             return Json(new
             {
@@ -124,7 +161,7 @@ namespace MonoOvens.Controllers
              //   iTotalRecords = totalDealers,
                 iTotalRecords = filteredDealersCount,
                 iTotalDisplayRecords = filteredDealersCount,
-                aaData = Dealers
+                aaData = viewModel
             });
         }
         // GET: Dealer/Details/5
@@ -148,6 +185,14 @@ namespace MonoOvens.Controllers
         // GET: Dealer/Create
         public IActionResult CreateDealer()
         {
+            List<ImporterMaster> Importer = new List<ImporterMaster>();
+
+            Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+
+            Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+
+            ViewBag.ImporterList = Importer;
+            
             return View();
         }
 
@@ -162,7 +207,8 @@ namespace MonoOvens.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
+                // var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
                 dealerMaster.CreatedBy = userName;
                 _context.Add(dealerMaster);
                 await _context.SaveChangesAsync();
@@ -184,8 +230,17 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
+            List<ImporterMaster> Importer = new List<ImporterMaster>();
+
+            Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+
+            Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+
+            ViewBag.ImporterList = Importer;
+
             return View(dealerMaster);
         }
+        
 
         // POST: Dealer/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -206,7 +261,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    //var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     dealerMaster.ModifiedBy = userName;
                     _context.Update(dealerMaster);
                     await _context.SaveChangesAsync();
@@ -226,7 +282,25 @@ namespace MonoOvens.Controllers
             }
             return View(dealerMaster);
         }
-
+        //public JsonResult GetImpoterAssetCategoryId(int id)
+        //{
+        //    selectid = id;
+        //    List<DealerMaster> Importer = new List<DealerMaster>();
+        //    Importer = (from lists in _context.Dealers where id == id select lists).ToList();
+        //    Importer.Insert(0, new ImporterMaster { Id = 0, });
+        //    ViewBag.ImporterList = Importer;
+        //    //if (Importer == null)
+        //    //{
+        //    //    return Json(new
+        //    //    {
+        //    //        data = null
+        //    //    });
+        //    //}         
+        //    return Json(new
+        //    {
+        //        data = Importer
+        //    });
+        //}
 
         //To soft delete a record.
         public JsonResult Delete(int? id)

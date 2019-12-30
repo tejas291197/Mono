@@ -122,7 +122,6 @@ E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.dll
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.pdb
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.dll
 E:\Mono\MonoOvens\bin\Debug\netcoreapp2.1\MonoOvens.Views.pdb
-E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cache
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.RazorAssemblyInfo.cs
 E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.TagHelpers.input.cache
@@ -322,3 +321,19 @@ D:\tejas\temp\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.Views.pdb
 D:\tejas\temp\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.dll
 D:\tejas\temp\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.pdb
 D:\tejas\temp\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csproj.CopyComplete
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Importer\CreateImporter.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Importer\Delete.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Importer\EditImporter.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Importer\ImporterDetails.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Importer\ImporterList.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\StoreGroup\CreateStoreGroup.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\StoreGroup\Delete.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\StoreGroup\EditStoreGroup.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\StoreGroup\StoreGroupDetails.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\StoreGroup\StoreGroupList.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Store\CreateStore.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Store\Delete.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Store\EditStore.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Store\StoreDetails.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\Razor\Views\Store\StoreList.cshtml.g.cs
+E:\Mono\MonoOvens\obj\Debug\netcoreapp2.1\MonoOvens.csprojAssemblyReference.cache

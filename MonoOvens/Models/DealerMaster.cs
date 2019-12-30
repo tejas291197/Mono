@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -38,7 +39,7 @@ namespace MonoOvens.Models
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
 
-
+        string IName;
 
         //[Required]
         //[EmailAddress]

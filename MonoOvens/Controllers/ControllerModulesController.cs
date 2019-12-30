@@ -69,7 +69,6 @@ namespace MonoOvens.Controllers
                 case 5:
                     Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.SoftwareVersion) : Controllers.OrderByDescending(z => z.SoftwareVersion);
                     break;
-
                 case 6:
                     Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.RecipeVersion) : Controllers.OrderByDescending(z => z.RecipeVersion);
                     break;
@@ -93,40 +92,13 @@ namespace MonoOvens.Controllers
                     break;
                 case 13:
                     Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.RemoteKill) : Controllers.OrderByDescending(z => z.RemoteKill);
-                    break;
-                case 14:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Elements) : Controllers.OrderByDescending(z => z.Elements);
-                    break;
-                case 15:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Element) : Controllers.OrderByDescending(z => z.kWh_Rating_Element);
-                    break;
-                case 16:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.LightType) : Controllers.OrderByDescending(z => z.LightType);
-                    break;
-                case 17:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Lights) : Controllers.OrderByDescending(z => z.Lights);
-                    break;
-                case 18:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Light) : Controllers.OrderByDescending(z => z.kWh_Rating_Light);
-                    break;
-                case 19:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Fans) : Controllers.OrderByDescending(z => z.Fans);
-                    break;
-                case 20:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Fan) : Controllers.OrderByDescending(z => z.kWh_Rating_Fan);
-                    break;
-                case 21:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Damper) : Controllers.OrderByDescending(z => z.kWh_Rating_Damper);
-                    break;
-                case 22:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_WaterSolenoid) : Controllers.OrderByDescending(z => z.kWh_Rating_WaterSolenoid);
-                    break;
+                    break;                
                 default:
                     Controllers = Controllers.OrderByDescending(z => z.Id);
                     break;
             }
             var filteredControllersCount = Controllers.Count();
-          //  Controllers = Controllers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+         //  Controllers = Controllers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
 
             return Json(new
             {
@@ -135,122 +107,7 @@ namespace MonoOvens.Controllers
                 iTotalDisplayRecords = filteredControllersCount,
                 aaData = Controllers
             });
-            //return Json(new
-            //{
-            //    success = 1
-            //});
-        }
-
-
-        //data provider method for the controller list.
-        public JsonResult ControllerAjaxDataProvider(GridPagination param)
-        {   
-            // Thread.Sleep(7000);
-            var userId = _userManager.GetUserId(User);
-            var uId = _context.Users.Where(x => x.Id == userId);
-          //  IEnumerable<ControllerModule> Controllers = _context.Controller;
-            IEnumerable<ControllerModule> Controllers = _context.Controller.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
-            var totalControllers = _context.Controller.Count();
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
-            var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
-            var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
-            if (!string.IsNullOrEmpty(param.sSearch)) Controllers = Controllers.Where(z => z.AuthenticationCode.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.ControllerDate.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.FirmwareVersion.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.RecipeVersion.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.RemoteKill.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.SerialNumber.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.SevenDayTimer.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.Skins.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.SleepDelay.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.SoftwareVersion.ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.Status.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                        || z.Wallpaper.ToLower().Contains(param.sSearch.ToLower()) );
-
-
-            switch (sortColumnIndex)
-            {
-                case 1:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.FG_Code) : Controllers.OrderByDescending(z => z.FG_Code);
-                    break;
-                case 2:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.SerialNumber) : Controllers.OrderByDescending(z => z.SerialNumber);
-                    break;
-                case 3:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.AuthenticationCode) : Controllers.OrderByDescending(z => z.AuthenticationCode);
-                    break;
-                case 4:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.FirmwareVersion) : Controllers.OrderByDescending(z => z.FirmwareVersion);
-                    break;
-                case 5:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.SoftwareVersion) : Controllers.OrderByDescending(z => z.SoftwareVersion);
-                    break;
-               
-                case 6:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.RecipeVersion) : Controllers.OrderByDescending(z => z.RecipeVersion);
-                    break;
-                case 7:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Skins) : Controllers.OrderByDescending(z => z.Skins);
-                    break;
-                case 8:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Wallpaper) : Controllers.OrderByDescending(z => z.Wallpaper);
-                    break;
-                case 9:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.SevenDayTimer) : Controllers.OrderByDescending(z => z.SevenDayTimer);
-                    break;
-                case 10:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.SleepDelay) : Controllers.OrderByDescending(z => z.SleepDelay);
-                    break;
-                case 11:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.ControllerDate) : Controllers.OrderByDescending(z => z.ControllerDate);
-                    break;
-                case 12:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Status) : Controllers.OrderByDescending(z => z.Status );
-                    break;
-                case 13:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.RemoteKill) : Controllers.OrderByDescending(z => z.RemoteKill);
-                    break;
-                case 14:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Elements) : Controllers.OrderByDescending(z => z.Elements);
-                    break;
-                case 15:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Element) : Controllers.OrderByDescending(z => z.kWh_Rating_Element);
-                    break;
-                case 16:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.LightType) : Controllers.OrderByDescending(z => z.LightType);
-                    break;
-                case 17:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Lights) : Controllers.OrderByDescending(z => z.Lights);
-                    break;
-                case 18:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Light) : Controllers.OrderByDescending(z => z.kWh_Rating_Light);
-                    break;
-                case 19:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.Fans) : Controllers.OrderByDescending(z => z.Fans);
-                    break;
-                case 20:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Fan) : Controllers.OrderByDescending(z => z.kWh_Rating_Fan);
-                    break;
-                case 21:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_Damper) : Controllers.OrderByDescending(z => z.kWh_Rating_Damper);
-                    break;
-                case 22:
-                    Controllers = sortDirection == "asc" ? Controllers.OrderBy(z => z.kWh_Rating_WaterSolenoid) : Controllers.OrderByDescending(z => z.kWh_Rating_WaterSolenoid);
-                    break;
-                default:
-                    Controllers = Controllers.OrderByDescending(z => z.Id);
-                    break;
-            }
-            var filteredControllersCount = Controllers.Count();
-            Controllers = Controllers.Skip(param.iDisplayStart).Take(param.iDisplayLength);
-
-            return Json(new
-            {
-                sEcho = param.sEcho,
-                iTotalRecords = filteredControllersCount,
-                iTotalDisplayRecords = filteredControllersCount,
-                aaData = Controllers
-            });
+           
         }
 
         // GET: ControllerModules/Details/5
@@ -274,6 +131,14 @@ namespace MonoOvens.Controllers
         // GET: ControllerModules/Create
         public IActionResult CreateController()
         {
+            List<AssetMaster> Asset = new List<AssetMaster>();
+
+            Asset = (from lists in _context.Assets.Where(x => x.IsDeleted == false) select lists).ToList();
+
+            Asset.Insert(0, new AssetMaster { Id = 0, FG_Code = "--Select--" });
+
+            ViewBag.FGAsset = Asset;
+
             return View();
         }
 
@@ -282,18 +147,19 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateController([Bind("Id,FG_Code,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status," +
-            "RemoteKill,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans,kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,IsDeleted")] ControllerModule controllerModule)
+        public async Task<IActionResult> CreateController([Bind("Id,FG_Code,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins," +
+            "Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status,RemoteKill,IsDeleted,ModifiedBy,CreatedBy")] ControllerModule controllerModule)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                //  var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 controllerModule.CreatedBy = userName;
                 _context.Add(controllerModule);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ControllersList));
-            }
+            }            
             return View(controllerModule);
         }
 
@@ -310,6 +176,15 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
+            {
+                List<AssetMaster> Asset = new List<AssetMaster>();
+
+                Asset = (from lists in _context.Assets.Where(x => x.IsDeleted == false) select lists).ToList();
+
+                Asset.Insert(0, new AssetMaster { Id = 0, FG_Code="--Select--"});
+
+                ViewBag.FGAssetedit = Asset;
+            }
             return View(controllerModule);
         }
 
@@ -318,8 +193,8 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditController(int id, [Bind("Id,FG_Code,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status" +
-            "RemoteKill,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans,kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,IsDeleted")] ControllerModule controllerModule)
+        public async Task<IActionResult> EditController(int id,[Bind("Id,FG_Code,SerialNumber,AuthenticationCode,FirmwareVersion,SoftwareVersion,RecipeVersion,Skins,Wallpaper,SevenDayTimer,SleepDelay,ControllerDate,Status" +
+            "RemoteKill,IsDeleted,ModifiedBy,CreatedBy")] ControllerModule controllerModule)
         {
             if (id != controllerModule.Id)
             {
@@ -331,7 +206,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    //  var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     controllerModule.ModifiedBy = userName;
                     _context.Update(controllerModule);
                     await _context.SaveChangesAsync();

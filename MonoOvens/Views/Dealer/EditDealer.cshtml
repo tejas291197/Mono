@@ -9,60 +9,67 @@
 
 <hr />
 <div class="row">
-    <form asp-action="EditDealer">
+    <div>
         <span id="nameError" style="color:red"></span>
         <span id="phoneError" style="color:red"></span>
         <p class="form-group text-danger">(*)fields are mandatory</p>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group" style="padding-right:50px ; float:left ">
+        <form asp-action="EditDealer">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            @*<div class="form-group" style="padding-right:50px ; float:left ">
             <label asp-for="ImporterName" class="control-label">Importer Name:</label><span style="color:red"> *</span>
             <input asp-for="ImporterName" class="form-control" id="iname" required />
-            <span id="nameError" style="color:red"></span>
+
             <span asp-validation-for="ImporterName" class="text-danger"></span>
-        </div>
-        <div class="form-group" style="padding-right:50px ; float:left ">
-            <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
-            <input asp-for="DealerName" class="form-control" id="dname" required />
-            <span id="nameError" style="color:red"></span>
-            <span asp-validation-for="DealerName" class="text-danger"></span>
-        </div>
-        <div class="form-group" style="padding-right:50px ; float:left ">
-            <label asp-for="DealerPhone" class="control-label">Dealer Phone:</label><span style="color:red"> *</span>
-            <input asp-for="DealerPhone" class="form-control" id="phone" required />
-            <span id="phoneError" style="color:red"></span>
-            <span asp-validation-for="DealerPhone" class="text-danger"></span>
-        </div>
-        <div class="form-group" style="padding-right:50px ; float:left ">
-            <label asp-for="Email" class="control-label">Email:</label><span style="color:red"> *</span>
-            <input asp-for="Email" class="form-control" required />
-            <span id="nameError" style="color:red"></span>
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group" style="padding-right:50px ; float:left ">
-            <label asp-for="DealerRegion" class="control-label">Dealer Region:</label><span style="color:red"> *</span>
-            <input asp-for="DealerRegion" class="form-control" id="dname" required />
-            <span id="nameError" style="color:red"></span>
-            <span asp-validation-for="DealerRegion" class="text-danger"></span>
-        </div>
-        @*</form>
-        <form>
-            <div style="clear:left" class="dynamic_form">
-                <fieldset>
-                    <legend>Customer Detail:</legend>
-                    <div class="form-group" style="padding-right:50px ; float:left ">
-                        <label asp-for="CustomerName" class="control-label">Name:</label><span style="color:red"> *</span>
-                        <input asp-for="CustomerName" class="form-control" id="cname" required />
-                        <span id="nameError" style="color:red"></span>
-                        <span asp-validation-for="CustomerName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group" style="padding-right:50px ; float:left ">
-                        <label asp-for="CustomerNumber" class="control-label">Phone No.:</label><span style="color:red"> *</span>
-                        <input asp-for="CustomerNumber" class="form-control" id="cnumber" required />
-                        <span id="nameError" style="color:red"></span>
-                        <span asp-validation-for="CustomerNumber" class="text-danger"></span>
-                    </div>*@
-        <div class="form-group" style=" float:left ; padding-right:50px">
+        </div>*@
+            <div class="form-group" style=" float:left ; padding-right:100px">
+                <label>Importer Name : </label><span style="color:red"> *</span>
+                <select asp-for="ImporterName" class="form-control" onblur="check(1)"
+                        asp-items="@(new SelectList(@ViewBag.ImporterList, "Id" ,"ImporterName"))" id="iname" required>                    
+                </select>
+                <span asp-validation-for="ImporterName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerName" class="control-label">Dealer Name:</label><span style="color:red"> *</span>
+                <input asp-for="DealerName" class="form-control" id="dname" required />
+
+                <span asp-validation-for="DealerName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerPhone" class="control-label">Dealer Phone:</label><span style="color:red"> *</span>
+                <input asp-for="DealerPhone" class="form-control" id="phone" required />
+                <span asp-validation-for="DealerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="Email" class="control-label">Email:</label><span style="color:red"> *</span>
+                <input asp-for="Email" class="form-control" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="DealerRegion" class="control-label">Dealer Region:</label><span style="color:red"> *</span>
+                <input asp-for="DealerRegion" class="form-control" id="dregion" required />
+                <span asp-validation-for="DealerRegion" class="text-danger"></span>
+            </div>
+            @*<div style="clear:left" class="dynamic_form">
+        <fieldset>
+            <legend>Customer Detail:</legend>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="CustomerName" class="control-label">Name: </label><span style="color:red"> *</span>
+                <input asp-for="CustomerName" class="form-control" id="cname" required />
+
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-right:50px ; float:left ">
+                <label asp-for="CustomerNumber" class="control-label">Phone No.:</label><span style="color:red"> *</span>
+                <input asp-for="CustomerNumber" class="form-control" id="cnumber" required />
+
+                <span asp-validation-for="CustomerNumber" class="text-danger"></span>
+            </div>*@
+
+            @*</fieldset>
+            </div>
+        <div class="form-group" style=" float:left ; padding-right:50px ">
             <label asp-for="Region" class="control-label">Region:</label>
             <select asp-for="Region" class="form-control">
                 <option value="">--select--</option>
@@ -73,18 +80,18 @@
                 <option value="C04">C04</option>
             </select>
             <span asp-validation-for="Region" class="text-danger"></span>
-        </div>
-        <div class="form-group" style=" float:left ; padding-right:50px">
-            <label asp-for="Area" class="control-label">Area:</label>
-            <input asp-for="Area" class="form-control" id="area" />
-            <span asp-validation-for="Area" class="text-danger"></span>
-        </div>
-
-        @*</fieldset>
-        </div>
-        *@
-
-        @*<div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
+        </div>*@
+            <div class="form-group" style="float:left ; padding-right:50px ">
+                <label asp-for="Region" class="control-label">Region:</label>
+                <input asp-for="Region" class="form-control" />
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+            <div class="form-group" style=" float:left ; padding-right:50px">
+                <label asp-for="Area" class="control-label">Area:</label>
+                <input asp-for="Area" class="form-control" id="area" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+            @*<div class="form-group" style=" float:left ; padding-right:50px ; clear:left">
             <label asp-for="StoreCode" class="control-label">Store Code:</label>
             <input asp-for="StoreCode" class="form-control" placeholder="PLO0100" />
             <span asp-validation-for="StoreCode" class="text-danger"></span>
@@ -124,15 +131,15 @@
             <input asp-for="StorePostcode" class="form-control" placeholder="GT DFG3" />
             <span asp-validation-for="StorePostcode" class="text-danger"></span>
         </div>*@
-    <div class="form-group" style=" clear:left ; padding-left:400px">
-        @*<div class="button-group">
-        <a href="javascript:void(0)" class="btn btn-primary" id="plus">Add More Customers</a><br />
-         </div>*@
-        <input type="submit" value="Save" class="btn btn-success" id="subbtn" />
+            <div class="form-group" style=" clear:left ; padding-left:400px">
+                @*<p>
+                <span class="btn btn-info" style="clear:left">Add Customer</span>
+            </p>*@
+                <br />    <input type="submit" value="Save" class="btn btn-primary" id="subbtn" />
+            </div>
+        </form>
     </div>
-    </form>
 </div>
-
 <div>
     <a asp-action="DealersList">Back to List</a>
 </div>
@@ -142,47 +149,52 @@
     <script>
         // to allow only digits to be entered from the user side .
         function Digits(e) {
-           if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-              //display error message
-              $("#phoneError").html("Only Digits Allowed").show().fadeOut("slow");
-               return false;
-           }
-       }
-       // to allow only charactors to be entered from the user side .
-       function Charactors(e) {
-            var key = e.keyCode;
-            if (!((key == 8) ||  (key == 9) ||  (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
-                e.preventDefault();
-                  $("#nameError").html(" **** Only Charactors Allowed **** ").show().fadeOut("slow");
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#phoneError").html(" **** Only Digits Allowed **** ").show().fadeOut("slow");
+                return false;
             }
-       }
-       $(document).ready(function () {
-          
-         $("#phone").keypress(function (e) {
+        }
+        // to allow only charactors to be entered from the user side .
+        function Charactors(e) {
+            var key = e.keyCode;
+            if (!((key == 8) || (key == 9) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122))) {
+                e.preventDefault();
+                $("#nameError").html(" **** Only Charactors Allowed **** ").show().fadeOut("slow");
+            }
+        }
+        $(document).ready(function () {
+            $("#phone").keypress(function (e) {
                 return Digits(e);
             });
             $("#iname").keypress(function (e) {
                 Charactors(e);
             });
-              $("#dname").keypress(function (e) {
+            $("#dname").keypress(function (e) {
                 Charactors(e);
             });
-          
-           //$("#sname").keypress(function(e)
-           //{
-           //    Charactors(e);
-           //});
-         
-           //$("#cnumber").keypress(function(e)
-           //{
-           //    return Digits(e);
-           //});
-           // $("#cname").keydown(function(e)
-           //{
-           //    Charactors(e);
-           // });
-       });
 
+            //$("#sname").keypress(function(e)
+            //{
+            //    Charactors(e);
+            //});
 
+            //$("#cnumber").keypress(function(e)
+            //{
+            //    return Digits(e);
+            //});
+            // $("#cname").keydown(function(e)
+            //{
+            //    Charactors(e);
+            // });
+            //$("#dregion").keydown(function(e)
+            //{
+            //   Charactors(e);
+            //});
+            //$("#area").keypress(function(e)
+            //{
+            //    return Digits(e);
+            //});
+        });
     </script>
 }

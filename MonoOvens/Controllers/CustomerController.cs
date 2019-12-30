@@ -152,7 +152,8 @@ namespace MonoOvens.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+             //   var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 customerMaster.CreatedBy = userName;
                 _context.Add(customerMaster);
                 await _context.SaveChangesAsync();
@@ -194,7 +195,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    //var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     customerMaster.ModifiedBy = userName;
                     _context.Update(customerMaster);
                     await _context.SaveChangesAsync();

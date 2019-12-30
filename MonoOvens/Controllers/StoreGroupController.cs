@@ -31,52 +31,121 @@ namespace MonoOvens.Controllers
 
             var userId = _userManager.GetUserId(User);
             var uId = _context.Users.Where(x => x.Id == userId);
-            IEnumerable<StoreGroupMaster> StoreGroups = _context.StoreGroups.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
-            var totalStoreGroups = _context.StoreGroups.Count();
+            //IEnumerable<StoreGroupMaster> StoreGroups = _context.StoreGroups.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+            //var totalStoreGroups = _context.StoreGroups.Count();           
+            var viewModel = from stgp in _context.StoreGroups
+                            join imp in _context.Importers on stgp.ImporterName equals imp.Id.ToString()
+                            join dlr in _context.Dealers on stgp.DealerName equals dlr.Id.ToString()
+                            //join astC in _context.AssetCategory on ast.AssetCategory equals astC.Id
+                            where stgp.ImporterName == imp.Id.ToString()
+                            //where ast.AssetCategory == astC.Id
+                            //where ast.ControllerType == ctr.Id
+                            where stgp.IsDeleted == false
+                            where stgp.CreatedBy == userId
+                            select new
+                            {
+                                stgp.Id,
+                                impName = imp.ImporterName,
+                                dlrName = dlr.DealerName,
+                                stgp.Region,
+                                stgp.Area,
+                             
+                                stgp.City,
+                                stgp.HOAddress1,
+                                stgp.HOAddress2,
+                                stgp.HOAddress3,
+                                stgp.Postcode,
+                                stgp.StoreGroupName,
+                                stgp.StoreGroupPhone,
+                                stgp.StoreGroupRegion,
+                                stgp.Email,
+                                
+                            };
+            if (User.IsInRole("Administrator"))
+            {
+                viewModel = from stgp in _context.StoreGroups
+                            join imp in _context.Importers on stgp.ImporterName equals imp.Id.ToString()
+                            join dlr in _context.Dealers on stgp.DealerName equals dlr.Id.ToString()
+                            //join astC in _context.AssetCategory on ast.AssetCategory equals astC.Id
+                            where stgp.ImporterName == imp.Id.ToString()
+                            //where ast.AssetCategory == astC.Id
+                            //where ast.ControllerType == ctr.Id
+                            where stgp.IsDeleted == false
+                           // where stgp.CreatedBy == userId
+                            select new
+                            {
+                                stgp.Id,
+                                impName = imp.ImporterName,
+                                dlrName = dlr.DealerName,
+                                stgp.Region,
+                                stgp.Area,
+
+                                stgp.City,
+                                stgp.HOAddress1,
+                                stgp.HOAddress2,
+                                stgp.HOAddress3,
+                                stgp.Postcode,
+                                stgp.StoreGroupName,
+                                stgp.StoreGroupPhone,
+                                stgp.StoreGroupRegion,
+                                stgp.Email,
+
+                            };
+            }
+                var totalStoreGroups = viewModel.ToList().Count();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
-            if (!string.IsNullOrEmpty(param.sSearch)) StoreGroups = StoreGroups.Where(z => z.DealerName.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.ImporterName.ToString().ToLower().Contains(param.sSearch.ToLower())
+            if (!string.IsNullOrEmpty(param.sSearch)) viewModel = viewModel.Where(z => z.dlrName.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.impName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreGroupName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreGroupPhone.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreGroupRegion.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Email.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Region.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Area.ToString().ToLower().Contains(param.sSearch.ToLower()));
+                                                                                //|| z.Region.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                //|| z.Area.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.HOAddress1.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.HOAddress2.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                //|| z.HOAddress3.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.City.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Postcode.ToString().ToLower().Contains(param.sSearch.ToLower()));
+
 
             switch (sortColumnIndex)
             {
                 case 1:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.ImporterName) : StoreGroups.OrderByDescending(z => z.ImporterName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.impName) : viewModel.OrderByDescending(z => z.impName);
                     break;
                 case 2:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.DealerName) : StoreGroups.OrderByDescending(z => z.DealerName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.dlrName) : viewModel.OrderByDescending(z => z.dlrName);
                     break;
                 case 3:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.StoreGroupName) : StoreGroups.OrderByDescending(z => z.StoreGroupName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreGroupName) : viewModel.OrderByDescending(z => z.StoreGroupName);
                     break;
                 case 4:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.StoreGroupPhone) : StoreGroups.OrderByDescending(z => z.StoreGroupName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreGroupPhone) : viewModel.OrderByDescending(z => z.StoreGroupName);
                     break;
                 case 5:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.StoreGroupRegion) : StoreGroups.OrderByDescending(z => z.StoreGroupRegion);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreGroupRegion) : viewModel.OrderByDescending(z => z.StoreGroupRegion);
                     break;
                 case 6:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.Email) : StoreGroups.OrderByDescending(z => z.Email);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Email) : viewModel.OrderByDescending(z => z.Email);
                     break;
                 case 7:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.Region) : StoreGroups.OrderByDescending(z => z.Region);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Region) : viewModel.OrderByDescending(z => z.Region);
                     break;
                 case 8:
-                    StoreGroups = sortDirection == "asc" ? StoreGroups.OrderBy(z => z.Area) : StoreGroups.OrderByDescending(z => z.Area);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Area) : viewModel.OrderByDescending(z => z.Area);
+                    break;               
+                case 9:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode) : viewModel.OrderByDescending(z => z.HOAddress1 + " " + z.HOAddress2 + " " + z.HOAddress3 + " " + z.City + " " + z.Postcode);
                     break;
                 default:
-                    StoreGroups = StoreGroups.OrderByDescending(z => z.Id);
+                    viewModel = viewModel.OrderByDescending(z => z.Id);
                     break;
             }
-            var filteredStoreGroupsCount = StoreGroups.Count();
-            StoreGroups = StoreGroups.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+            var filteredStoreGroupsCount = viewModel.Count();
+            viewModel = viewModel.Skip(param.iDisplayStart).Take(param.iDisplayLength);
 
             return Json(new
             {
@@ -84,7 +153,7 @@ namespace MonoOvens.Controllers
                 //  iTotalRecords = totalStoreGroups,
                 iTotalRecords = filteredStoreGroupsCount,
                 iTotalDisplayRecords = filteredStoreGroupsCount,
-                aaData = StoreGroups
+                aaData = viewModel
             });
         }
 
@@ -107,6 +176,18 @@ namespace MonoOvens.Controllers
         // GET: StoreGroupMasters/Create
         public IActionResult CreateStoreGroup()
         {
+            List<ImporterMaster> Importer = new List<ImporterMaster>();
+            List<DealerMaster> Dealer = new List<DealerMaster>();
+
+            Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+            Dealer = (from lists in _context.Dealers.Where(x => x.IsDeleted == false) select lists).ToList();
+
+            Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+            Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--" });
+
+            ViewBag.ImporterList = Importer;
+            ViewBag.DealerList = Dealer;
+
             return View();
         }
 
@@ -115,12 +196,13 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateStoreGroup([Bind("Id,ImporterName,DealerName,StoreGroupName,StoreGroupPhone,StoreGroupRegion,Email,Region,Area,IsDeleted,CreatedBy")] StoreGroupMaster storeGroupMaster)
+        public async Task<IActionResult> CreateStoreGroup([Bind("Id,ImporterName,DealerName,StoreGroupName,StoreGroupPhone,StoreGroupRegion,Email,Region,Area,HOAddress1,HOAddress2,HOAddress3,City,Postcode,IsDeleted,CreatedBy")] StoreGroupMaster storeGroupMaster)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                //   var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 storeGroupMaster.CreatedBy = userName;
                 _context.Add(storeGroupMaster);
                 await _context.SaveChangesAsync();
@@ -142,6 +224,19 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
+            {
+                List<ImporterMaster> Importer = new List<ImporterMaster>();
+                List<DealerMaster> Dealer = new List<DealerMaster>();
+
+                Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+                Dealer = (from lists in _context.Dealers.Where(x => x.IsDeleted == false) select lists).ToList();
+
+                Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+                Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--" });
+
+                ViewBag.ImporterList = Importer;
+                ViewBag.DealerList = Dealer;
+            }
             return View(storeGroupMaster);
         }
 
@@ -150,7 +245,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditStoreGroup(int id, [Bind("Id,ImporterName,DealerName,StoreGroupName,StoreGroupPhone,StoreGroupRegion,Email,Region,Area,IsDeleted,CreatedBy")] StoreGroupMaster storeGroupMaster)
+        public async Task<IActionResult> EditStoreGroup(int id, [Bind("Id,ImporterName,DealerName,StoreGroupName,StoreGroupPhone,StoreGroupRegion,Email,Region,Area,HOAddress1,HOAddress2,HOAddress3,City,Postcode,IsDeleted,CreatedBy")] StoreGroupMaster storeGroupMaster)
         {
             if (id != storeGroupMaster.Id)
             {
@@ -162,7 +257,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    // var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     storeGroupMaster.ModifiedBy = userName;
                     _context.Update(storeGroupMaster);
                     await _context.SaveChangesAsync();

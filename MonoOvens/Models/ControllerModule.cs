@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MonoOvens.Models
 {
+   
     public partial class ControllerModule
     {
+        [Key]
         public int Id { get; set; }
         public string FG_Code { get; set; }
         public string SerialNumber { get; set; }
@@ -23,15 +26,16 @@ namespace MonoOvens.Models
 
         // fields added for the power consumptions for perticuler controller.
         //public string Power { get; set; }
-        public int Elements { get; set; }
-        public float kWh_Rating_Element { get; set; }
-        public string LightType { get; set; }
-        public int Lights { get; set; }
-        public float kWh_Rating_Light { get; set; }
-        public int Fans { get; set; }
-        public float kWh_Rating_Fan { get; set; }
-        public float kWh_Rating_Damper { get; set; }
-        public float kWh_Rating_WaterSolenoid { get; set; }
+        //public int Elements { get; set; }
+        //public float kWh_Rating_Element { get; set; }
+        //public string LightType { get; set; }
+        //public int Lights { get; set; }
+        //public float kWh_Rating_Light { get; set; }
+        //public int Fans { get; set; }
+        //public float kWh_Rating_Fan { get; set; }
+        //public float kWh_Rating_Damper { get; set; }
+        //public float kWh_Rating_WaterSolenoid { get; set; }
+        public string AssignedToStore { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }

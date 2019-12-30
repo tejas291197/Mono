@@ -26,93 +26,173 @@ namespace MonoOvens.Controllers
         }
         public JsonResult StoreAjaxDataProvider(GridPagination param)
         {
+            //IEnumerable<StoreMaster> Stores = _context.Stores.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+            //var totalStores = _context.Stores.Count();
             var userId = _userManager.GetUserId(User);
-            var uId = _context.Users.Where(x => x.Id == userId);
-            IEnumerable<StoreMaster> Stores = _context.Stores.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
-            var totalStores = _context.Stores.Count();
+            var uId = _context.Users.Where(x => x.Id == userId);                      
+            var viewModel = from str in _context.Stores
+                            join imp in _context.Importers on str.ImporterName equals imp.Id.ToString()
+                            join dlr in _context.Dealers on str.DealerName equals dlr.Id.ToString()
+                            join stgp in _context.StoreGroups on str.StoreGroupName equals stgp.Id.ToString()
+                            where str.ImporterName == imp.Id.ToString()
+                            //where ast.AssetCategory == astC.Id
+                            //where ast.ControllerType == ctr.Id
+                            where str.IsDeleted == false
+                            where str.CreatedBy == userId
+                            select new
+                            {
+                                str.Id,
+                                impName = imp.ImporterName,
+                                dlrName = dlr.DealerName,
+                                stgpName = stgp.StoreGroupName,
+                                str.Region,
+                                str.Area,
+                                str.StoreCode,
+                                str.Type,
+                                str.StoreName,
+                                str.StoreAddress1,
+                                str.StoreAddress2,
+                                str.StorePhone,
+                                str.StoreContact,
+                                str.Zone,
+                                str.PostTown,
+                                str.StorePostcode,
+
+
+                            };
+            if (User.IsInRole("Administrator"))
+            {
+                viewModel = from str in _context.Stores
+                            join imp in _context.Importers on str.ImporterName equals imp.Id.ToString()
+                            join dlr in _context.Dealers on str.DealerName equals dlr.Id.ToString()
+                            join stgp in _context.StoreGroups on str.StoreGroupName equals stgp.Id.ToString()
+                            where str.ImporterName == imp.Id.ToString()
+                            //where ast.AssetCategory == astC.Id
+                            //where ast.ControllerType == ctr.Id
+                            where str.IsDeleted == false
+                            //where str.CreatedBy == userId
+                            select new
+                            {
+                                str.Id,
+                                impName = imp.ImporterName,
+                                dlrName = dlr.DealerName,
+                                stgpName = stgp.StoreGroupName,
+                                str.Region,
+                                str.Area,
+                                str.StoreCode,
+                                str.Type,
+                                str.StoreName,
+                                str.StoreAddress1,
+                                str.StoreAddress2,
+                                str.StorePhone,
+                                str.StoreContact,
+                                str.Zone,
+                                str.PostTown,
+                                str.StorePostcode,
+
+
+                            };
+            }
+                var totalStoreGroups = viewModel.ToList().Count();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc
             var sortColumnIndex = Convert.ToInt32(HttpContext.Request.Query["iSortCol_0"]);
-            if (!string.IsNullOrEmpty(param.sSearch)) Stores = Stores.Where(z => z.ImporterName.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.DealerName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.StoreGroupName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.CustomerName.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.CustomerPhone.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Email.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Region.ToLower().Contains(param.sSearch.ToLower())
-                                                                                || z.Area.ToLower().Contains(param.sSearch.ToLower())
+            if (!string.IsNullOrEmpty(param.sSearch)) viewModel = viewModel.Where(z => z.impName.ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.dlrName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.stgpName.ToString().ToLower().Contains(param.sSearch.ToLower())                                                                                
                                                                                 || z.StoreCode.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.Type.ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreAddress1.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StoreAddress2.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.StorePhone.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.StoreContact.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Zone.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Area.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                                || z.Region.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.PostTown.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                                 || z.StorePostcode.ToString().ToLower().Contains(param.sSearch.ToLower()));                                                                                
             switch (sortColumnIndex)
             {
                 case 1:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.ImporterName) : Stores.OrderByDescending(z => z.ImporterName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.impName) : viewModel.OrderByDescending(z => z.impName);
                     break;
                 case 2:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.DealerName) : Stores.OrderByDescending(z => z.DealerName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.dlrName) : viewModel.OrderByDescending(z => z.dlrName);
                     break;
                 case 3:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StoreGroupName) : Stores.OrderByDescending(z => z.StoreGroupName);
-                    break;
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.stgpName) : viewModel.OrderByDescending(z => z.stgpName);
+                    break;                
                 case 4:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.CustomerName) : Stores.OrderByDescending(z => z.CustomerName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreCode) : viewModel.OrderByDescending(z => z.StoreCode);
                     break;
                 case 5:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.CustomerPhone) : Stores.OrderByDescending(z => z.CustomerPhone);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Type) : viewModel.OrderByDescending(z => z.Type);
                     break;
                 case 6:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.Email) : Stores.OrderByDescending(z => z.Email);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreName) : viewModel.OrderByDescending(z => z.StoreName);
                     break;
                 case 7:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.Region) : Stores.OrderByDescending(z => z.Region);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreAddress1) : viewModel.OrderByDescending(z => z.StoreAddress1);
                     break;
                 case 8:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.Area) : Stores.OrderByDescending(z => z.Area);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreAddress2) : viewModel.OrderByDescending(z => z.StoreAddress2);
                     break;
                 case 9:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StoreCode) : Stores.OrderByDescending(z => z.StoreCode);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StorePhone) : viewModel.OrderByDescending(z => z.StorePhone);
                     break;
                 case 10:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.Type) : Stores.OrderByDescending(z => z.Type);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StoreContact) : viewModel.OrderByDescending(z => z.StoreContact);
                     break;
                 case 11:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StoreName) : Stores.OrderByDescending(z => z.StoreName);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Zone) : viewModel.OrderByDescending(z => z.Zone);
                     break;
                 case 12:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StoreAddress1) : Stores.OrderByDescending(z => z.StoreAddress1);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Area) : viewModel.OrderByDescending(z => z.Area);
                     break;
                 case 13:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StoreAddress2) : Stores.OrderByDescending(z => z.StoreAddress2);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Region) : viewModel.OrderByDescending(z => z.Region);
                     break;
                 case 14:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.PostTown) : Stores.OrderByDescending(z => z.PostTown);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.PostTown) : viewModel.OrderByDescending(z => z.PostTown);
                     break;
                 case 15:
-                    Stores = sortDirection == "asc" ? Stores.OrderBy(z => z.StorePostcode) : Stores.OrderByDescending(z => z.StorePostcode);
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.StorePostcode) : viewModel.OrderByDescending(z => z.StorePostcode);
                     break;
                 default:
-                    Stores = Stores.OrderByDescending(z => z.Id);
+                    viewModel = viewModel.OrderByDescending(z => z.Id);
                     break;
             }
-            var filteredStoresCount = Stores.Count();
-            Stores = Stores.Skip(param.iDisplayStart).Take(param.iDisplayLength);
+            var filteredStoresCount = viewModel.Count();
+            viewModel = viewModel.Skip(param.iDisplayStart).Take(param.iDisplayLength);
             return Json(new
             {
                 sEcho = param.sEcho,
                 //    iTotalRecords = totalStores,
                 iTotalRecords = filteredStoresCount,
                 iTotalDisplayRecords = filteredStoresCount,
-                aaData = Stores
+                aaData = viewModel
             });
         }
         
         public IActionResult CreateStore()
         {
+            List<ImporterMaster> Importer = new List<ImporterMaster>();
+            List<DealerMaster> Dealer = new List<DealerMaster>();
+            List<StoreGroupMaster> StoreGroup = new List<StoreGroupMaster>();
+
+            Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+            Dealer = (from lists in _context.Dealers.Where(x => x.IsDeleted == false) select lists).ToList();
+            StoreGroup = (from lists in _context.StoreGroups.Where(x => x.IsDeleted == false) select lists).ToList();
+
+            Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+            Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--" });
+            StoreGroup.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "--Select--" });
+
+            ViewBag.ImporterList = Importer;
+            ViewBag.DealerList = Dealer;
+            ViewBag.StoreGroupList = StoreGroup;
+
             return View();
         }
 
@@ -121,12 +201,13 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateStore([Bind("Id,ImporterName,DealerName,StoreGroupName,CustomerName,CustomerPhone,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode,IsDeleted,CreatedBy")] StoreMaster storeMaster)
+        public async Task<IActionResult> CreateStore([Bind("Id,ImporterName,DealerName,StoreGroupName,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,StorePhone,StoreContact,Zone,Area,Region,PostTown,StorePostcode,IsDeleted,CreatedBy,ModifiedBy")] StoreMaster storeMaster)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x=>x.FirstName+" "+x.LastName).FirstOrDefault() ;
+                //   var userName = _context.Users.Where(x => x.Id == user).Select(x=>x.FirstName+" "+x.LastName).FirstOrDefault() ;
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 storeMaster.CreatedBy =  userName;
                 _context.Add(storeMaster);
                 await _context.SaveChangesAsync();
@@ -148,7 +229,25 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
-            return View(storeMaster);
+            {
+                List<ImporterMaster> Importer = new List<ImporterMaster>();
+                List<DealerMaster> Dealer = new List<DealerMaster>();
+                List<StoreGroupMaster> StoreGroup = new List<StoreGroupMaster>();
+
+                Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+                Dealer = (from lists in _context.Dealers.Where(x => x.IsDeleted == false) select lists).ToList();
+                StoreGroup = (from lists in _context.StoreGroups.Where(x => x.IsDeleted == false) select lists).ToList();
+
+                Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+                Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--" });
+                StoreGroup.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "--Select--" });
+
+                ViewBag.ImporterList = Importer;
+                ViewBag.DealerList = Dealer;
+                ViewBag.StoreGroupList = StoreGroup;
+
+                return View(storeMaster);
+            }
         }
 
         // POST: StoreMasters/Edit/5
@@ -156,7 +255,7 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditStore(int id, [Bind("Id,ImporterName,DealerName,StoreGroupName,CustomerName,CustomerPhone,Email,Region,Area,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,PostTown,StorePostcode,IsDeleted,CreatedBy")] StoreMaster storeMaster)
+        public async Task<IActionResult> EditStore(int id, [Bind("Id,ImporterName,DealerName,StoreGroupName,StoreCode,Type,StoreName,StoreAddress1,StoreAddress2,StorePhone,StoreContact,Zone,Area,Region,PostTown,StorePostcode,IsDeleted,CreatedBy,ModifiedBy")] StoreMaster storeMaster)
         {
             if (id != storeMaster.Id)
             {
@@ -168,7 +267,8 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    //var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     storeMaster.ModifiedBy = userName;
                     _context.Update(storeMaster);
                     await _context.SaveChangesAsync();
@@ -185,7 +285,7 @@ namespace MonoOvens.Controllers
                     }
                 }
                 return RedirectToAction(nameof(StoreList));
-            }
+            }            
             return View(storeMaster);
         }
 

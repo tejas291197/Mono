@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -39,7 +38,7 @@ namespace MonoOvens.Controllers
             var userId = _userManager.GetUserId(User);
             var uId = _context.Users.Where(x => x.Id == userId);
             //IEnumerable<AssetMaster> viewModel = _context.Assets;
-            //  IEnumerable<AssetMaster> viewModel = _context.Assets.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+            // IEnumerable<AssetMaster> viewModel = _context.Assets.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
             var viewModel = from ast in _context.Assets
                             join ctr in _context.ControllerType on ast.ControllerType equals ctr.Id
                             join astT in _context.AssetType on ast.AssetType equals astT.Id
@@ -61,15 +60,15 @@ namespace MonoOvens.Controllers
                                 ast.Handed,
                                 ast.Format,
                                 ast.Power,
-                                //ast.Elements,
-                                //ast.kWh_Rating_Element,
-                                //ast.LightType,
-                                //ast.Lights,
-                                //ast.kWh_Rating_Light,
-                                //ast.Fans,
-                                //ast.kWh_Rating_Fan,
-                                //ast.kWh_Rating_Damper,
-                                //ast.kWh_Rating_WaterSolenoid,
+                                ast.Elements,
+                                ast.kWh_Rating_Element,
+                                ast.LightType,
+                                ast.Lights,
+                                ast.kWh_Rating_Light,
+                                ast.Fans,
+                                ast.kWh_Rating_Fan,
+                                ast.kWh_Rating_Damper,
+                                ast.kWh_Rating_WaterSolenoid,
 
 
                             };
@@ -90,9 +89,9 @@ namespace MonoOvens.Controllers
                                                                              || z.Trays.ToString().ToLower().Contains(param.sSearch.ToLower())
                                                                              || z.TraySize.ToLower().Contains(param.sSearch.ToLower())                                                                            
                                                                              || z.Handed.ToString().ToLower().Contains(param.sSearch.ToLower())
-                                                                             || z.Power.ToString().ToLower().Contains(param.sSearch.ToLower())   );
-            //|| z.Elements.ToString().ToLower().Contains(param.sSearch.ToLower())
-            //|| z.Format.ToLower().Contains(param.sSearch.ToLower())) ;
+                                                                             || z.Power.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Elements.ToString().ToLower().Contains(param.sSearch.ToLower())
+                                                                             || z.Format.ToLower().Contains(param.sSearch.ToLower())) ;
 
             switch (sortColumnIndex)
             {
@@ -126,9 +125,33 @@ namespace MonoOvens.Controllers
                 case 10:
                     viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Power) : viewModel.OrderByDescending(z => z.Power);
                     break;
-                //case 11:
-                //    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Elements) : viewModel.OrderByDescending(z => z.Elements);
-                //    break;
+                case 11:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Elements) : viewModel.OrderByDescending(z => z.Elements);
+                    break;
+                case 12:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.kWh_Rating_Element) : viewModel.OrderByDescending(z => z.kWh_Rating_Element);
+                    break;
+                case 13:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.LightType) : viewModel.OrderByDescending(z => z.LightType);
+                    break;
+                case 14:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Lights) : viewModel.OrderByDescending(z => z.Lights);
+                    break;
+                case 15:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.kWh_Rating_Light) : viewModel.OrderByDescending(z => z.kWh_Rating_Light);
+                    break;
+                case 16:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.Fans) : viewModel.OrderByDescending(z => z.Fans);
+                    break;
+                case 17:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.kWh_Rating_Fan) : viewModel.OrderByDescending(z => z.kWh_Rating_Fan);
+                    break;
+                case 18:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.kWh_Rating_Damper) : viewModel.OrderByDescending(z => z.kWh_Rating_Damper);
+                    break;
+                case 19:
+                    viewModel = sortDirection == "asc" ? viewModel.OrderBy(z => z.kWh_Rating_WaterSolenoid) : viewModel.OrderByDescending(z => z.kWh_Rating_WaterSolenoid);
+                    break;
                 default:
                     viewModel = viewModel.OrderByDescending(z => z.Id);
                     break;
@@ -200,12 +223,14 @@ namespace MonoOvens.Controllers
         //     "Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
         //      "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid")] AssetMaster assetMaster)
         public async Task<IActionResult> CreateAsset([Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType," +
-            "Controllers,Trays,TraySize,Handed,Format,Power")] AssetMaster assetMaster)
+            "Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
+              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,CreatedBy,modifiedby")] AssetMaster assetMaster)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.GetUserId(User);
-                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                //  var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                 assetMaster.CreatedBy = userName;
                 _context.Add(assetMaster);
                 await _context.SaveChangesAsync();
@@ -227,23 +252,23 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
-            //List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();        
-            //List<ControllerTypeMaster> CType = new List<ControllerTypeMaster>();
-            //List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
+            List<AssetCategoryMaster> Category = new List<AssetCategoryMaster>();
+            List<ControllerTypeMaster> CType = new List<ControllerTypeMaster>();
+            List<AssetTypeMaster> AType = new List<AssetTypeMaster>();
 
-            //Category = (from lists in _context.AssetCategory select lists).ToList();           
-            //CType = (from lists in _context.ControllerType select lists).ToList();
-            //AType = (from lists in _context.AssetType select lists).ToList();
+            Category = (from lists in _context.AssetCategory select lists).ToList();
+            CType = (from lists in _context.ControllerType select lists).ToList();
+            AType = (from lists in _context.AssetType select lists).ToList();
 
-            //Category.Insert(0, new AssetCategoryMaster { Id = 0, AssetCategory = "---Select---" });         
-            //CType.Insert(0, new ControllerTypeMaster { Id = 0, ControllerType = "---Select---" });
-            //AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
-            
-            //ViewBag.ACateogiesedit = Category;           
-            //ViewBag.CTypesedit = CType;
-            //ViewBag.ATypesedit = AType;
-            
-            return View();
+            Category.Insert(0, new AssetCategoryMaster { Id = 0, AssetCategory = "---Select---" });
+            CType.Insert(0, new ControllerTypeMaster { Id = 0, ControllerType = "---Select---" });
+            AType.Insert(0, new AssetTypeMaster { Id = 0, AssetType = "---Select---" });
+
+            ViewBag.ACateogiesedit = Category;
+            ViewBag.CTypesedit = CType;
+            ViewBag.ATypesedit = AType;
+
+            return View(assetMaster);
         }
 
         // POST: Asset/Edit/5
@@ -251,9 +276,10 @@ namespace MonoOvens.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power")] AssetMaster assetMaster)
-        
-            //public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power")] AssetMaster assetMaster)
+        public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
+              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,modifiedby,CreatedBy")] AssetMaster assetMaster)
+
+        //public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power")] AssetMaster assetMaster)
         {
             if (id != assetMaster.Id)
             {
@@ -265,8 +291,9 @@ namespace MonoOvens.Controllers
                 try
                 {
                     var user = _userManager.GetUserId(User);
-                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
-                    assetMaster.ModifiedBy = userName;
+                    // var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+                    var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
+                    assetMaster.modifiedby = userName;
                     _context.Update(assetMaster);
                     await _context.SaveChangesAsync();
                 }

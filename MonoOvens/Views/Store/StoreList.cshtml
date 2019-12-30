@@ -253,22 +253,7 @@ section Scripts{
     </th>
     <th>
         Store Group Name
-    </th>
-    <th>
-        Customer Name
-    </th>
-    <th>
-        Customer Phone
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Email)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Region)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Area)
-    </th>
+    </th>    
     <th>
         Store Code
     </th>
@@ -281,7 +266,21 @@ section Scripts{
     <th>
         Store Address
     </th>
-
+    <th>
+        Store Phone
+    </th>
+    <th>
+        Store Contact
+    </th>
+    <th>
+        Zone
+    </th>
+    <th>
+        Area
+    </th>
+    <th>
+        Region
+    </th>
     <th></th>
     </tr>
     </thead>
@@ -369,26 +368,23 @@ section Scripts{
                 ],
                 "columns": [
                     { "data": "id" },
-                    { "data": "importerName" },
-                    { "data": "dealerName" },
-                    { "data": "storeGroupName" },
-                    { "data": "customerName" },
-                    { "data": "customerPhone" },
-                    { "data": "email" },
-                    { "data": "region" },
-                    { "data": "area" },
+                    { "data": "impName" },
+                    { "data": "dlrName" },
+                    { "data": "stgpName" },
                     { "data": "storeCode" },
                     { "data": "type" },
                     { "data": "storeName" },
-                    {
-                        "data": "storeAddress1",
+                     {
+                        "data": "storeAddress",
                         "render": function (data, type, row) {
                     return row.storeAddress1 + '&nbsp;' + row.storeAddress2  + '&nbsp;' + row.postTown + '&nbsp;' +row.storePostcode
                         }
-                    },
-                    //{ "data": "StoreAddress2" },
-                    //{ "data": "postTown" },
-                    //{ "data": "storePostcode" },
+                    },    
+                    { "data": "storePhone" },
+                    { "data": "storeContact" },
+                    { "data": "zone" },
+                    { "data": "area" },
+                    { "data": "region" },                                                       
                     {
                         "orderable": false,
                         "searchable": false,
