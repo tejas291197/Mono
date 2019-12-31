@@ -36,63 +36,84 @@
         </div>
         <div style=" clear:left">
             <br />
-            <fieldset>
-                <legend align="center">Assign Asset :</legend><br />
+            <fieldset>                
                 @if (User.IsInRole("Administrator"))
-                {                              
-                <div class="form-group" style="float:left; padding-right:25px">
-                    <label class="control-label">Select Importer :</label>
-                    <input asp-items="@ViewBag.ImportersList" class="form-control" />
-                </div>
+                {
+                    <legend align="center">Assign Asset :</legend><br />
+                    <div class="form-group" style="float:left; padding-right:25px">
+                        <label class="control-label">Select Importer :</label>
+                        <select class="form-control" onblur="check(1)"
+                                asp-items="@(new SelectList(@ViewBag.ImporterList, "Id" ,"ImporterName"))" id="iname">
+                        </select>
+                    </div>
 
-                <div class="form-group" style="float:left; padding-right:25px">
-                    <label class="control-label">Select Dealer :</label>
-                    <input asp-items="@ViewBag.DealersList" class="form-control" />
-                </div>
-                <div class="form-group" style="float:left; padding-right:25px">
-                    <label class="control-label">Select StoreGroup :</label>
-                    <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
-
-                </div>
-                <div class="form-group" style="float:left; padding-right:25px">
-                    <label class="control-label">Select Store :</label>
-                    <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
-                </div>
+                    <div class="form-group" style="float:left; padding-right:25px">
+                        <label class="control-label">Select Dealer :</label>
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.DealerList, "Id" ,"DealerName"))" id="dname">
+        </select>*@
+                        <select id="dealersList" class="form-control" required>
+                        </select>
+                    </div>
+                    <div class="form-group" style="float:left; padding-right:25px">
+                        <label class="control-label">Select StoreGroup :</label>
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.StoreGroupList, "Id" ,"StoreGroupName"))" id="sname">
+        </select>*@
+                        <select id="storeGroupsList" class="form-control" required>
+                        </select>
+                    </div>
+                    <div class="form-group" style="float:left; padding-right:25px">
+                        <label class="control-label">Select Store :</label>
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.StoreList, "Id" ,"StoreName"))" id="sname">
+        </select>*@
+                        <select id="storesList" class="form-control" asp-for="AssignedToStore" required>
+                        </select>
+                    </div>
                 }
                 else if (User.IsInRole("Importer"))
-                {                   
-
+                {
+                    <legend align="center">Assign Asset :</legend><br />
                     <div class="form-group" style="float:left; padding-right:33px">
                         <label class="control-label">Select Dealer:</label>
-                        <input asp-items="@ViewBag.DealersList" class="form-control" />
+                        <select class="form-control" onblur="check(1)"
+                                asp-items="@(new SelectList(@ViewBag.DealerList, "Id" ,"DealerName"))" id="dname">
+                        </select> 
                     </div>
                     <div class="form-group" style="float:left; padding-right:33px">
                         <label class="control-label">Select StoreGroup:</label>
-                        <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
-
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.StoreGroupList, "Id" ,"StoreGroupName"))" id="sname">
+        </select>*@
+                        <select id="storeGroupsList" class="form-control" required>
+                        </select>
                     </div>
                     <div class="form-group" style="float:left; padding-right:33px">
                         <label class="control-label">Select Store:</label>
-                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.StoreList, "Id" ,"StoreName"))" id="sname">
+        </select>*@
+                        <select id="storesList" class="form-control" asp-for="AssignedToStore" required>
+                        </select>
                     </div>
                 }
                 else if (User.IsInRole("Dealer"))
                 {
+                    <legend align="center">Assign Asset :</legend><br />
                     <div class="form-group" style="float:left; padding-right:50px">
                         <label class="control-label">Select StoreGroup:</label>
-                        <input asp-items="@ViewBag.StoreGroupsList" class="form-control" />
-
+                        <select class="form-control" onblur="check(1)"
+                                asp-items="@(new SelectList(@ViewBag.StoreGroupList, "Id" ,"StoreGroupName"))" id="sname">
+                        </select>
                     </div>
                     <div class="form-group" style="float:left; padding-right:50px">
                         <label class="control-label">Select Store:</label>
-                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
-                    </div>
-                }
-                else if (User.IsInRole("StoreGroup"))
-                {
-                    <div class="form-group" style="float:left; padding-right:100px">
-                        <label class="control-label">Select Store:</label>
-                        <input asp-for="AssignedToStore" asp-items="@ViewBag.StoresList" class="form-control" />
+                        @*<select class="form-control" onblur="check(1)"
+                asp-items="@(new SelectList(@ViewBag.StoreList, "Id" ,"StoreName"))" id="sname">
+        </select>*@
+                        <select id="storesList" class="form-control" asp-for="AssignedToStore" required>
+                        </select>
                     </div>
                 }
                 else { }
@@ -264,8 +285,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @*<script>
-        $('#lightsType').on('change', function () {
+   <script>
+       @*  $('#lightsType').on('change', function () {
             var light = $('#lightsType option:selected').val();
             if (light == "Halogen") {
                 $("#lightsRating option[value='0.02']").removeAttr("selected", "selected");
@@ -276,6 +297,82 @@
                 $("#lightsRating option[value='0.0024']").attr("selected", "selected");
             
             }
+        })*@
+
+           $('#iname').click( function () {
+                var categoryVal = $('#iname option:selected').val();
+
+              //  console.log(categoryVal);
+                $.ajax({
+                    url: '/ControllerModules/GetDelearsListfromImporterId',
+                    method: 'POST',
+                    data: { id: categoryVal },
+                    success: function (data) {
+                        $("#dealersList").empty();
+                        // $("#atypemain").append("<option value='0'>--Select--</option>");                       
+                        $.each(data, function (index, optiondata) {                          
+                            for (var i = 0; i < optiondata.length; i++) {                               
+                                $("#dealersList").append("<option value=" + optiondata[i].id + ">" + optiondata[i].dealerName + "</option>")
+                                // $("#atypemain").append($("<option />").val(optiondata[i].id).text(optiondata[i].assetType));
+                            }                           
+                        });                        
+                    },
+                    error: function (data) {
+                       // alert("There is some error in asset category classification.")
+                    }
+
+                })
+           })
+
+        $('#dname').click( function () {
+                var categoryVal = $('#dname option:selected').val();
+
+              //  console.log(categoryVal);
+                $.ajax({
+                    url: '/ControllerModules/GetStoreGroupsListfromDealerId',
+                    method: 'POST',
+                    data: { id: categoryVal },
+                    success: function (data) {
+                        $("#StoreGroupList").empty();
+                        // $("#atypemain").append("<option value='0'>--Select--</option>");                       
+                        $.each(data, function (index, optiondata) {                          
+                            for (var i = 0; i < optiondata.length; i++) {                               
+                                $("#StoreGroupList").append("<option value=" + optiondata[i].id + ">" + optiondata[i].dealerName + "</option>")
+                                // $("#atypemain").append($("<option />").val(optiondata[i].id).text(optiondata[i].assetType));
+                            }                           
+                        });                        
+                    },
+                    error: function (data) {
+                       // alert("There is some error in asset category classification.")
+                    }
+
+                })
         })
-    </script>*@
+
+        $('#sname').click( function () {
+                var categoryVal = $('#sname option:selected').val();
+
+              //  console.log(categoryVal);
+                $.ajax({
+                    url: '/ControllerModules/GetStoresListfromStoreGroupId',
+                    method: 'POST',
+                    data: { id: categoryVal },
+                    success: function (data) {
+                        $("#StoreList").empty();
+                        // $("#atypemain").append("<option value='0'>--Select--</option>");                       
+                        $.each(data, function (index, optiondata) {                          
+                            for (var i = 0; i < optiondata.length; i++) {                               
+                                $("#StoreList").append("<option value=" + optiondata[i].id + ">" + optiondata[i].dealerName + "</option>")
+                                // $("#atypemain").append($("<option />").val(optiondata[i].id).text(optiondata[i].assetType));
+                            }                           
+                        });                        
+                    },
+                    error: function (data) {
+                       // alert("There is some error in asset category classification.")
+                    }
+
+                })
+            })
+          
+    </script>
 }

@@ -242,9 +242,9 @@ namespace MonoOvens.Controllers
                 Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--" });
                 StoreGroup.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "--Select--" });
 
-                ViewBag.ImporterList = Importer;
-                ViewBag.DealerList = Dealer;
-                ViewBag.StoreGroupList = StoreGroup;
+                ViewBag.ImporterListEdit = Importer;
+                ViewBag.DealerListEdit = Dealer;
+                ViewBag.StoreGroupListEdit = StoreGroup;
 
                 return View(storeMaster);
             }

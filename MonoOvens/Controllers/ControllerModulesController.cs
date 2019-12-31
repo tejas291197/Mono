@@ -15,6 +15,9 @@ namespace MonoOvens.Controllers
     {
         private readonly MonoContext _context;
         private readonly UserManager<UserMaster> _userManager;
+        private static int selectImpid;
+        private static int selectDealerid;
+        private static int selectStoreGroupid;
 
         public ControllerModulesController(MonoContext context,UserManager<UserMaster> userManager)
         {
@@ -130,7 +133,7 @@ namespace MonoOvens.Controllers
 
         // GET: ControllerModules/Create
         public IActionResult CreateController()
-        {
+        {            
             List<AssetMaster> Asset = new List<AssetMaster>();
 
             Asset = (from lists in _context.Assets.Where(x => x.IsDeleted == false) select lists).ToList();
@@ -139,9 +142,73 @@ namespace MonoOvens.Controllers
 
             ViewBag.FGAsset = Asset;
 
+            List<ImporterMaster> Importer = new List<ImporterMaster>();
+            List<DealerMaster> Dealer = new List<DealerMaster>();
+            List<StoreGroupMaster> StoreGroup = new List<StoreGroupMaster>();
+            List<StoreMaster> Store = new List<StoreMaster>();
+
+            Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+            Dealer = (from lists in _context.Dealers where lists.IsDeleted==false select lists).ToList();
+            //  StoreGroup = (from lists in _context.StoreGroups.Where (/*x.IsDeleted == false || */lists.DealerName == id) select lists).ToList();
+            // StoreGroup = (from lists in _context.StoreGroups where lists.ImporterName.Equals(id) select lists).ToList();
+            StoreGroup = (from lists in _context.StoreGroups where lists.IsDeleted == false select lists).ToList();
+            Store =  (from lists in _context.Stores where lists.IsDeleted == false select lists).ToList();
+            // Store = (from lists in _context.Stores.Where(/*x => x.IsDeleted == false*/lists.StoreGroups == id) select lists).ToList();
+
+            Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--" });
+            Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--", ImporterName = "0" });
+            StoreGroup.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "--Select--", DealerName = "0" });
+            Store.Insert(0, new StoreMaster { Id = 0, StoreName = "--Select--", StoreGroupName = "0" });
+
+            ViewBag.ImporterList = Importer;
+            ViewBag.DealerList = Dealer;
+            ViewBag.StoreGroupList = StoreGroup;
+            ViewBag.StoreList = Store;
+
             return View();
         }
+        public JsonResult GetDelearsListfromImporterId(int id)
+        {
+            selectImpid = id;
+            List<DealerMaster> Dealers = new List<DealerMaster>();
+            Dealers = (from lists in _context.Dealers where lists.ImporterName.Equals(id)  select lists).ToList();
+            Dealers.Insert(0, new DealerMaster { Id = 0, DealerName = "---Select---" });
+            ViewBag.Dealers = Dealers;
+                
+            return Json(new
+            {
+                data = Dealers
+            });
+        }
 
+        public JsonResult GetStoreGroupsListfromDealerId(int id)
+        {
+            selectDealerid = id;
+            List<StoreGroupMaster> Storegrps = new List<StoreGroupMaster>();
+            Storegrps = (from lists in _context.StoreGroups where lists.DealerName.Equals(id) select lists).ToList();
+            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---" });
+            ViewBag.StoreGroups = Storegrps;
+
+            return Json(new
+            {
+                data = Storegrps
+            });
+        }
+
+
+        public JsonResult GetStoresListfromStoreGroupId(int id)
+        {
+            selectStoreGroupid = id;
+            List<StoreMaster> stores = new List<StoreMaster>();
+            stores = (from lists in _context.Stores where lists.StoreGroupName.Equals(id) select lists).ToList();
+            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---" });
+            ViewBag.Stores = stores;
+
+            return Json(new
+            {
+                data = stores
+            });
+        }
         // POST: ControllerModules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -177,6 +244,8 @@ namespace MonoOvens.Controllers
                 return NotFound();
             }
             {
+                //selectImpid = id;
+
                 List<AssetMaster> Asset = new List<AssetMaster>();
 
                 Asset = (from lists in _context.Assets.Where(x => x.IsDeleted == false) select lists).ToList();
@@ -184,6 +253,26 @@ namespace MonoOvens.Controllers
                 Asset.Insert(0, new AssetMaster { Id = 0, FG_Code="--Select--"});
 
                 ViewBag.FGAssetedit = Asset;
+
+                List<ImporterMaster> Importer = new List<ImporterMaster>();
+                List<DealerMaster> Dealer = new List<DealerMaster>();
+                List<StoreGroupMaster> StoreGroup = new List<StoreGroupMaster>();
+                List<StoreMaster> Store = new List<StoreMaster>();
+
+                Importer = (from lists in _context.Importers.Where(x => x.IsDeleted == false) select lists).ToList();
+                Dealer = (from lists in _context.Dealers.Where(x => x.IsDeleted == false) select lists).ToList();
+                StoreGroup = (from lists in _context.StoreGroups.Where(x => x.IsDeleted == false) select lists).ToList();
+                Store = (from lists in _context.Stores.Where(x => x.IsDeleted == false) select lists).ToList();
+
+                Importer.Insert(0, new ImporterMaster { Id = 0, ImporterName = "--Select--"});
+                Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "--Select--", ImporterName = "0" });
+                StoreGroup.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "--Select--", DealerName = "0" });
+                Store.Insert(0, new StoreMaster { Id = 0, StoreName = "--Select--", StoreGroupName = "0" });
+
+                ViewBag.ImporterListEdit = Importer;
+                ViewBag.DealerListEdit = Dealer;
+                ViewBag.StoreGroupListEdit = StoreGroup;
+                ViewBag.StoreListEdit = Store;
             }
             return View(controllerModule);
         }
@@ -227,7 +316,46 @@ namespace MonoOvens.Controllers
             }
             return View(controllerModule);
         }
+        public JsonResult GetDealerNameByImpoterName(int id)
+        {
+            selectImpid = id;
+            List<DealerMaster> Dealer = new List<DealerMaster>();
+            Dealer = (from lists in _context.Dealers where lists.ImporterName == "id" select lists).ToList();
+            Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "---Select---", ImporterName = "0" });
+            ViewBag.DealerList = Dealer;              
+            return Json(new
+            {
+                data = Dealer
+            });
+        }
+        public JsonResult GetStoreGroupsListEditfromDealerId(int id)
+        {
+            selectDealerid = id;
+            List<StoreGroupMaster> Storegrps = new List<StoreGroupMaster>();
+            Storegrps = (from lists in _context.StoreGroups where lists.DealerName.Equals(id) select lists).ToList();
+            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---" });
+            ViewBag.StoreGroups = Storegrps;
 
+            return Json(new
+            {
+                data = Storegrps
+            });
+        }
+
+
+        public JsonResult GetStoresListEditfromStoreGroupId(int id)
+        {
+            selectStoreGroupid = id;
+            List<StoreMaster> stores = new List<StoreMaster>();
+            stores = (from lists in _context.Stores where lists.StoreGroupName.Equals(id) select lists).ToList();
+            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---" });
+            ViewBag.Stores = stores;
+
+            return Json(new
+            {
+                data = stores
+            });
+        }
         //To soft delete a record.
         public JsonResult Delete(int? id)
         {
