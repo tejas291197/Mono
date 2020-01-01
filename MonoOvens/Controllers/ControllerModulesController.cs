@@ -172,7 +172,7 @@ namespace MonoOvens.Controllers
             selectImpid = id;
             List<DealerMaster> Dealers = new List<DealerMaster>();
             Dealers = (from lists in _context.Dealers where lists.ImporterName.Equals(id)  select lists).ToList();
-            Dealers.Insert(0, new DealerMaster { Id = 0, DealerName = "---Select---" });
+            Dealers.Insert(0, new DealerMaster { Id = 0, DealerName = "---Select---", ImporterName = "0" });
             ViewBag.Dealers = Dealers;
                 
             return Json(new
@@ -186,7 +186,7 @@ namespace MonoOvens.Controllers
             selectDealerid = id;
             List<StoreGroupMaster> Storegrps = new List<StoreGroupMaster>();
             Storegrps = (from lists in _context.StoreGroups where lists.DealerName.Equals(id) select lists).ToList();
-            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---" });
+            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---", DealerName = "0" });
             ViewBag.StoreGroups = Storegrps;
 
             return Json(new
@@ -201,7 +201,7 @@ namespace MonoOvens.Controllers
             selectStoreGroupid = id;
             List<StoreMaster> stores = new List<StoreMaster>();
             stores = (from lists in _context.Stores where lists.StoreGroupName.Equals(id) select lists).ToList();
-            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---" });
+            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---", StoreGroupName = "0" });
             ViewBag.Stores = stores;
 
             return Json(new
@@ -323,7 +323,8 @@ namespace MonoOvens.Controllers
             List<DealerMaster> Dealer = new List<DealerMaster>();
             Dealer = (from lists in _context.Dealers where lists.ImporterName == "id" select lists).ToList();
             Dealer.Insert(0, new DealerMaster { Id = 0, DealerName = "---Select---", ImporterName = "0" });
-            ViewBag.DealerList = Dealer;              
+            ViewBag.DealerList = Dealer;     
+            
             return Json(new
             {
                 data = Dealer
@@ -334,7 +335,7 @@ namespace MonoOvens.Controllers
             selectDealerid = id;
             List<StoreGroupMaster> Storegrps = new List<StoreGroupMaster>();
             Storegrps = (from lists in _context.StoreGroups where lists.DealerName.Equals(id) select lists).ToList();
-            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---" });
+            Storegrps.Insert(0, new StoreGroupMaster { Id = 0, StoreGroupName = "---Select---", DealerName = "0" });
             ViewBag.StoreGroups = Storegrps;
 
             return Json(new
@@ -349,7 +350,7 @@ namespace MonoOvens.Controllers
             selectStoreGroupid = id;
             List<StoreMaster> stores = new List<StoreMaster>();
             stores = (from lists in _context.Stores where lists.StoreGroupName.Equals(id) select lists).ToList();
-            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---" });
+            stores.Insert(0, new StoreMaster { Id = 0, StoreName = "---Select---", StoreGroupName="0" });
             ViewBag.Stores = stores;
 
             return Json(new
