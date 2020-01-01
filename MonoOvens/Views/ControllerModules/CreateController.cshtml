@@ -77,7 +77,7 @@
                     <legend align="center">Assign Asset :</legend><br />
                     <div class="form-group" style="float:left; padding-right:33px">
                         <label class="control-label">Select Dealer:</label>
-                        <select class="form-control" onblur="check(1)"
+                        <select class="form-control" onblur="check(2)"
                                 asp-items="@(new SelectList(@ViewBag.DealerList, "Id" ,"DealerName"))" id="dname">
                         </select> 
                     </div>
@@ -103,7 +103,7 @@
                     <legend align="center">Assign Asset :</legend><br />
                     <div class="form-group" style="float:left; padding-right:50px">
                         <label class="control-label">Select StoreGroup:</label>
-                        <select class="form-control" onblur="check(1)"
+                        <select class="form-control" onblur="check(3)"
                                 asp-items="@(new SelectList(@ViewBag.StoreGroupList, "Id" ,"StoreGroupName"))" id="sname">
                         </select>
                     </div>
