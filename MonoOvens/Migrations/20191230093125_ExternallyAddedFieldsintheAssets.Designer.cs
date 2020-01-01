@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonoOvens.Models;
 
 namespace MonoOvens.Migrations
 {
     [DbContext(typeof(MonoContext))]
-    partial class MonoContextModelSnapshot : ModelSnapshot
+    [Migration("20191230093125_ExternallyAddedFieldsintheAssets")]
+    partial class ExternallyAddedFieldsintheAssets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

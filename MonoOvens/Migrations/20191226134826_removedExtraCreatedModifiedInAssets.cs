@@ -6,10 +6,10 @@ namespace MonoOvens.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ModifiedBy",
-                table: "Assets",
-                newName: "modifiedby");
+            //migrationBuilder.RenameColumn(
+            //    name: "ModifiedBy",
+            //    table: "Assets",
+            //    newName: "modifiedby");
 
             //migrationBuilder.AddColumn<string>(
             //    name: "CreatedBy",

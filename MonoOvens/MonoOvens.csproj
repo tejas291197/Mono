@@ -30,6 +30,8 @@
     <Compile Remove="Migrations\20191017100628_CustomerAdded.Designer.cs" />
     <Compile Remove="Migrations\20191216042219_AddedCreatedBy_ModifiedByFieldsInAllModels.Designer.cs" />
     <Compile Remove="Migrations\20191226122258_fieldsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20191230090410_createdbyremoved.cs" />
+    <Compile Remove="Migrations\20191230090410_createdbyremoved.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -224,7 +224,7 @@ namespace MonoOvens.Controllers
         //      "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid")] AssetMaster assetMaster)
         public async Task<IActionResult> CreateAsset([Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType," +
             "Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
-              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,CreatedBy,modifiedby")] AssetMaster assetMaster)
+              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,CreatedBy,Modifiedby")] AssetMaster assetMaster)
         {
             if (ModelState.IsValid)
             {
@@ -277,7 +277,7 @@ namespace MonoOvens.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power,Elements,kWh_Rating_Element,LightType,Lights,kWh_Rating_Light,Fans," +
-              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,modifiedby,CreatedBy")] AssetMaster assetMaster)
+              "kWh_Rating_Fan,kWh_Rating_Damper,kWh_Rating_WaterSolenoid,Modifiedby,CreatedBy")] AssetMaster assetMaster)
 
         //public async Task<IActionResult> EditAsset(int id, [Bind("Id,FG_Code,AssetCategory,AssetType,ControllerType,Controllers,Trays,TraySize,Handed,Format,Power")] AssetMaster assetMaster)
         {
@@ -293,7 +293,7 @@ namespace MonoOvens.Controllers
                     var user = _userManager.GetUserId(User);
                     // var userName = _context.Users.Where(x => x.Id == user).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
                     var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
-                    assetMaster.modifiedby = userName;
+                    assetMaster.ModifiedBy = userName;
                     _context.Update(assetMaster);
                     await _context.SaveChangesAsync();
                 }

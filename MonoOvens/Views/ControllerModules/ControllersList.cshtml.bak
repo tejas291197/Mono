@@ -1,0 +1,315 @@
+﻿@model IEnumerable<MonoOvens.Models.ControllerModule>
+
+@{
+    ViewData["Title"] = "ControllersList";
+}
+
+<h2>Controllers</h2>
+@if (!User.IsInRole("Store"))
+{
+    <p>
+        <a asp-action="CreateController">Create New</a>
+    </p>
+}
+
+<table style="width:100%!important" class="table  table-bordered" id="controllersTable">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                FG. Code
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th>
+                Authentication Code
+            </th>
+            <th>
+                Firmware Version
+            </th>
+            <th>
+                Software Version
+            </th>
+            <th>
+                Recipe Version
+            </th>
+            <th>
+                Skins
+            </th>
+            <th>
+                Wallpaper
+            </th>
+            <th>
+                7 DayTimer
+            </th>
+            <th>
+                Sleep Delay
+            </th>
+            <th>
+                Controller Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Remote Kill
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+
+</table>
+
+
+@section Scripts{
+
+    <script language="javascript" type="text/javascript">
+        var controllersTable;
+
+        function EditControllerbyAdmin(id) {
+
+            window.location.href = "/ControllerModules/EditController/" + id;
+        }
+
+        function confirmDelete(callback) {
+            bootbox.confirm({
+                message: "<h3>Are you sure, You want to delete this record...!!</h3>",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) callback();
+                }
+            });
+
+        }
+
+        function deleteSelectedItem(id) {
+
+            confirmDelete(function () {
+
+                //var data = customersTable.rows({ selected: true }).data();
+                $.ajax({
+                    type: "GET",
+                    url: "/ControllerModules/Delete",
+                    data: { id: id },
+                    success: function (data) {
+
+                        controllersTable.draw(true);
+                        // toggleActionButtons(false);
+                          document.location.reload(true);
+                    }
+
+                }).fail(function (error) {
+                    alert(error.statusText);
+                    //console.log(error);
+                })
+            });
+
+        }
+
+        $(document).ready(function () {
+            //toggleActionButtons(false);
+
+            controllersTable = $('#controllersTable').DataTable({
+                //select: {
+                //    style: 'single'
+                //},
+                //"order": [[3, "desc"]],
+                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                responsive: true, "bProcessing": true,
+                "ServerSide": true,                                                   // paging
+                "sAjaxSource": '/ControllerModules/ControllerAjaxData',
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+
+                    {
+                        "render": function (data, type, row) {
+                            //return '<a href="/Clients/EditClient/' + data.id +'"  >Edit</a> <a href="/Clients/ClientDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+                            return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditControllerbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
+                        },
+                        "targets": 14
+                    }
+                ],
+                "columns": [
+                    { "data": "id" },
+                    { "data": "fG_Code" },
+                    { "data": "serialNumber" },
+                    { "data": "authenticationCode" },
+                    { "data": "firmwareVersion" },
+                    { "data": "softwareVersion" },
+                    { "data": "recipeVersion" },
+                    { "data": "skins" },
+                    { "data": "wallpaper" },
+                    { "data": "sevenDayTimer" },
+                    { "data": "sleepDelay" },
+                    {
+                        "data": "controllerDate",
+                        "render": function (data, type, row) {
+                            var date = new Date(row.controllerDate);
+                            var month = (date.getMonth() + 1).toString();
+                            var day = date.getDate().toString();
+                            return (day.length > 1 ? day : "0" + day) + "/" + (month.length > 1 ? month : "0" + month) + "/" + date.getFullYear()
+                        }
+                    },
+                    {
+                        "data": "status",
+                        "render": function (dtat, type, row) {
+                            if (row.status == 1) {
+                                return '<span style="color:green">Active </span>'
+                            }
+                            else {
+                                return '<span style="colour:red">Inactive </span>'
+                            }
+                        }
+                    },
+                    {
+                        "data": "remoteKill",
+                        "render": function (data, type, row) {
+                            if (row.remoteKill == 1) {
+                                return '<span style="color:green"> Enabled </span>'
+                            }
+
+                            else {
+                                return '<span style="color:red"> Disabled </span>'
+                            }
+                        }
+                    },                    
+                    {
+                        "orderable": false,
+                        "searchable": false,
+                        "data": null
+                    }
+                ]
+            });
+            //               controllersTable = $('#controllersTable').DataTable({
+            //                select: {
+            //                    style: 'single'
+            //                },
+            //                //"order": [[3, "desc"]],
+            //                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+            //                responsive: true, "bProcessing": true,
+            //                "bServerSide": true,                                                   // paging
+            //                "sAjaxSource": '/ControllerModules/ControllerAjaxDataProvider',
+            //                    "sAjaxSource": '/ControllerModules/ControllerAjaxData',
+            //             //controllersTable = $('#controllersTable').DataTable({
+            //             //   select: {
+            //             //       style: 'single'
+            //             //   },
+            //             //   //"order": [[3, "desc"]],
+            //             //   "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+            //             //   responsive: true, "bProcessing": true,
+            //             //   "bServerSide": true,                                                   // paging
+            //             //   "sAjaxSource": '/ControllerModules/ControllerAjaxDataProvider',
+            //                 "columnDefs": [
+            //                     {
+            //                        "targets": [0],
+            //                        "visible": false,
+            //                        "searchable": false
+            //                    },
+
+            //                    {
+            //                        "render": function (data, type, row) {
+            // // return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+            ////return '<a class="btn btn-primary btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="Edit Detail" onclick="EditControllerbyAdmin(`' + data.id + '`)">edit</a> | <a class="btn btn-danger btn-link"   id="' + data.id + '" data-toggle="tooltip" title="" data-original-title="View Detail" onclick="deleteSelectedItem(' + data.id + ')">delete</a>'
+            // return '<a href="/ControllerModules/EditController/' + data.id +'"  >Edit</a> <a href="/ControllerModules/ControllerDetails/'+ data.id +'" >Details</a>  <a id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
+            //                        },
+            //                        "targets": 23
+            //                    }
+            //                ],
+            //                 "columns": [
+            //                    {"data" :"id" },
+            //                    { "data":"fG_Code"},
+            //                    { "data": "serialNumber" },
+            //                    { "data": "authenticationCode" },
+            //                    { "data": "firmwareVersion" },
+            //                    { "data": "softwareVersion" },
+            //                    { "data": "recipeVersion" },
+            //                    { "data": "skins" },
+            //                    { "data": "wallpaper" },
+            //                    { "data": "sevenDayTimer" },
+            //                    { "data": "sleepDelay" },
+
+            //                      {
+            //                         "data": "controllerDate",
+            //                         "render": function (data, type, row) {
+            //                              var date = new Date(row.controllerDate);
+            //                             var month = (date.getMonth()+1).toString();
+            //                             var day = date.getDate().toString();
+            //                             return (day.length > 1 ? day : "0" + day) + "/" + (month.length > 1 ? month : "0" + month )+ "/" + date.getFullYear()
+            //                         }
+            //                     },
+            //                      {
+            //                        "data": "status",
+            //                        "render": function (data, type, row) {
+            //                             if (row.status == 1) {
+            //                                  return '<span style="color:green"> Active </span>'
+            //                             }
+
+            //                             else {
+            //                                  return '<span style="color:red"> Inactive </span>'
+            //                             }
+            //                        }
+            //                     },
+
+            //                     {
+            //                         "data": "remoteKill",
+            //                         "render": function (data, row, type) {
+            //                             if (row.remoteKill == 1) {
+            //                                  return '<span style="color:green"> Enabled </span>'
+            //                             }
+
+            //                             else {
+            //                                  return '<span style="color:red"> Disabled </span>'
+            //                             }
+            //                         }
+            //                     },
+            //                     { "data": "elements" },
+            //                     { "data": "kWh_Rating_Element" },
+            //                     { "data": "lightType" },
+            //                     { "data": "lights" },
+            //                     { "data": "kWh_Rating_Light" },
+            //                     { "data": "fans" },
+            //                     { "data": "kWh_Rating_Fan" },
+            //                     { "data": "kWh_Rating_Damper" },
+            //                     { "data": "kWh_Rating_WaterSolenoid" },
+            //                      {
+            //                        "orderable": false,
+            //                        "searchable": false,
+            //                        "data": null
+            //                     }
+            //                ]
+            //            });
+            //$('#controllersTable tbody').on('click', 'tr', function () {
+            //    setTimeout(function () {
+            //        var selectedCount = controllersTable.rows({ selected: true }).count();
+            //        // toggleActionButtons(selectedCount > 0);
+            //    }, 100)
+            //});
+
+
+
+            //$.ajax({
+            //    url: '/ControllerModules/ControllerAjaxData',
+            //    method: 'GET',
+            //    success: function (data) {
+            //        console.log("ajax called");
+            //    }
+            //})
+        });
+    </script>
+}

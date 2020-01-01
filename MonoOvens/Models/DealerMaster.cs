@@ -39,7 +39,7 @@ namespace MonoOvens.Models
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
 
-        string IName;
+   //     string IName;
 
         //[Required]
         //[EmailAddress]

@@ -176,7 +176,6 @@ namespace MonoOvens.Controllers
             {
                 return NotFound();
             }
-            else
             {
                 List<AssetMaster> Asset = new List<AssetMaster>();
 

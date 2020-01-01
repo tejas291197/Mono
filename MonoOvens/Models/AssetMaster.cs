@@ -29,7 +29,7 @@ namespace MonoOvens.Models
         public string Handed { get; set; }
         public string Format { get; set; }
         public string Power { get; set; }       
-        public string modifiedby { get; set; }
+        public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
 
 

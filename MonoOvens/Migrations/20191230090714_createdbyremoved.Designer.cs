@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonoOvens.Models;
 
 namespace MonoOvens.Migrations
 {
     [DbContext(typeof(MonoContext))]
-    partial class MonoContextModelSnapshot : ModelSnapshot
+    [Migration("20191230090714_createdbyremoved")]
+    partial class createdbyremoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -692,8 +694,6 @@ namespace MonoOvens.Migrations
 
                     b.Property<string>("AccessRole");
 
-                    b.Property<string>("CreatedBy");
-
                     b.Property<string>("FirstName");
 
                     b.Property<bool>("IsDeleted");
@@ -701,6 +701,8 @@ namespace MonoOvens.Migrations
                     b.Property<string>("LastName");
 
                     b.Property<string>("ModifiedBy");
+
+                    b.Property<string>("createdBy");
 
                     b.ToTable("UserMaster");
 
