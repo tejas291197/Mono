@@ -7,7 +7,10 @@
 <h2>Assets</h2>
 
 <p>
-    <a asp-action="CreateAsset">Create New</a>
+    @if (!User.IsInRole("Store"))
+    {
+        <a asp-action="CreateAsset">Create New</a>
+    }
 </p>
 <table style="width:100%!important" class="table  table-bordered" id="assetsTable">
     <thead>
@@ -72,126 +75,189 @@
             <th>
                 kW/h Rating WaterSolenoid
             </th>
-            <th></th>
+            @if (!User.IsInRole("Store"))
+            {
+                <th></th>
+            }
         </tr>
     </thead>
-   
+
 </table>
 @section Scripts{
+    @if (!User.IsInRole("Store"))
+    {
+        <script language="javascript" type="text/javascript">
+            var assetsTable;
 
-    <script language="javascript" type="text/javascript">
-        var assetsTable;
+            function EditAssetbyAdmin(id) {
 
-         function EditAssetbyAdmin(id) {
-            
-            window.location.href = "/Asset/EditAsset/" + id;
-          }
-         function confirmDelete(callback) {
-            bootbox.confirm({
-                message: "<h3>Are you sure, You want to Delete this record...!!</h3>",
-                buttons: {
-                    confirm: {
-                        label: 'Yes',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: 'No',
-                        className: 'btn-danger'
-                    }
-                },
-                callback: function (result) {
-                    if (result) callback();
-                }
-            });
-            
-        }
-
-
-        function deleteSelectedItem(id) {
-
-            confirmDelete(function () {
-
-                //var data = customersTable.rows({ selected: true }).data();
-                $.ajax({
-                    type: "GET",
-                    url:  "/Asset/Delete",
-                    data: { id: id },
-                    success: function (data) {
-                        
-                        assetsTable.draw(true);
-                        // toggleActionButtons(false);
-                      //  document.location.reload(true);
-                    }
-
-                }).fail(function (error) {
-                    alert(error.statusText);
-                    console.log(error);
-                })
-            }); 
-            
-        }               
-
-          $(document).ready(function () {
-            //toggleActionButtons(false);
-             
-             assetsTable = $('#assetsTable').DataTable({
-                select: {
-                    style: 'single'
-                },
-                //"order": [[3, "desc"]],
-                "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
-                responsive: true, "bProcessing": true,
-                "bServerSide": true,                                                   // paging
-                "sAjaxSource": '/Asset/AssetAjaxDataProvider',
-                "columnDefs": [
-                    {
-                        "targets": [0],
-                        "visible": false,
-                        "searchable": false
-                    },
-                    {
-                        "render": function (data, type, row) {
-                            return '<a href="/Asset/EditAsset/' + data.id +'"  >Edit</a> |  <a class="btn btn-primary btn-link" id="'+data.id+'" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
-                            //return '<a class="btn btn-primary btn-link" id="' + data.id + '" data-toggle="tooltrip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id = "' + data.id + '" data - toggle="tooltip" title = "" data - original - title="View Detail" onclick = "deleteSelectedItem(' + data.id + ')" > Delete</a > '
+                window.location.href = "/Asset/EditAsset/" + id;
+            }
+            function confirmDelete(callback) {
+                bootbox.confirm({
+                    message: "<h3>Are you sure, You want to Delete this record...!!</h3>",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
                         },
-                        "targets": 20
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) callback();
                     }
-                ],
-                 "columns": [   
-                    { "data": "id" },
-                    { "data": "fG_Code" },                    
-                    { "data": "assetCategory" },
-                    { "data": "assetType" },
-                    { "data": "controllerType" },
-                    { "data": "controllers" },
-                    { "data": "trays" },
-                    { "data": "traySize" },                    
-                    { "data": "handed" },
-                    { "data": "format" },
-                    { "data": "power" },
-                    { "data": "elements" },
-                    { "data": "kWh_Rating_Element" },
-                    { "data": "lightType" },
-                    { "data": "lights" },
-                    { "data": "kWh_Rating_Light" },
-                    { "data": "fans" },
-                    { "data": "kWh_Rating_Fan" },
-                    { "data": "kWh_Rating_Damper" },
-                    { "data": "kWh_Rating_WaterSolenoid" },
+                });
 
-                    {
-                        "orderable": false,
-                        "searchable": false,
-                        "data": null
-                    }
-                ]
+            }
+
+
+            function deleteSelectedItem(id) {
+
+                confirmDelete(function () {
+
+                    //var data = customersTable.rows({ selected: true }).data();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Asset/Delete",
+                        data: { id: id },
+                        success: function (data) {
+
+                            assetsTable.draw(true);
+                            // toggleActionButtons(false);
+                            //  document.location.reload(true);
+                        }
+
+                    }).fail(function (error) {
+                        alert(error.statusText);
+                        console.log(error);
+                    })
+                });
+
+            }
+
+            $(document).ready(function () {
+                //toggleActionButtons(false);
+
+                assetsTable = $('#assetsTable').DataTable({
+                    select: {
+                        style: 'single'
+                    },
+                    //"order": [[3, "desc"]],
+                    "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                    responsive: true, "bProcessing": true,
+                    "bServerSide": true,                                                   // paging
+                    "sAjaxSource": '/Asset/AssetAjaxDataProvider',
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "render": function (data, type, row) {
+                                return '<a href="/Asset/EditAsset/' + data.id + '"  >Edit</a> |  <a class="btn btn-primary btn-link" id="' + data.id + '" onclick="deleteSelectedItem(' + data.id + ')">Delete</a>'
+                                //return '<a class="btn btn-primary btn-link" id="' + data.id + '" data-toggle="tooltrip" title="" data-original-title="Edit Detail" onclick="EditAssetbyAdmin(`' + data.id + '`)">Edit</a> | <a class="btn btn-danger btn-link"   id = "' + data.id + '" data - toggle="tooltip" title = "" data - original - title="View Detail" onclick = "deleteSelectedItem(' + data.id + ')" > Delete</a > '
+                            },
+
+                            "targets": 20
+                        }
+                    ],
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "fG_Code" },
+                        { "data": "assetCategory" },
+                        { "data": "assetType" },
+                        { "data": "controllerType" },
+                        { "data": "controllers" },
+                        { "data": "trays" },
+                        { "data": "traySize" },
+                        { "data": "handed" },
+                        { "data": "format" },
+                        { "data": "power" },
+                        { "data": "elements" },
+                        { "data": "kWh_Rating_Element" },
+                        { "data": "lightType" },
+                        { "data": "lights" },
+                        { "data": "kWh_Rating_Light" },
+                        { "data": "fans" },
+                        { "data": "kWh_Rating_Fan" },
+                        { "data": "kWh_Rating_Damper" },
+                        { "data": "kWh_Rating_WaterSolenoid" },
+
+                        {
+                            "orderable": false,
+                            "searchable": false,
+                            "data": null
+                        }
+                    ]
+                });
+                $('#assetsTable tbody').on('click', 'tr', function () {
+                    setTimeout(function () {
+                        var selectedCount = assetsTable.rows({ selected: true }).count();
+                        // toggleActionButtons(selectedCount > 0);
+                    }, 100)
+                });
             });
-            $('#assetsTable tbody').on('click', 'tr', function () {
-                setTimeout(function () {
-                    var selectedCount = assetsTable.rows({ selected: true }).count();
-                    // toggleActionButtons(selectedCount > 0);
-                }, 100)
-            });
-        });
-    </script>
+        </script>
+    }
+        @if (User.IsInRole("Store")) 
+            {
+            <script language="javascript" type="text/javascript">
+                var assetsTable;               
+                $(document).ready(function () {
+                    //toggleActionButtons(false);
+
+                    assetsTable = $('#assetsTable').DataTable({
+                        select: {
+                            style: 'single'
+                        },
+                        //"order": [[3, "desc"]],
+                        "ordering": true, searching: true,                                   // make ordering false to getting the last out put as first.
+                        responsive: true, "bProcessing": true,
+                        "bServerSide": true,                                                   // paging
+                        "sAjaxSource": '/Asset/AssetAjaxDataProvider',
+                        "columnDefs": [
+                            {
+                                "targets": [0],
+                                "visible": false,
+                                "searchable": false
+                            }, {
+                                "targets": 19    
+                                }                          
+                        ],
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "fG_Code" },
+                            { "data": "assetCategory" },
+                            { "data": "assetType" },
+                            { "data": "controllerType" },
+                            { "data": "controllers" },
+                            { "data": "trays" },
+                            { "data": "traySize" },
+                            { "data": "handed" },
+                            { "data": "format" },
+                            { "data": "power" },
+                            { "data": "elements" },
+                            { "data": "kWh_Rating_Element" },
+                            { "data": "lightType" },
+                            { "data": "lights" },
+                            { "data": "kWh_Rating_Light" },
+                            { "data": "fans" },
+                            { "data": "kWh_Rating_Fan" },
+                            { "data": "kWh_Rating_Damper" },
+                            { "data": "kWh_Rating_WaterSolenoid" },                           
+                        ]
+                    });
+                    $('#assetsTable tbody').on('click', 'tr', function () {
+                        setTimeout(function () {
+                            var selectedCount = assetsTable.rows({ selected: true }).count();
+                            // toggleActionButtons(selectedCount > 0);
+                        }, 100)
+                    });
+                });
+            </script>
+                }
 }

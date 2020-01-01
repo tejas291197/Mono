@@ -24,5 +24,6 @@ namespace MonoOvens.Models
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
+        string dName;
     }
 }

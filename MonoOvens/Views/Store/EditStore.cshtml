@@ -17,7 +17,7 @@
             <div class="form-group" style=" float:left ; padding-right:100px">
                 <label>Importer Name : </label><span style="color:red"> *</span>
                 <select asp-for="ImporterName" class="form-control" onblur="check(1)"
-                        asp-items="@(new SelectList(@ViewBag.ImporterList, "Id" ,"ImporterName"))" id="iname" required>
+                        asp-items="@(new SelectList(@ViewBag.ImporterListEdit, "Id" ,"ImporterName"))" id="iname" required>
                 </select>
                 <span asp-validation-for="ImporterName" class="text-danger"></span>
             </div>
@@ -25,7 +25,7 @@
             <div class="form-group" style=" float:left ; padding-right:100px">
                 <label>Dealer Name : </label><span style="color:red"> *</span>
                 <select asp-for="DealerName" class="form-control" onblur="check(1)"
-                        asp-items="@(new SelectList(@ViewBag.DealerList, "Id" ,"DealerName"))" id="dname" required>                    
+                        asp-items="@(new SelectList(@ViewBag.DealerListEdit, "Id" ,"DealerName"))" id="dname" required>                    
                 </select>
                 <span asp-validation-for="DealerName" class="text-danger"></span>
             </div>
@@ -33,7 +33,7 @@
             <div class="form-group" style=" float:left ; padding-right:100px">
                 <label>Store Group Name :</label><span style="color:red"> *</span>
                 <select asp-for="StoreGroupName" class="form-control" onblur="check(1)"
-                        asp-items="@(new SelectList(@ViewBag.StoreGroupList, "Id" ,"StoreGroupName"))" id="sname" required>                    
+                        asp-items="@(new SelectList(@ViewBag.StoreGroupListEdit, "Id" ,"StoreGroupName"))" id="sname" required>                    
                 </select>
                 <span asp-validation-for="StoreGroupName" class="text-danger"></span>
             </div>
