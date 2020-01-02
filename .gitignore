@@ -38,10 +38,10 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-/appsettings.json
+
 /MonoOvens/.config
 
 ## Ignore anywhere
-
+/appsettings.json
 **/bin/
 **/obj/
