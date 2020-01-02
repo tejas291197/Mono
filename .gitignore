@@ -42,6 +42,6 @@ msbuild.wrn
 /MonoOvens/.config
 
 ## Ignore anywhere
-/appsettings.json
+**/appsettings.json
 **/bin/
 **/obj/
