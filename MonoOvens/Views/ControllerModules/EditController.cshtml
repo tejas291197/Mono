@@ -19,7 +19,7 @@
 
         <div class="form-group" style=" float:left ; padding-right:100px">
             <label>FG Code : </label><span style="color:red"> *</span>
-            <select asp-for="FG_Code" class="form-control" onblur="check(1)"
+            <select asp-for="FG_Code" class="form-control" 
                     asp-items="@(new SelectList(@ViewBag.FGAssetedit, "Id" ,"FG_Code"))" id="fgasset" required>
             </select>
             <span asp-validation-for="FG_Code" class="text-danger"></span>

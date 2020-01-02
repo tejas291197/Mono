@@ -37,6 +37,7 @@ namespace MonoOvens.Controllers
             var uId = _context.Users.Where(x => x.Id == userId);
             //  IEnumerable<ControllerModule> Controllers = _context.Controller;
             IEnumerable<ControllerModule> Controllers = _context.Controller.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id);
+         
             var totalControllers = _context.Controller.Count();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(param);
             var sortDirection = HttpContext.Request.Query["sSortDir_0"]; // asc or desc

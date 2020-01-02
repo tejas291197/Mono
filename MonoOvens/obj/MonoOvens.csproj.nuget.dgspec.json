@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {}
+    "E:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj": {}
   },
   "projects": {
-    "E:\\Mono\\MonoOvens\\MonoOvens.csproj": {
+    "E:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "projectUniqueName": "E:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj",
         "projectName": "MonoOvens",
-        "projectPath": "E:\\Mono\\MonoOvens\\MonoOvens.csproj",
-        "packagesPath": "C:\\Users\\Rakesh\\.nuget\\packages\\",
-        "outputPath": "E:\\Mono\\MonoOvens\\obj\\",
+        "projectPath": "E:\\tejas\\temp\\Mono\\MonoOvens\\MonoOvens.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "E:\\tejas\\temp\\Mono\\MonoOvens\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rakesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

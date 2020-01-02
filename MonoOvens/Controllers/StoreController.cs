@@ -271,7 +271,7 @@ namespace MonoOvens.Controllers
                     var userName = _context.Users.Where(x => x.Id == user).Select(x => x.Id).FirstOrDefault();
                     storeMaster.ModifiedBy = userName;
                     _context.Update(storeMaster);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

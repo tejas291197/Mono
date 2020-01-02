@@ -7,33 +7,26 @@
   <ItemGroup>
     <Compile Remove=".config\**" />
     <Compile Remove="bin\**" />
+    <Compile Remove="MigrationsOld2\**" />
     <Compile Remove="Migrationsold\**" />
     <Compile Remove="obj\**" />
     <Content Remove=".config\**" />
     <Content Remove="bin\**" />
+    <Content Remove="MigrationsOld2\**" />
     <Content Remove="Migrationsold\**" />
     <Content Remove="obj\**" />
     <EmbeddedResource Remove=".config\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="MigrationsOld2\**" />
     <EmbeddedResource Remove="Migrationsold\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove=".config\**" />
     <None Remove="bin\**" />
+    <None Remove="MigrationsOld2\**" />
     <None Remove="Migrationsold\**" />
     <None Remove="obj\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20190918100549_clientedited.cs" />
-    <Compile Remove="Migrations\20190918100549_clientedited.Designer.cs" />
-    <Compile Remove="Migrations\20191017100628_CustomerAdded.cs" />
-    <Compile Remove="Migrations\20191017100628_CustomerAdded.Designer.cs" />
-    <Compile Remove="Migrations\20191216042219_AddedCreatedBy_ModifiedByFieldsInAllModels.Designer.cs" />
-    <Compile Remove="Migrations\20191226122258_fieldsAdded.Designer.cs" />
-    <Compile Remove="Migrations\20191230090410_createdbyremoved.cs" />
-    <Compile Remove="Migrations\20191230090410_createdbyremoved.Designer.cs" />
-  </ItemGroup>
-
+ 
   <ItemGroup>
     <Compile Include="Migrationsold\MonoContextModelSnapshot.cs" />
   </ItemGroup>
