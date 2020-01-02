@@ -40,8 +40,9 @@ msbuild.wrn
 .vs/
 
 /MonoOvens/.config
-
+#ignore git appsettings.json file.
+MonoOvens/appsettings.json
 ## Ignore anywhere
-**/appsettings.json
+
 **/bin/
 **/obj/
