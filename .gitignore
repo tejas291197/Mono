@@ -31,10 +31,6 @@ x64/
 x86/
 build/
 bld/
-/MonoOvens/*bin/
-/MonoOvens/*obj/
-../bin/
-../obj/
 [Oo]ut/
 msbuild.log
 msbuild.err
@@ -44,3 +40,8 @@ msbuild.wrn
 .vs/
 /MonoOvens/appsettings.json
 /MonoOvens/.config
+
+## Ignore anywhere
+
+**/bin/
+**/obj/
